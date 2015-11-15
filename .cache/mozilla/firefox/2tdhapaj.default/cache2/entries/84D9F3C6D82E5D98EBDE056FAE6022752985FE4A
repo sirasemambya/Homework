@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Pragma" NAME="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" NAME="Cache-Control" CONTENT="no-cache">
+<LINK REL="stylesheet" HREF="/css/web_defaultapp.css" TYPE="text/css"><LINK REL="stylesheet" HREF="https://cp4.njit.edu/cp/content/style.css" TYPE="text/css">
+<LINK REL="stylesheet" HREF="/css/web_defaultprint.css" TYPE="text/css" media="print">
+<TITLE>Look Up Classes</TITLE>
+<META HTTP-EQUIV="Content-Script-Type" NAME="Default_Script_Language" CONTENT="text/javascript">
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+window.onunload = function() {submitcount=0;}
+var submitcount=0;
+function checkSubmit() {
+if (submitcount == 0)
+   {
+   submitcount++;
+   return true;
+   }
+else
+   {
+alert("Your changes have already been submitted.");
+   return false;
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+//  Function to open a window
+function windowOpen(window_url) {
+   helpWin = window.open(window_url,'','toolbar=yes,status=no,scrollbars=yes,menubar=yes,resizable=yes,directories=no,location=no,width=350,height=400');
+   if (document.images) { 
+       if (helpWin) helpWin.focus()
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+</HEAD>
+<BODY  class="campuspipeline" >
+<DIV class="headerwrapperdiv">
+<DIV class="headerlinksdiv">
+<SPAN class="pageheaderlinks2">
+<MAP NAME="Module_Navigation_Links_H" title="Module Navigation Links">
+<p>
+<A HREF="#skip_Module_Navigation_Links_H" onMouseover="window.status='Skip Module Navigation Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Module Navigation Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Module Navigation Links</A>
+<TABLE  CLASS="plaintable" SUMMARY="This is main table for displaying Tab Items."
+                          WIDTH="100%" cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<TD CLASS="pldefault">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Tab Items."
+                 cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_GenMnu" onMouseover="window.status='Personal Information'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Personal Information'; return true" onBlur="window.status=''; return true" >Personal Information</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="tabon"  height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu" onMouseover="window.status='Student'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Student'; return true" onBlur="window.status=''; return true" >Student</A>
+</TD>
+<TD class="bgtabon"  height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_FinAidMainMnu" onMouseover="window.status='Financial Aid'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Financial Aid'; return true" onBlur="window.status=''; return true" >Financial Aid</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+<TR>
+<TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+</MAP>
+</SPAN>
+<a name="skip_Module_Navigation_Links_H"></a>
+</DIV>
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Menu Items and Banner Search textbox."
+         WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<DIV class="headerlinksdiv2">
+<FORM ACTION="/prod/twbksrch.P_ShowResults" METHOD="POST">
+Search
+<SPAN class="fieldlabeltextinvisible"><LABEL for=keyword_in_id><SPAN class="fieldlabeltext">Search</SPAN></LABEL></SPAN>
+<INPUT TYPE="text" NAME="KEYWRD_IN" SIZE="20" MAXLENGTH="65" ID="keyword_in_id">
+<INPUT TYPE="submit" VALUE="Go">
+</FORM>
+</div>
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<SPAN class="pageheaderlinks">
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"  class="submenulinktext2" id="ssbbackurl">RETURN TO MENU</A>
+|
+<A HREF="/prod/twbksite.P_DispSiteMap?menu_name_in=bmenu.P_MainMnu&amp;depth_in=2&amp;columns_in=3" accesskey="2" class="submenulinktext2">SITE MAP</A>
+|
+<A HREF="/prod/twbkfrmt.P_DispHelp?pagename_in=bwskfcls.P_GetCrse" accesskey="H" onClick="popup = window.open('/prod/twbkfrmt.P_DispHelp?pagename_in=bwskfcls.P_GetCrse', 'PopupPage','height=500,width=450,scrollbars=yes,resizable=yes'); return false" target="_blank" onMouseOver="window.status='';  return true" onMouseOut="window.status=''; return true"onFocus="window.status='';  return true" onBlur="window.status=''; return true"  class="submenulinktext2">HELP</A>
+</span>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV class="pagetitlediv">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays title and static header displays."
+   WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<H2>Look Up Classes</H2>
+</TD>
+<TD CLASS="pldefault">
+&nbsp;
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<DIV class="staticheaders">
+31118493 Sira B. Semambya<br>
+2015 Fall<br>
+Apr 23, 2015 02:14 pm<br>
+</div>
+</TD>
+</TR>
+<TR>
+<TD class="bg3" width="100%" colSpan=3><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD>
+</TR>
+</TABLE>
+<a name="main_content"></a>
+</DIV>
+<DIV class="pagebodydiv">
+<!--  ** END OF twbkwbis.P_OpenDoc **  -->
+<FORM ACTION="/prod/bwskfreg.P_AltPin1" METHOD="POST" onSubmit="return checkSubmit()">
+<INPUT TYPE="hidden" NAME="crn" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="rsts" VALUE="dummy">
+<DIV class="infotextdiv"><TABLE  CLASS="infotexttable" SUMMARY="This layout table contains information that may be helpful in understanding the content and functionality of this page.  It could be a brief set of instructions, a description of error messages, or other special information."><TR><TD CLASS="indefault"><IMG SRC="/wtlgifs/web_info_cascade.png" ALT="Information" CLASS="headerImg" TITLE="Information"  NAME="web_info" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=12 WIDTH=14></TD><TD CLASS="indefault"><SPAN class="infotext"> Select the box in front of the CRN (C identifies a closed class) and choose Register or Add to Worksheet.</SPAN></TD></TR></TABLE><P></DIV>
+<INPUT TYPE="hidden" NAME="TERM_IN" VALUE="201590">
+<INPUT TYPE="hidden" NAME="sel_crn" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="ADD_BTN" VALUE="dummy">
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the sections found" width="100%"><CAPTION class="captiontext">Sections Found</CAPTION>
+<TR>
+<TH COLSPAN="26" CLASS="ddtitle" scope="colgroup" >Marketing</TH>
+</TR>
+<TR>
+<TH CLASS="ddheader" scope="col" >Select</TH>
+<TH CLASS="ddheader" scope="col" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Subject>Subj</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Course>Crse</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Section>Sec</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Campus>Cmp</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Credit Hours">Cred</ABBR></TH>
+<TH CLASS="ddheader" scope="col" >Title</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Section Capacity">Cap</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Section Actual">Act</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Section Remaining">Rem</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Waitlist Capacity">WL Cap</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Waitlist Actual">WL Act</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Waitlist Remaining">WL Rem</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Crosslist Capacity">XL Cap</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Crosslist Actual">XL Act</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Crosslist Remaining">XL Rem</ABBR></TH>
+<TH CLASS="ddheader" scope="col" >Instructor</TH>
+<TH CLASS="ddheader" scope="col" >Date (<ABBR title = "month month">MM</ABBR>/<ABBR title = "day day">DD</ABBR>)</TH>
+<TH CLASS="ddheader" scope="col" >Location</TH>
+<TH CLASS="ddheader" scope="col" >Attribute</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">
+<INPUT TYPE="checkbox" NAME="sel_crn" VALUE="93852 201590" ID="action_id1">
+<LABEL for=action_id1><SPAN class="fieldlabeltextinvisible">add to worksheet</SPAN></LABEL>
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590">
+</TD>
+<TD CLASS="dddefault"><A HREF="/prod/bwckschd.p_disp_listcrse?term_in=201590&amp;subj_in=MRKT&amp;crse_in=331&amp;crn_in=93852" onMouseOver="window.status='Detail';  return true" onFocus="window.status='Detail';  return true" onMouseOut="window.status='';  return true"onBlur="window.status='';  return true">93852</A></TD>
+<TD CLASS="dddefault">MRKT</TD>
+<TD CLASS="dddefault">331</TD>
+<TD CLASS="dddefault">001</TD>
+<TD CLASS="dddefault">NK</TD>
+<TD CLASS="dddefault">3.000</TD>
+<TD CLASS="dddefault">Consumer-Buyer Behavior</TD>
+<TD CLASS="dddefault">T</TD>
+<TD CLASS="dddefault">11:30 am-02:25 pm</TD>
+<TD CLASS="dddefault">40</TD>
+<TD CLASS="dddefault">19</TD>
+<TD CLASS="dddefault">21</TD>
+<TD CLASS="dddefault">99</TD>
+<TD CLASS="dddefault">0</TD>
+<TD CLASS="dddefault">99</TD>
+<TD CLASS="dddefault">0</TD>
+<TD CLASS="dddefault">0</TD>
+<TD CLASS="dddefault">0</TD>
+<TD CLASS="dddefault">Melodi D.  Guilbault (<ABBR title= "Primary">P</ABBR>)</TD>
+<TD CLASS="dddefault">09/01-12/10</TD>
+<TD CLASS="dddefault">FMH 110</TD>
+<TD CLASS="dddefault">&nbsp;</TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="submit" NAME="ADD_BTN" VALUE="Register">
+<INPUT TYPE="submit" NAME="ADD_BTN" VALUE="Add to WorkSheet">
+<INPUT TYPE="submit" NAME="ADD_BTN" VALUE="New Search">
+</FORM>
+
+<!--  ** START OF twbkwbis.P_CloseDoc **  -->
+<TABLE  CLASS="plaintable" SUMMARY="This is table displays line separator at end of the page."
+                                             WIDTH="100%" cellSpacing=0 cellPadding=0 border=0><TR><TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+<A HREF="#top" onMouseover="window.status='Skip to top of page'; return true" onMouseout="window.status=''; return true" OnFocus="window.status='Skip to top of page'; return true" onBlur="window.status=''; return true" class="skiplinks">Skip to top of page</A>
+</DIV>
+<DIV class="footerbeforediv">
+
+</DIV>
+<DIV class="footerlinksdiv">
+<SPAN class="pagefooterlinks">
+<MAP NAME="Look_Up_Classes_Links_F" title="Look Up Classes Links">
+<p>
+<A HREF="#skip_Look_Up_Classes_Links_F" onMouseover="window.status='Skip Look Up Classes Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Look Up Classes Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Look Up Classes Links</A>
+<P>[ <A HREF="/prod/bwskfshd.P_CrseSchd" onMouseover="window.status='Week at a Glance'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Week at a Glance'; return true" onBlur="window.status=''; return true" >Week at a Glance</A>
+ | <A HREF="/prod/bwskfshd.P_CrseSchdDetl" onMouseover="window.status='Student Detail Schedule'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Student Detail Schedule'; return true" onBlur="window.status=''; return true" >Student Detail Schedule</A>
+ | <A HREF="/prod/bwskffee.P_FeeAsses" onMouseover="window.status='View Fee Assessment'; return true" onMouseout="window.status=''; return true" onFocus="window.status='View Fee Assessment'; return true" onBlur="window.status=''; return true" >View Fee Assessment</A>
+ ]
+</MAP>
+</SPAN>
+<a name="skip_Look_Up_Classes_Links_F"></a>
+</DIV>
+<DIV class="footerafterdiv">
+
+</DIV>
+<DIV class="globalafterdiv">
+
+</DIV>
+<DIV class="globalfooterdiv">
+
+</DIV>
+<DIV class="pagefooterdiv">
+<SPAN class="releasetext">Release: 8.5.2.1</SPAN>
+</DIV>
+<DIV class="poweredbydiv">
+</DIV>
+<DIV class="div1"></DIV>
+<DIV class="div2"></DIV>
+<DIV class="div3"></DIV>
+<DIV class="div4"></DIV>
+<DIV class="div5"></DIV>
+<DIV class="div6"></DIV>
+<div class="banner_copyright"> <br><h5>Â© 2015 Ellucian Company L.P. and its affiliates.<br></h5></div>
+</BODY>
+</HTML>
+{Î!R      U96¶U96¶;@;       >~1429812734,:https://bnssbpr1.njit.edu/prod/bwskfcls.P_GetCrse necko:classified 1 security-info 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 request-method POST response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:14:18 GMT
+Server: Oracle-Application-Server-11g
+Content-Length: 13589
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ charset UTF-8 uncompressed-len 0   5

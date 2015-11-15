@@ -1,0 +1,230 @@
+/* Styles common to all browsers
+ *
+ * February 15, 2003 css with addition of classes using new names 
+ *   Only specification change was 8 pt for quicklink instead of 9px for sitemap to allow 
+ *   possible removal of font-size attribute from html
+ * February 19, 2003 added eventtxt class and corrected comments
+ * February 20, 2003 removed obsolete class definitions
+ * March 2, 2003 major revision of level 2 & 3 classes (old values are shown as comments
+ *   within the definitions 
+ * March 3, 2003 removed browser-dependent definitions (i.e. linkpage, bodytxtb, bodytxt,
+ *   and bodylink 
+ * June 23, 2003 added classes for homepage bottom menus
+ *
+ */
+
+/* OBSOLETE CLASS NAMES */
+
+/* groupheadings NOT USED */
+/* homeintro changed to headline */
+/* sitemap changed to quicklink (its only use on the site) */
+/* sitemapgroup not used */
+/* subhomebodytext changed to linkpage */
+/* subleftnav(h) changed to leftnav */
+/* subleftnavtext changed to leftnav (only used for student and fac/staff home pages) */
+/* Ptitle changed to ptitle
+
+/* NEW CLASS NAMES */
+
+/* Level 2 - did you know text */
+
+.dyktxtb {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; FONT-WEIGHT: bold; FONT-FAMILY: Arial; }
+.dyktxt {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; FONT-FAMILY: Arial; }
+.dyktxt A:link {FONT-SIZE: 12px; /* 11px; */ COLOR: #C42020; TEXT-DECORATION: underline; }
+.dyktxt A:visited {FONT-SIZE: 12px; /* 11px; */ COLOR: #990000; TEXT-DECORATION: underline; }
+.dyktxt A:hover {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; TEXT-DECORATION: underline; }
+
+/* Level 2 up - event text */
+
+.eventtxtb {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; FONT-WEIGHT: bold; FONT-FAMILY: Arial; }
+.eventtxt {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; FONT-FAMILY: Arial; }
+.eventtxt A:link {FONT-SIZE: 12px; /* 11px; */ COLOR: #C42020; TEXT-DECORATION: underline; }
+.eventtxt A:visited {FONT-SIZE: 12px; /* 11px; */ COLOR: #990000; TEXT-DECORATION: underline; }
+.eventtxt A:hover {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; TEXT-DECORATION: underline; }
+
+/* Home Page Headline */
+
+.headline {FONT-SIZE: 13px; COLOR: #0034AA; FONT-WEIGHT: bold; FONT-FAMILY: Arial; }
+.headline A:link {FONT-SIZE: 13px; COLOR: #0034AA; TEXT-DECORATION: underline; }
+.headline A:visited {FONT-SIZE: 13px; COLOR: #0034AA; TEXT-DECORATION: underline; }
+.headline A:hover {FONT-SIZE: 13px; COLOR: #D92424; TEXT-DECORATION: underline; }
+
+/* Home Page Emergency Headlines */
+
+.emergency_headline {FONT-SIZE: 13px; COLOR: #F08C00; FONT-WEIGHT: bold; FONT-FAMILY: Arial; }
+.emergency_headline A:link {FONT-SIZE: 13px; COLOR: #F08C00; TEXT-DECORATION: underline; }
+.emergency_headline A:visited {FONT-SIZE: 13px; COLOR: #F08C00; TEXT-DECORATION: underline; }
+.emergency_headline A:hover {FONT-SIZE: 13px; COLOR: #F08C00; TEXT-DECORATION: underline; }
+
+
+/* Level 2 up - left menu main entries (unselected) and left menu area text */
+
+.leftnav {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; FONT-FAMILY: Arial; }
+.leftnav A:link {FONT-SIZE: 12px; /* 11px; */ COLOR: #D92424; TEXT-DECORATION: underline; }
+.leftnav A:visited {FONT-SIZE: 12px; /* 11px; */ COLOR: #D92424; TEXT-DECORATION: underline; }
+.leftnav A:hover {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; TEXT-DECORATION: underline; }
+
+/* Level 2 up - left menu main entries (selected) */
+
+.leftnavh {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; FONT-FAMILY: Arial; }
+.leftnavh A:link {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; TEXT-DECORATION: underline; }
+.leftnavh A:visited {FONT-SIZE: 12px; /* 11px; */ COLOR: #000000; TEXT-DECORATION: underline; }
+.leftnavh A:hover {FONT-SIZE: 12px; /* 11px; */ COLOR: #D92424; TEXT-DECORATION: underline; }
+
+/* Level 2 - Top and Bottom Section Headings and Level 3 up - Page Headings */
+
+.ptitle {FONT-SIZE: larger; /* 15px; */ COLOR: #DA2325; FONT-WEIGHT: bolder; FONT-FAMILY: Arial; }
+
+/* Level 2 up - Sub Page Heading */
+
+.psubtitle {FONT-SIZE: larger; /* 15px; */ COLOR: #000000; FONT-WEIGHT: bolder; 
+   FONT-FAMILY: Arial; TEXT-DECORATION: italic; }
+
+/* Quick Links on Home Page and Level 2 up Banner */
+
+.quicklink {FONT-SIZE: 8pt; COLOR: #FFFFFF; FONT-FAMILY: Arial; }
+.quicklink A:link {FONT-SIZE: 8pt; COLOR: #FFFFFF; TEXT-DECORATION: underline; }
+.quicklink A:visited {FONT-SIZE: 8pt; COLOR: #FFFFFF; TEXT-DECORATION: underline; }
+.quicklink A:hover {FONT-SIZE: 8pt; COLOR: #7E80A3; TEXT-DECORATION: underline; }
+
+/* Level 2 up - Section headings */
+
+.stitle {FONT-SIZE: 15px; COLOR: #DA2325; FONT-WEIGHT: bolder; FONT-FAMILY: Arial; }
+
+/* Level 2 up - 7 categories (unselected) */
+
+.topnav {fONT-SIZE: 10px; COLOR: #000000;	FONT-FAMILY: Arial; }
+.topnav A:link {FONT-SIZE: 10px; COLOR: #000000; TEXT-DECORATION: none; }
+.topnav A:visited {FONT-SIZE: 10px; COLOR: #000000; TEXT-DECORATION: none; }
+.topnav A:hover {FONT-SIZE: 10px; COLOR: #D92424; TEXT-DECORATION: none; }
+
+/* Level 2 up - 7 categories (selected) */
+
+.topnavh {FONT-SIZE: 10px; COLOR: #D92424; FONT-FAMILY: Arial; }
+.topnavh A:link {FONT-SIZE: 10px; COLOR: #D92424; TEXT-DECORATION: none; }
+.topnavh A:visited {FONT-SIZE: 10px; COLOR: #D92424; TEXT-DECORATION: none; }
+.topnavh A:hover {FONT-SIZE: 10px; COLOR: #000000; TEXT-DECORATION: none; }
+
+/* RETAINED CLASS NAMES */
+
+/* Home Page - 7 categories */
+
+.homemenu {FONT-SIZE: 12px; COLOR: #D92424; FONT-WEIGHT: bold; FONT-FAMILY: Arial; }
+.homemenu A:link {FONT-SIZE: 12px; COLOR: #D92424; TEXT-DECORATION: none; }
+.homemenu A:visited {FONT-SIZE: 12px; COLOR: #D92424; TEXT-DECORATION: none; }
+.homemenu A:hover {FONT-SIZE: 12px; COLOR: #7E80A3; TEXT-DECORATION: none; }
+
+/* Home Page - sub categories */
+
+.homemenusub {FONT-SIZE: 10px; COLOR: #494977; FONT-FAMILY: Arial; }
+.homemenusub A:link {FONT-SIZE: 10px; COLOR: #494977; TEXT-DECORATION: none; }
+.homemenusub A:visited {FONT-SIZE: 10px; COLOR: #494977; TEXT-DECORATION: none; }
+.homemenusub A:hover {FONT-SIZE: 10px; COLOR: #D92424; TEXT-DECORATION: none; }
+
+/* Level 2 up - left menu sub entries (unselected) and text in menu area */
+
+.subnav {FONT-SIZE: 11px; /* 10px; */ COLOR: #000000;	FONT-FAMILY: Arial; }
+.subnav A:link {FONT-SIZE: 11px; /* 10px; */ COLOR: #000000; TEXT-DECORATION: none; }
+.subnav A:visited {FONT-SIZE: 11px; /* 10px; */ COLOR: #000000; TEXT-DECORATION: none; }
+.subnav A:hover {FONT-SIZE: 11px; /* 10px; */ COLOR: #D92424; TEXT-DECORATION: none; }
+
+/* Level 2 up - left menu sub entries (selected)*/
+
+.subnavh {FONT-SIZE: 11px; /* 10px; */ COLOR: #D92424; FONT-FAMILY: Arial; }
+.subnavh A:link {FONT-SIZE: 11px; /* 10px; */ COLOR: #D92424; TEXT-DECORATION: none; }
+.subnavh A:visited {FONT-SIZE: 11px; /* 10px; */ COLOR: #D92424; TEXT-DECORATION: none; }
+.subnavh A:hover {FONT-SIZE: 11px; /* 10px; */ COLOR: #000000; TEXT-DECORATION: none; }
+
+/* Footnotes */
+
+.footnote {FONT-SIZE: 10px; /* 9px; */ COLOR: #999999; FONT-FAMILY: Arial; }
+
+/* ADDED BY BHAVNA TO MAKE THE LINK OF FOOTNOTE TO THE COLOR OF FOOTNOTE NORMAL FONT */
+.footnote A:link {FONT-SIZE: 10px; /* 9px; */ COLOR: #999999; FONT-FAMILY: Arial; TEXT-DECORATION: underline; }
+.footnote A:visited {FONT-SIZE: 10px; /* 9px; */ COLOR: #999999; FONT-FAMILY: Arial; TEXT-DECORATION: underline; }
+.footnote A:hover {FONT-SIZE: 10px; /* 9px; */ COLOR: #D92424; FONT-FAMILY: Arial; TEXT-DECORATION: underline; }
+/*ADDED BY BHAVNA ENDS */
+
+/* Level 2 up - styles to aid positioning */
+
+.imgmarginright {margin-top: 20px; /* 15px; */ margin-right: 10px; }
+
+.imgmarginleft {margin-top: 20px; /* 15px; */ margin-left: 10px; }
+
+.imgmarginTopOnly {margin-top: 5px;}
+
+/* Homepage - bottom menu entries */
+
+.menuoption {font-size: 12px; color: #000000; font-family: Arial; background-color: #efefef;}
+.menuoption A:link {FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+.menuoption A:visited {FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+.menuoption A:hover {FONT-SIZE: 12px; COLOR: #FF0000; FONT-FAMILY: Arial; TEXT-DECORATION: none;}
+
+.homemenu2 {FONT-SIZE: 12px; COLOR: #D92424; FONT-WEIGHT: bold; FONT-FAMILY: Arial; }
+.homemenu2 A:link {FONT-SIZE: 12px; COLOR: #D92424; TEXT-DECORATION: none }
+.homemenu2 A:visited {FONT-SIZE: 12px; COLOR: #D92424; TEXT-DECORATION: none }
+.homemenu2 A:hover {FONT-SIZE: 12px; COLOR: #7E80A3; TEXT-DECORATION: none }
+
+/* ************* */
+
+/* begin A.S.: for contact info in top right corner of njit_research_l3 pages */
+.contactinfo {
+	FONT-SIZE: 12px; COLOR: #717171; FONT-FAMILY: Verdana;
+}
+/* end A.S. */
+
+/* begin A to Z styles, UCOMM 3/7/2006 */
+.atoz {
+	font-family:"Courier New", Courier, monospace;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.atoz a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #D92424;
+	padding-left:4px;
+	padding-right:4px;
+
+	
+
+}
+.atoz a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #D92424;
+	padding-left:4px;
+	padding-right:4px;
+
+
+}
+.atoz a:hover {
+	color: #D92424;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	padding-left:4px;
+	padding-right:4px;
+
+}
+
+
+
+.atoz a:active {
+	color: #D92424;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	padding-left:4px;
+	padding-right:4px;
+}
+/* End A to Z Styles */
+
+—«¿»è-      U96U96;‰ÒVK±   4:http://www.njit.edu/uicomponents/css/cstyleinfo.css necko:classified 1 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:12:28 GMT
+Server: Apache
+Last-Modified: Mon, 10 Aug 2009 18:30:34 GMT
+Etag: "3bc11b-246c-470cdc810e680"
+Accept-Ranges: bytes
+Content-Length: 9324
+Content-Type: text/css
+ uncompressed-len 0   $l

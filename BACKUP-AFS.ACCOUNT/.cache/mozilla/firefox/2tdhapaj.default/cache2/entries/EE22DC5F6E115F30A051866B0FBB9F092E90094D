@@ -1,0 +1,792 @@
+/*
+ * Copyright 1995-2012 Ellucian Company L.P. and its affiliates. 
+ */
+// $Id: //Tuxedo/RELEASE/Product/webroot/DGW_StudentFunctions.js#4 $
+//////////////////////////////////////////////////////////////////
+// DGW_StudentFunctions.js
+// Before making any changes to the standard SunGard Bi-Tech .js file
+// be sure to save it to DW_StudentFunctions.js.sbi so that you have a working
+// copy in case you need to undo your changes.
+// When changes are made be sure to log them here at the top so that
+// SBI and you can track your changes.
+//////////////////////////////////////////////////////////////////
+
+// When set to true the users can click on the column header to sort.
+// When set to false we will use the non-sortable table; in doing this we
+// we be removing a lot of complex functionality that may cause the sorting
+// to not work in some browsers.
+var bAllowSortingInStudentGrid = true;
+if (is_nav4)
+{
+	// Sorting does not work in Navigator 4.x
+	bAllowSortingInStudentGrid = false;
+}
+var sa = new Array();
+var theLastOne;
+//var nextIndex = 0;
+var theCurrentLength;
+var nl = "\n";
+var currentID;
+var iStudentsSelected;
+
+var sShowColumnsArray;
+var oViewClass;
+var oViewClassMask;
+
+var iDefSecondaryColumn;
+var iCurrentSortColumn;
+var sCurrentSortOrder;
+var oOrderArray;
+
+function InitializeArrays()
+{
+	sa.length = 0;
+	studentArray.length = 0;
+	iCurrentSortColumn = -1;										   //1.0a
+	sCurrentSortOrder  = "";										   //1.0a
+}
+
+function DegreeEntry(degree, degreelit, school, majorlit, level, degreeinterest)
+{
+	this.degree = Trim(degree);
+	this.degreelit = Trim(degreelit);
+	this.school = Trim(school);
+	this.majorlit = Trim(majorlit);
+	this.level = Trim(level);
+	this.degreeinterest = Trim(degreeinterest);
+}
+
+function StudentEntry(id, name)
+{
+	this.id = Trim(id);
+	this.name = Trim(name);
+	this.auditdate = "";
+	this.refreshdate = "";
+	this.degrees = new Array;
+}
+
+function AddDegree(id, degree, degreelit, school, majorlit, level, degreeinterest)
+{
+	currentID = Trim(id);
+	for (var i=0; i < sa.length; i++)
+	{
+		if (sa[i].id == currentID)
+		{
+			var iDegreeLength = sa[i].degrees.length;
+			var bContinue=true;
+			/* keep this check for duplicate degree. Only the degree code gets sent to dap09 */
+			for ( x = 0; x < iDegreeLength ; x++ )
+			{
+				if (sa[i].degrees[x].degree == degree && 
+					sa[i].degrees[x].school == school) // if this particular schoo/degree combo has already been added -- don't add it again.
+				{
+					bContinue=false;
+					break;
+				}
+			}
+			if (bContinue)
+			{
+				sa[i].degrees[iDegreeLength] = new DegreeEntry(degree, degreelit, school, majorlit, level, degreeinterest);
+			}
+			break;
+		}
+		else
+		{
+			; //alert("Error: Attempt to add a degree for a student that doesn't exist.");
+		}
+	}
+}
+
+function AddAuditDate(id, auditdate)
+{
+	var sAuditDate;
+	currentID = Trim(id);
+	// When searching by ID (WCIS) doing a simple search we get the auditdate
+	// but it is not formatted; it comes to us as ccyymmdd; format now
+	// If the first char is a "2" we know it is ccyymmdd
+	if (auditdate.length > 0 && auditdate.charAt(0) == "2")
+	{
+        sAuditDate =  FormatDate (auditdate);
+	}
+	else // Already formatted
+	{
+		sAuditDate = auditdate;
+	}
+	for (var i=0; i < sa.length; i++)
+	{
+		if (sa[i].id == currentID)
+		{
+			sa[i].auditdate = Trim(sAuditDate);
+			break;
+		}
+		else
+		{
+			; //alert("Error: Attempt to add an AuditDate for a student that doesn't exist.");
+		}
+	}
+}
+
+function AddRefreshDateTime (id, refreshdate, refreshtime, changeddate, changedtime)
+{
+	var sRefreshDate = FormatRefreshDate (refreshdate);
+	var sRefreshTime = FormatRefreshTime (refreshtime);
+  var sChangedDate = FormatRefreshDate (changeddate);
+	var sChangedTime = FormatRefreshTime (changedtime);
+	currentID = Trim(id);
+
+	for (var i=0; i < sa.length; i++)
+	{
+		if (sa[i].id == currentID)
+		{
+			sa[i].refreshdate = Trim(sRefreshDate + " at " + sRefreshTime);
+			sa[i].changeddate = Trim(sChangedDate + " at " + sChangedTime);
+			break;
+		}
+		else
+		{
+			; //alert("Error: Attempt to add an AuditDate for a student that doesn't exist.");
+		}
+	}
+}
+
+function AddCustom(id, sCustomCode, sCustomValue)
+{
+	currentID = Trim(id);
+	for (var i=0; i < sa.length; i++)
+	{
+		if (sa[i].id == currentID)
+		{
+          //alert ("Adding custom value of " + sCustomValue + " to student " + currentID);
+			sa[i].customcode  = Trim(sCustomCode );
+			sa[i].customvalue = Trim(sCustomValue);
+			break;
+		}
+		else
+		{
+			; //alert("Error: Attempt to add a custom value for a student that doesn't exist.");
+		}
+	}
+}
+
+function FormatRefreshDate (refreshdate)
+{
+	var sRefreshDate = "";
+  refreshdate = Trim (refreshdate);
+	if (refreshdate.length > 0 && refreshdate.charAt(0) == "2")
+	{
+        sRefreshDate =  FormatDate (refreshdate);
+	}
+	else // Already formatted
+	{
+		sRefreshDate = refreshdate;
+	}
+	today = GetCurrentDate();                                      //1.1g Begin
+	if (Trim(today) == Trim(sRefreshDate))
+	{
+		sRefreshDate = "Today";
+	}                                                              //1.1g End
+	return sRefreshDate;
+}
+
+function FormatRefreshTime (refreshtime)
+{
+	var sRefreshTime = "";
+  refreshtime = Trim (refreshtime);
+	if (refreshtime.length > 0 && refreshtime.length < 5)
+	{
+		sRefreshAMPM = ""
+		sRefreshHour   = 1*(refreshtime.substring(0,2));
+		if (sRefreshHour < 12 && sRefreshHour > 0)
+		{
+			sRefreshHour = sRefreshHour;
+			sRefreshAMPM = "am";
+		}
+		else if (sRefreshHour == 12)
+		{
+			sRefreshHour = sRefreshHour;
+			sRefreshAMPM = "pm";
+		}
+		else if (sRefreshHour == 0)
+		{
+			sRefreshHour = 12;
+			sRefreshAMPM = "am";
+		}
+		else // 1pm or greater
+		{
+			sRefreshHour = sRefreshHour - 12;
+			sRefreshAMPM = "pm";
+		}
+		sRefreshMinute = refreshtime.substring(2,4);
+		sRefreshTime   = sRefreshHour + ":" + sRefreshMinute + " " + sRefreshAMPM;
+	}
+	else
+	{
+		sRefreshTime = refreshtime
+	}
+
+	return sRefreshTime;
+}
+
+function AddStudent(id, name)
+{
+	currentID = Trim(id);
+	var bIDFound;
+	var iArrayLength = sa.length;
+	if (iArrayLength == 0)
+	{
+		sa[iArrayLength] = new StudentEntry(id, name);
+		return;
+	}
+	for (var i=0; i < iArrayLength; i++)
+	{
+		if (sa[i].id == currentID)
+		{
+			return; //alert("Error: Attempt to add a student that already exists: " + sa[i].id);
+		}
+		else
+		{
+			bIDFound = false;
+		}
+	}
+	if (!bIDFound)
+	{
+		sa[iArrayLength] = new StudentEntry(id, name);
+	}
+}
+
+function SelectStudents()
+{
+	//var oOpenerStudentArray = top.opener.studentArray;
+	//studentArray = sa;
+	studentArray.length = 0;
+	if (typeof(wChild.frBody.document.frmStudents) == "undefined")
+	{
+		wChild.alert("No students are selected.");
+		return;
+	}
+	if (typeof(wChild.frBody.document.frmStudents.ids) == "undefined")
+	{
+		wChild.alert("No students are selected.");
+		return;
+	}
+	else
+	{
+		var oFormSelectedIds = wChild.frBody.document.frmStudents.ids;
+	}
+	if (typeof(oFormSelectedIds.length) == "undefined")
+	{
+		studentArray[0] = sa[0];
+		bStudentsSelected = true;
+	}
+	else
+	{
+		for (var i=0; i < oFormSelectedIds.length; i++)
+		{
+			if (oFormSelectedIds[i].checked)
+			{
+			   if (bAllowSortingInStudentGrid)
+				 // The value of the checkbox is the index into the sa array
+	  			 studentArray[studentArray.length] = sa[oFormSelectedIds[i].value];
+			   else // Non-sorting method; value is student id
+				 // USE THIS IF WE ARE USING DrawListNoSort
+				 studentArray[studentArray.length] = sa[i];
+			   bStudentsSelected = true;
+			}
+		}
+		if (studentArray.length == 0)
+		{
+			wChild.alert("No students are selected.");
+			return;
+		}
+	}
+	PopulateStudentList(false);
+	window.focus();
+	wChild.close();
+}
+
+function NameSort(a, b) {
+    var x = a.name.toLowerCase();
+    var y = b.name.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+
+// Called by SHP script that brings us back our list of students with data
+function DrawList (sStatusMessage) 
+{	  
+	if (bAllowSortingInStudentGrid)
+	{
+		// Load the page that will draw the sort grid listing the students
+		// When this page loads it will call AddSortItems and then SortDetail
+		wChild.frBody.location.href = 'SD_StudentSort.html';
+	}
+	else
+	{
+		DrawListNoSort(sStatusMessage);
+	}
+}
+
+function DrawListNoSort(sStatusMessage)
+{
+	var sOutput = "";
+	/// DOES NOT WORK ///// sa.sort(NameSort); // Do sort by name of course
+	iStudentsSelected = sa.length;
+
+	if (typeof(sStatusMessage) == "undefined" || Trim(sStatusMessage) == "")
+	{
+		sStatusMessage = "Students Found:";
+	}
+	with(wChild.frBody.document)
+	{
+		open();
+		write('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en"><head><title>Detailed Audit</title><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><meta http-equiv="Content-Language" content="en" /><link rel="StyleSheet" href="DGW_Style.css" type="text/css">');
+		write('<style> body {margin: 0;} </style></head>');
+		write('<body >');
+		write('<form name="frmStudents">');
+		write('<table border="0" cellspacing="0" cellpadding="0" width="100%" class="AuditTable">');
+		write('<tr>');
+		write('<td align="left" valign="top">');
+		write('<table border="0" cellspacing="0" cellpadding="4" width="100%">');
+		write('<tr><td align="left" valign="middle" class="StuHead">');
+		write('<span class="StuHeadTitle">' + sStatusMessage + '&nbsp;</span>');
+		write('<span class="StuHeadCaption">');
+		write(iStudentsSelected);
+		write('</span>');
+		write('<br />');
+		write('</td></tr></table>');
+		write('</td>');
+		write('</tr>');
+		write('<tr><td class="AuditHeadBorderLight">');
+		write('<img src="Images_DG2/spacer.gif" height="1" alt=""><br />');
+		write('</td></tr>');
+		write('<tr><td class="AuditHeadBorderDark">');
+		write('<img src="Images_DG2/spacer.gif" height="1" alt=""><br />');
+		write('</td></tr>');
+		write('</table>');
+		write('<table border="0" cellspacing="0" cellpadding="0" width="100%" class="AuditTable"><tr><td>');
+		write('<table class="Inner" cellspacing="1" cellpadding="3" border="0" width="100%">');
+		write('<tr><td nowrap class="FindStudentsTitle" width="1"><br /></td>');
+		write('<td nowrap class="FindStudentsTitle">ID</td>');
+		write('<td nowrap class="FindStudentsTitle" width="50%">Name</td>');
+		if (bDegreeUsed)
+		{
+			write('<td nowrap class="FindStudentsTitle">' + sDegreeLiteral + '</td>');
+		}
+		if (bMajorUsed)
+		{
+			write('<td nowrap class="FindStudentsTitle" width="50%">' + sMajorLiteral + '</td>');
+		}
+		if (bSchoolUsed)
+		{
+			write('<td nowrap class="FindStudentsTitle">' + sSchoolLiteral + '</td>');
+		}
+		if (bLevelUsed)
+		{
+			write('<td nowrap class="FindStudentsTitle">' + sLevelLiteral + '</td></tr>');
+		}
+		for (var i=0; i < sa.length; i++)
+		{
+			var iDegreeCount = sa[i].degrees.length;
+			write('<tr>' + nl);
+			write('<td nowrap class="FindStudentsTitle" width="1"><input type="checkbox" name="ids" value="' + sa[i].id + '" checked><br /></td>' + nl);
+			write('<td nowrap class="FindStudentsData">' + sa[i].id + '<br /></td>' + nl);
+			write('<td nowrap class="FindStudentsData">' + sa[i].name + '<br /></td>' + nl);
+			if (bDegreeUsed)
+			{
+  				write('<td nowrap class="FindStudentsData">');
+	  			for (var j=0; j < iDegreeCount; j++)
+				{
+					write(sa[i].degrees[j].degreelit + '<br />');
+				} // for
+				write('</td>' + nl);
+			} // degree used
+			if (bMajorUsed)
+			{
+				write('<td nowrap class="FindStudentsData">');
+				for (var k=0; k < iDegreeCount; k++)
+				{
+					write(sa[i].degrees[k].majorlit + '<br />');
+				} // for
+				write('</td>' + nl);
+			} // major used
+			if (bSchoolUsed)
+			{
+				write('<td nowrap class="FindStudentsData">');
+				for (var l=0; l < iDegreeCount; l++)
+				{
+					write(sa[i].degrees[l].school + '<br />');
+				} // for
+				write('</td>' + nl);
+			} // school used
+			if (bLevelUsed)
+			{
+  				write('<td nowrap class="FindStudentsData">');
+				for (var l=0; l < iDegreeCount; l++)
+				{
+					write(sa[i].degrees[l].level + '<br />');
+				} // for
+				write('</td>' + nl);
+			} // level used
+			write('</tr>' + nl);
+		}
+		write('</table></td></tr></table></form></body>');
+		write('</html>');
+		close();
+	}
+} // drawlistnosort
+
+function CheckAllStudents()
+{
+	oElements = wChild.frBody.document.frmStudents.elements;
+	for (iIndex = 0; iIndex < oElements.length; iIndex++)
+	{
+		if (oElements[iIndex].type == "checkbox")
+		{
+			oElements[iIndex].checked = true;
+		}
+	}
+}
+function UncheckAllStudents()
+{
+	oElements = wChild.frBody.document.frmStudents.elements;
+	for (iIndex = 0; iIndex < oElements.length; iIndex++)
+	{
+		if (oElements[iIndex].type == "checkbox")
+		{
+			oElements[iIndex].checked = false;
+		}
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// Draw the student list so that the user can click on the column heading
+// and sort the list. BrowserSniffer.js is required.
+////////////////////////////////////////////////////////////////////////////
+function AddSortItems(sStatusMessage) 
+{
+	var sOutput = "";
+
+	//wChild.alert ('In AddSortItems');
+
+	//sa.sort(NameSort);
+	iStudentsSelected = sa.length;
+
+	// The order of the items in this array can be changed to change the order
+	// of the columns in the table
+	// 0 = Primary Sort; 1 = Secondary Sort
+	// 2 = checkbox; 3 = id;	 4= name;   
+	// 5 = degree;   6 = major;  7 = school; 8 = level
+	// Showing all columns results in: [2,3,4,5,6,7,8]
+	//	sShowColumnsArray = [2,3,4,5,6,7,8];
+	// Definitely show the checkbox, id and name fields
+	sShowColumnsArray = [2,3,4];
+	if (bDegreeUsed)
+	{
+		sShowColumnsArray[sShowColumnsArray.length] = 5;
+	}
+	if (bMajorUsed)
+	{
+		sShowColumnsArray[sShowColumnsArray.length] = 6;
+	}
+	if (bSchoolUsed)
+	{
+		sShowColumnsArray[sShowColumnsArray.length] = 7;
+	}
+	if (bLevelUsed)
+	{
+		sShowColumnsArray[sShowColumnsArray.length] = 8;
+	}
+	if (typeof(sStatusMessage) == "undefined" || Trim(sStatusMessage) == "")
+	{
+		sStatusMessage = "Students Found:";
+	}
+	sTitle = sStatusMessage + '&nbsp;' + iStudentsSelected;
+	// If this function was called again we are going to just recreate the array
+	oViewClass = new Array();
+	oViewClass.name = "oViewClass";
+
+	// Changing the order of these items will change the order in which they
+	// are displayed; be sure to change the ShowColumnsArray values also
+	oViewClassMask = new Array( ["Primary Sort","sort"],["Secondary Sort","sort"],["  ","checkbox"],["ID","string"],["Name","string"],[sDegreeLiteral,"string"],[sMajorLiteral ,"string"],[sSchoolLiteral,"string"],[sLevelLiteral ,"string"]);
+	oViewClassMask.name = "oViewClassMask"; 
+
+	// Example:
+	// AddDetail(oViewClass, oViewClassMask,
+	// "<input type=CHECKBOX name=ids value='006141' checked>",
+	// "006141				 ",
+	// "Hines, Annabelle	   ",
+	// "B.S.				   ",
+	// "Computer Science	   ",
+	// "UG					 ",
+	// "01					 ");
+	for (var i=0; i < sa.length; i++) 
+	{
+		var iDegreeCount = sa[i].degrees.length;
+		//wChild.alert ('Start student ' + i);
+		sDegreeString = ''; 
+		for (var j=0; j < iDegreeCount; j++)
+		{
+			sDegreeString += sa[i].degrees[j].degreelit + '&nbsp;';
+		} // for
+
+		sMajorString = '';
+		for (var k=0; k < iDegreeCount; k++)
+		{
+			sMajorString += sa[i].degrees[k].majorlit + '&nbsp;';
+		} // for
+
+		sSchoolString = '';
+		for (var l=0; l < iDegreeCount; l++)
+		{
+			sSchoolString += sa[i].degrees[l].school + '&nbsp;';
+		} // for
+
+		sLevelString = '';
+		for (var m=0; m < iDegreeCount; m++)
+		{
+			sLevelString += sa[i].degrees[m].level + '&nbsp;';
+	  	} // for
+
+		// The value is the index into the student array
+		AddDetail(oViewClass, oViewClassMask, '<input type="checkbox" name="ids" value="' + i + '" checked>', sa[i].id, sa[i].name, sDegreeString, sMajorString, sSchoolString, sLevelString);
+	} // for sa.length
+	//wChild.alert ('End student loop ');
+} // addsortitems
+
+/*------------------------------------------------------------------------------------------------------
+AddDetail(oDetailArray, oDetailArrayMask, arguments[])
+--------------------------------------------------------------------------------------------------------
+Parameters:
+oDetailArray		Required	The object name of of detail array created with the AddDetail() function.
+oDetailArrayMask	Required	The object name of an array that defines the detail array as a mask.
+arguments[]			Required	The data to be added to oDetailArray.
+--------------------------------------------------------------------------------------------------------
+Notes:
+------------------------------------------------------------------------------------------------------*/
+function AddDetail(oDetailArray, oDetailArrayMask)
+{
+	var iThisIndex = oDetailArray.length;
+	oDetailArray[iThisIndex] = new Array();
+	for (var i=2; i < arguments.length; i++)
+	{
+		switch (oDetailArrayMask[i][1])
+		{
+			case "int": 
+				oDetailArray[iThisIndex][i] = arguments[i];
+				break;
+			case "money":
+				oDetailArray[iThisIndex][i] = "$" + arguments[i];
+				break;
+			case "date":
+				oDetailArray[iThisIndex][i] = Trim(arguments[i], " ");
+				break;
+			case "string":
+				oDetailArray[iThisIndex][i] = arguments[i];
+				break;
+			case "checkbox": 
+				oDetailArray[iThisIndex][i] = arguments[i];
+				break;
+			default:
+				oDetailArray[iThisIndex][i] = arguments[i];
+				break;
+		}
+	}
+} // adddetail
+
+/*------------------------------------------------------------------------------------------------------
+SortDetail(sLayer, oDetailArray, oDetailArrayMask, iPrimaryColumn, iSecondaryColumn, oInOrderArray)
+--------------------------------------------------------------------------------------------------------
+Parameters:
+sLayer				Required	The id of the <div> or <layer> that will contain the sortable grid.
+oDetailArray		Required	The object name of of detail array created with the AddDetail() function.
+oDetailArrayMask	Required	The object name of an array that defines the detail array as a mask.
+iPrimaryColumn		Required	The column of oDetailArray that will be used as the primary sort.
+								This is changed every time a new column is sorted.
+iSecondaryColumn	Required	The column of oDetailArray that will be used as the secondary sort.
+								This is constant.
+oInOrderArray		Required	An array of integers that defines the order and number of columns
+								of oDetailArray to display.
+--------------------------------------------------------------------------------------------------------
+Notes:
+------------------------------------------------------------------------------------------------------*/
+function SortDetail (sLayer, oDetailArray, oDetailArrayMask, iPrimaryColumn, iSecondaryColumn, oInOrderArray)
+{
+/*	if (typeof(sLayer)		   == "undefined") alert ('SortDetail: sLayer is not defined');
+	if (typeof(oDetailArray)	 == "undefined") alert ('SortDetail: oDetailArray is not defined');
+	if (typeof(oDetailArrayMask) == "undefined") alert ('SortDetail: oDetailArrayMask is not defined');
+	if (typeof(iPrimaryColumn)   == "undefined") alert ('SortDetail: iPrimaryColumn is not defined');
+	if (typeof(iSecondaryColumn) == "undefined") alert ('SortDetail: iSecondaryColumn is not defined'); 
+*/
+
+	if (oInOrderArray)
+	{
+		oOrderArray = oInOrderArray;
+	}
+	iDefSecondaryColumn = iSecondaryColumn;
+	for (var i=0; i < oDetailArray.length; i++)
+	{
+		switch (oDetailArrayMask[iPrimaryColumn][1])
+		{
+			case "date":
+				var oDateArray = oDetailArray[i][iPrimaryColumn].split('/');
+				var sHoldSortDate = oDateArray[2] + oDateArray[0] + oDateArray[1];
+				oDetailArray[i][0] = parseInt(sHoldSortDate);
+				break;
+			default:
+				oDetailArray[i][0] = oDetailArray[i][iPrimaryColumn].toUpperCase();
+				break;
+		}
+	}
+	for (var i=0; i < oDetailArray.length; i++)
+	{
+		oDetailArray[i][1] = oDetailArray[i][iSecondaryColumn];
+	}
+	if (iCurrentSortColumn == iPrimaryColumn && sCurrentSortOrder == "Descending")
+	{
+		oDetailArray.reverse();
+		sCurrentSortOrder = "Ascending";
+	}
+	else if (iCurrentSortColumn == iPrimaryColumn && sCurrentSortOrder == "Ascending")
+	{
+		oDetailArray.reverse();
+		sCurrentSortOrder = "Descending";
+	}
+	else
+	{
+		oDetailArray.sort();
+		sCurrentSortOrder = "Ascending";
+	}
+	iCurrentSortColumn = iPrimaryColumn;
+	sTableHTML = GetDetailHTML(sLayer, oDetailArray, oDetailArrayMask);
+	WriteLayer(sLayer, sTableHTML);
+}
+
+function WriteLayer(sLayer, sHTML)
+{
+	if (is_ie4up)
+	{
+		//window.document.all[sLayer].innerHTML = sHTML;
+		wChild.frBody.document.all[sLayer].innerHTML = sHTML;
+	}
+	else if (is_nav4)
+	{
+		wChild.frBody.document[sLayer].document.open();
+		wChild.frBody.document[sLayer].document.write(sHTML);
+		wChild.frBody.document[sLayer].document.close();
+	}
+	else if (is_nav5)
+	{
+		var myElement = wChild.frBody.document.getElementById(sLayer);
+		myElement.width = "100%";
+		myElement.innerHTML = sHTML;
+	}
+}
+
+function GetDetailHTML(sLayer, oDetailArray, oDetailArrayMask)
+{
+	var sCellAlign = "left";
+	var sBodyHTML = "";
+
+	if (typeof(sTitle) == "undefined")
+	{
+		sTitle = " ";
+	}
+
+	sBodyHTML += '<form name="frmStudents">' + nl;
+	sBodyHTML += '<table border="0" cellspacing="0" cellpadding="4" width="100%">' + nl;
+	sBodyHTML += '<tr class="TableHeader"><td align="left" valign="middle" nowrap class="TableHeaderText">' + nl;
+	sBodyHTML += sTitle;
+	sBodyHTML += '<br /></td></tr></table>' + nl;
+	sBodyHTML += '<table cellspacing="0" cellpadding="0" border="0" width="100%" height="2">' + nl;
+	sBodyHTML += '<tr class="TableHighLight" height="1"><td align="left" valign="top" height="1">' +
+				 '<img src="Images_DG2/spacer.gif" height="1" width="50"><br /></td></tr>' + nl;
+	sBodyHTML += '<tr class="TableHeader" height="1"><td align="left" valign="top" height="1">' +
+				 '<img src="Images_DG2/spacer.gif" height="1" width="50"><br /></td></tr>' + nl;
+	sBodyHTML += '</table>' + nl;
+	sBodyHTML += '<table cellspacing="0" cellpadding="0" border="0" width="100%" height="2">' + nl;
+	sBodyHTML += '<tr><td align="left" valign="top">' + nl;
+	sBodyHTML += '<table border="0" cellspacing="0" cellpadding="0" width="100%">' + nl;
+	sBodyHTML += '<tr class="TableOuter"><td>' + nl;
+	sBodyHTML += '<table cellspacing="1" cellpadding="3" border="0" width="100%">' + nl;
+
+
+	//sBodyHTML += '<table cellspacing="0" cellpadding=3 border=1 width="100%" bordercolorlight=#CCCCCC bordercolordark=#FFFFFF bordercolor=#EEEEEE>' + nl;
+	//sBodyHTML += '<tr >' + nl;
+	sBodyHTML += '<tr>' + nl;
+
+	// DISPLAY THE COLUMN HEADING
+	for (var i = 0; i < oOrderArray.length; i++)
+	{
+		sBodyHTML += '<th align="left" valign="middle" nowrap class="SearchTableTitle"><a href="javascript:top.opener.SortDetail(\'' + sLayer + '\', ' + 'top.opener.' + oDetailArray.name + ', ';
+		sBodyHTML += 'top.opener.' + oDetailArrayMask.name + ', ' + oOrderArray[i] + ',' + iDefSecondaryColumn + ')">';
+		//alert(i + ": \n\n" + oOrderArray);
+		sBodyHTML += oDetailArrayMask[oOrderArray[i]][0] + '</a>' +	nl;
+			
+		if (iCurrentSortColumn == oOrderArray[i])
+		{
+			sBodyHTML += '<a href="javascript:top.opener.SortDetail(\'' + sLayer + '\', ' + 'top.opener.' + oDetailArray.name + ', ' + 'top.opener.' + oDetailArrayMask.name + ', ' + oOrderArray[i] + ',' + iDefSecondaryColumn + ')">' + '<img src="Images_DG2/Arrow_' + sCurrentSortOrder + '.gif" border="0" alt="Sort Order: ' + sCurrentSortOrder + '"></a><br /></th>' + nl;
+		}
+		else
+		{
+			sBodyHTML += '<img src="Images_DG2/spacer.gif" width="8" height="1" alt=""><br /></th>' + nl;
+		}
+
+	} // end for order array
+	sBodyHTML += '</tr>' + nl;
+
+	// DISPLAY THE COLUMN DATA ITEMS
+	for (var j = 0; j < oDetailArray.length; j++)
+	{
+		sBodyHTML += '<tr>' + nl;
+		for (var k = 0; k < oOrderArray.length; k++)
+		{
+			sWidth	  = "  ";
+			if (oDetailArrayMask[k + 2][1] == "money" || oDetailArrayMask[k + 2][1] == "int")
+			{
+				sCellAlign  = "right";
+				sTableClass = "SearchTableData";
+			}
+			else if (oDetailArrayMask[k + 2][1] == "checkbox")
+			{
+				sCellAlign = "center";
+				sTableClass = "SearchTableDataCheckbox";
+				sWidth	  = " width=30 ";
+			}
+			else
+			{
+				sCellAlign = "left";
+				sTableClass = "SearchTableData";
+			}
+			sBodyHTML += '<td align="' + sCellAlign + '" valign="middle" nowrap ' + 'class="' + sTableClass + '"' + sWidth + '>' + oDetailArray[j][oOrderArray[k]] + '<br /></td>' + nl;
+		}
+		sBodyHTML += '</tr>' + nl;
+		/*
+		if (j < (oDetailArray.length - 1)) {
+			sBodyHTML += '<tr>' + '<td colspan="' + oOrderArray.length + '"><img src="Images_DG2/spacer.gif" width=1 height=2></tr>' + nl;
+			sBodyHTML += '<tr >' + '<td colspan="' + oOrderArray.length * 5 + '"><img src="Images_DG2/spacer.gif" width=1 height=1></tr>' + nl;
+			sBodyHTML += '<tr>' + '<td colspan="' + oOrderArray.length + '"><img src="Images_DG2/spacer.gif" width=1 height=2></tr>' + nl;
+		}
+		*/
+	} // end for detail array
+	
+	if (typeof oSummary == "object") {
+		sBodyHTML += '<tr>' + nl;
+		for (var x = 0; x < oOrderArray.length; x++) {
+			sBodyHTML += '<td align="right" valign="middle" nowrap class="TableData">';
+			if(oSummary[x]) {sBodyHTML += oSummary[x][0] + oSummary[x][1];}
+			sBodyHTML += '<br /></td>' + nl;
+		}
+		sBodyHTML += '</tr>' + nl;
+	}
+
+	sBodyHTML += '</table></td></tr></table></td></tr></table></form>' + nl;
+	return sBodyHTML;
+} // getdetailhtml
+&­JÉPµ      U96U96;‰ÜUQ   2:https://dwapppr1.njit.edu/DGW_StudentFunctions.js necko:classified 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:12:42 GMT
+Server: Apache/2.2.3 (Red Hat)
+Last-Modified: Fri, 24 Oct 2014 10:38:19 GMT
+Etag: "60624-6108-50628c77efcc0"
+Accept-Ranges: bytes
+Content-Length: 24840
+Content-Type: application/x-javascript
+ uncompressed-len 0   a

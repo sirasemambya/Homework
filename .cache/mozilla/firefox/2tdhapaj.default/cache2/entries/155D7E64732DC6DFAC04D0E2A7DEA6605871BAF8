@@ -1,0 +1,410 @@
+<html xmlns:xalan-nodeset="org.apache.xalan.xslt.extensions.Nodeset" xmlns:java="http://xml.apache.org/xslt/java">
+    <news3col>
+	<head>
+            <title>NJIT - PublicInfo: NJIT Newsroom Home Page</title>
+            <meta content="NJIT Newsroom" name="description">
+            <meta content="NJIT, New Jersey Institute of Technology, news, media, press releases, newsroom, public relations, University Communications" name="keywords">
+            <!--googleoff:all-->
+            <meta content="crovetto" name="author">
+            <!--googleon:all-->
+
+            <meta content="University Communications" name="department">
+            <meta name="last-modified" content="Thu, 23 Apr 2015 12:00:00 EDT" />            <title>NJIT</title>
+	<link rel="stylesheet" type="text/css" href="/uicomponents/css/ostyleinfo.css">
+	<link rel="stylesheet" type="text/css" href="/uicomponents/css/cstyleinfo.css">
+<script language="javascript">
+ 		rolls = new Array (5);
+		rolls[0] = new Image(); rolls[0].src = "/uicomponents/images/Sub1r.gif"; //rollover image
+		rolls[1] = new Image(); rolls[1].src = "/uicomponents/images/Sub2r.gif"; //rollover image
+		rolls[2] = new Image(); rolls[2].src = "/uicomponents/images/Sub3r.gif"; //rollover image
+		rolls[3] = new Image(); rolls[3].src = "/uicomponents/images/Sub4r.gif"; //rollover image
+		rolls[4] = new Image(); rolls[4].src = "/uicomponents/images/submyr.gif"; //rollover image
+ 		ups = new Array (5);
+		ups[0] = "/uicomponents/images/Sub1.gif";
+		ups[1] = "/uicomponents/images/Sub2.gif";
+		ups[2] = "/uicomponents/images/Sub3.gif";
+		ups[3] = "/uicomponents/images/Sub4.gif";
+		ups[4] = "/uicomponents/images/submy.gif";
+
+var NS = (document.layers) ? 1:0
+var IE = (document.all) ? 1:0
+var NS6 = (document.getElementById) ? 1:0
+ function showLayer(lyr) {
+        if (IE) document.all[lyr].style.visibility = "visible";
+        else if (NS) document.layers[lyr].visibility = "visible";
+        else if (NS6) document.getElementById(lyr).style.visibility = "visible";
+}
+ function hideLayer(lyr) {
+        if (IE) document.all[lyr].style.visibility = "hidden";
+        else if (NS) document.layers[lyr].visibility = "hidden";
+        else if (NS6) document.getElementById(lyr).style.visibility = "hidden";
+}
+ function show(lnum) {
+        showLayer('ly' + lnum);
+        return true;
+}
+ function hide(lnum) {
+        hideLayer('ly' + lnum);
+        return true;
+}
+ function openPopup(url) {
+		myPopup=window.open(url,"NJIT", "resizable=yes,toolbar=yes,scrollbars=yes,menubar=yes,status=yes");
+		myPopup.focus();
+}
+</script>
+
+<script language="javascript" src='/uicomponents/scripts/rollover.js'></script>
+<!-- <script language="javascript" src='/uicomponents/scripts/dropsub.js'></script> -->
+
+<script language="javascript" src='/uicomponents/scripts/njitscript.js'></script>            <script LANGUAGE="JavaScript">function linkPopUp(url) {
+			var newURL = url;
+			var currentURL = top.document.location.href;
+			var firstChar = url.charAt(0);
+
+			if(firstChar =="/"){
+				sindex = currentURL.indexOf("/",7)
+				if(sindex >0){
+					url1 = currentURL.substring(0, sindex);
+					newURL = url1 + url;
+				}
+			}
+				linkPopUpWindow=window.open(newURL,"NJIT", "resizable=yes,toolbar=yes,scrollbars=yes,menubar=yes,status=yes");
+				linkPopUpWindow.focus();
+		}
+		</script>
+            <style type="text/css">
+					.homemenu1 {FONT-SIZE: 12px; COLOR: #494977; FONT-WEIGHT: bold; FONT-FAMILY:Arial; }
+					.homemenu1 A:link {FONT-SIZE: 12px; COLOR: #494977; TEXT-DECORATION: none; }
+					.homemenu1 A:visited {FONT-SIZE: 12px; COLOR: #494977; TEXT-DECORATION: none;}
+					.homemenu1 A:hover {FONT-SIZE: 12px; COLOR: #D92424; TEXT-DECORATION: none; }
+					.imgmargintop {margin-top: 5px; }
+					.uportal-channel-text a:link{color: #a03a33;}
+					.uportal-channel-text a:visited{color: #a03a33;}
+				</style>
+            <link rel="stylesheet" type="text/css" href="http://cp3.njit.edu/cp/content/style.css" /> 
+            <link rel="stylesheet" type="text/css" href="http://cp3.njit.edu/media/org/jasig/portal/layout/dlm/skins/classic/skin/portal.css" /> 
+        </head>
+	<body rightmargin="0" marginwidth="0" marginheight="0" leftmargin="0" bgcolor="#ffffff">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+
+                    <td width="5"><img width="5" src="/uicomponents/images/1x1.gif" height="1" border="0"></td><td valign="top" align="left">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 23, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-113.php" target="_blank">Campus Musical Talent Celebrates Spring</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-113_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>NJIT faculty, students and friends have mustered an impressive array of talents to form a jazz band, string and wind ensembles and a dance group. With the snows of winter now behind us, these talents will be a celebratory part of spring on campus.&nbsp;<a href="http://www.njit.edu/news/2015/2015-113.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 20, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-112.php" target="_blank">All Abroad: Two CoAD Professors Travel Overseas for Panel Discussions </a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-112_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>Distinguished professor of architecture Zeynep &Ccedil;elik and multiple award-winning associate professor Mar&iacute;a Hurtado de Mendoza will be overseas this week sharing ideas and discussing their latest projects.&nbsp;<a href="http://www.njit.edu/news/2015/2015-112.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 20, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-111.php" target="_blank">NACME President and CEO Irving Pressley McPhail to Address Class of 2015 at NJIT's 99th Commencement</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-111_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>New Jersey Institute of Technology (NJIT) will confer honorary degrees upon two distinguished individuals at the 99th Commencement exercises Tuesday, May 19, 2015, 9 a.m. at the Prudential Center in Newark.&nbsp;<a href="http://www.njit.edu/news/2015/2015-111.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 17, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-110.php" target="_blank">NJIT to Host 2015 Panasonic Creative Design Challenge April 21</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-110_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>Students from 24 New Jersey high schools will compete in the Panasonic Creative Design Challenge (CDC), a premier robotics competition for New Jersey high school students held annually on the NJIT campus.&nbsp;<a href="http://www.njit.edu/news/2015/2015-110.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 17, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-109.php" target="_blank">Linode Donates $1.2 Million in Servers to NJIT as Part of Workforce Development Initiative</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-109_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>New Jersey Institute of Technology (NJIT) recently received 420 Intel-based Supermicro servers from Linode, a Linux-based cloud hosting company based in Galloway, NJ. The servers, valued at $1.2 million, will support advanced instruction, research and career advancement for NJIT students.&nbsp;&nbsp;<a href="http://www.njit.edu/news/2015/2015-109.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 16, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-108.php" target="_blank">NJIT Student Receives NCORE Scholarship</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-108_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>Deliris Diaz, a sophomore applied physics major, was recently selected as a recipient of the 2015 National Conference for Race &amp; Ethnicity in American Higher Education (NCORE) scholarship.&nbsp;<a href="http://www.njit.edu/news/2015/2015-108.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 16, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-107.php" target="_blank">CoAD Professor Named 2015 New Jersey Future Smart Growth Award Winner </a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-107_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>New Jersey Future, a nonprofit, nonpartisan organization that brings together concerned citizens and leaders to promote responsible land-use policies, has named College of Architecture and Design (CoAD) associate professor Darius Sollohub a 2015 Smart Growth Award Winner.&nbsp;<a href="http://www.njit.edu/news/2015/2015-107.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 13, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-106.php" target="_blank">NJIT Student Team Reached Final Four of CFA Institute Research Challenge</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-106_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>For the second year in a row, a team of NJIT students reached the final four of the <a href="http://www.nyssa.org/StudentOutreach/CFAInstituteResearchChallenge.aspx">CFA Institute Research Challenge</a>, an annual global competition that provides university students with hands-on mentoring and intensive training in financial analysis.&nbsp;<a href="http://www.njit.edu/news/2015/2015-106.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 10, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njithighlanders.com/news/2015/4/3/MBB_0403155909.aspx?path=mbball" target="_blank">NJIT's Jim Engles Wins the John McLendon National Coach of the Year Award</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-105_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>NJIT men's basketball coach Jim Engles was honored Friday afternoon as the 2015 John McLendon National Coach of the Year at the annual CollegeInsider.com Awards Banquet, held at the Hyatt Regency Hotel.&nbsp;<a href="http://www.njithighlanders.com/news/2015/4/3/MBB_0403155909.aspx?path=mbball" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                              <tr>
+                                <td width="100%" valign="top">
+                                 <span class="uportal-channel-text" style="float:right; font-size:10px; padding-left:10px;"> April 10, 2015</span>   
+                                 <span class="uportal-channel-text"><b><a href="http://www.njit.edu/news/2015/2015-104.php" target="_blank">School of Art + Design to Participate in Greater Newark Mini Maker Faire</a></b></span> 
+                                    <table cellspacing="1" cellpadding="0" border="0" align="left">
+                                        <tr>
+                                            <td> <img width="100" src="http://www.njit.edu/news/2015/images/2015-104_teaser.jpg" class="imgmargintop" border="0" align="left" style="border:1px solid black;"></td><td><img width="10" src="/uicomponents/images/1x1.gif" height="1"></td>
+                                        </tr>
+                                    </table>
+
+                                    
+			<span class="uportal-channel-text">
+                                        <newsContent>
+                                            <br>The School of Art + Design's industrial and digital design programs will represent NJIT at the Greater Newark Mini Maker Faire April 11, 11 a.m. - 4 p.m. at the Newark Museum.&nbsp;<a href="http://www.njit.edu/news/2015/2015-104.php" target="_blank"><img src="http://www.njit.edu/features/uicomponents/images/next.gif" border="0"></a>
+                                            <BR>
+</newsContent>
+
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+
+                                    <br>
+                                </td>
+                            </tr>
+                             
+                            
+ <!--                                                            -->
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </body>
+</news3col>
+</html>
+
+ë¶D›
+      U96U96;‰Ò       ':http://www.njit.edu/news/cp.php?max=10 necko:classified 1 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:12:28 GMT
+Server: Apache
+Content-Type: text/html
+ charset windows-1252 uncompressed-len 0   fÚ

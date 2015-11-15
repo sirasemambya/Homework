@@ -1,0 +1,679 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Pragma" NAME="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" NAME="Cache-Control" CONTENT="no-cache">
+<LINK REL="stylesheet" HREF="/css/web_defaultapp.css" TYPE="text/css"><LINK REL="stylesheet" HREF="https://cp4.njit.edu/cp/content/style.css" TYPE="text/css">
+<LINK REL="stylesheet" HREF="/css/web_defaultprint.css" TYPE="text/css" media="print">
+<TITLE>Student Detail Schedule</TITLE>
+<META HTTP-EQUIV="Content-Script-Type" NAME="Default_Script_Language" CONTENT="text/javascript">
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+window.onunload = function() {submitcount=0;}
+var submitcount=0;
+function checkSubmit() {
+if (submitcount == 0)
+   {
+   submitcount++;
+   return true;
+   }
+else
+   {
+alert("Your changes have already been submitted.");
+   return false;
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+//  Function to open a window
+function windowOpen(window_url) {
+   helpWin = window.open(window_url,'','toolbar=yes,status=no,scrollbars=yes,menubar=yes,resizable=yes,directories=no,location=no,width=350,height=400');
+   if (document.images) { 
+       if (helpWin) helpWin.focus()
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+</HEAD>
+<BODY  class="campuspipeline" >
+<DIV class="headerwrapperdiv">
+<DIV class="headerlinksdiv">
+<SPAN class="pageheaderlinks2">
+<MAP NAME="Module_Navigation_Links_H" title="Module Navigation Links">
+<p>
+<A HREF="#skip_Module_Navigation_Links_H" onMouseover="window.status='Skip Module Navigation Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Module Navigation Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Module Navigation Links</A>
+<TABLE  CLASS="plaintable" SUMMARY="This is main table for displaying Tab Items."
+                          WIDTH="100%" cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<TD CLASS="pldefault">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Tab Items."
+                 cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_GenMnu" onMouseover="window.status='Personal Information'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Personal Information'; return true" onBlur="window.status=''; return true" >Personal Information</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="tabon"  height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu" onMouseover="window.status='Student'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Student'; return true" onBlur="window.status=''; return true" >Student</A>
+</TD>
+<TD class="bgtabon"  height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_FinAidMainMnu" onMouseover="window.status='Financial Aid'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Financial Aid'; return true" onBlur="window.status=''; return true" >Financial Aid</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+<TR>
+<TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+</MAP>
+</SPAN>
+<a name="skip_Module_Navigation_Links_H"></a>
+</DIV>
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Menu Items and Banner Search textbox."
+         WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<DIV class="headerlinksdiv2">
+<FORM ACTION="/prod/twbksrch.P_ShowResults" METHOD="POST">
+Search
+<SPAN class="fieldlabeltextinvisible"><LABEL for=keyword_in_id><SPAN class="fieldlabeltext">Search</SPAN></LABEL></SPAN>
+<INPUT TYPE="text" NAME="KEYWRD_IN" SIZE="20" MAXLENGTH="65" ID="keyword_in_id">
+<INPUT TYPE="submit" VALUE="Go">
+</FORM>
+</div>
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<SPAN class="pageheaderlinks">
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"  class="submenulinktext2" id="ssbbackurl">RETURN TO MENU</A>
+|
+<A HREF="/prod/twbksite.P_DispSiteMap?menu_name_in=bmenu.P_MainMnu&amp;depth_in=2&amp;columns_in=3" accesskey="2" class="submenulinktext2">SITE MAP</A>
+|
+<A HREF="/prod/twbkfrmt.P_DispHelp?pagename_in=bwskfshd.P_CrseSchdDetl" accesskey="H" onClick="popup = window.open('/prod/twbkfrmt.P_DispHelp?pagename_in=bwskfshd.P_CrseSchdDetl', 'PopupPage','height=500,width=450,scrollbars=yes,resizable=yes'); return false" target="_blank" onMouseOver="window.status='';  return true" onMouseOut="window.status=''; return true"onFocus="window.status='';  return true" onBlur="window.status=''; return true"  class="submenulinktext2">HELP</A>
+</span>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV class="pagetitlediv">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays title and static header displays."
+   WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<H2>Student Detail Schedule</H2>
+</TD>
+<TD CLASS="pldefault">
+&nbsp;
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<DIV class="staticheaders">
+31118493 Sira B. Semambya<br>
+2015 Fall<br>
+Apr 23, 2015 02:16 pm<br>
+</div>
+</TD>
+</TR>
+<TR>
+<TD class="bg3" width="100%" colSpan=3><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD>
+</TR>
+</TABLE>
+<a name="main_content"></a>
+</DIV>
+<DIV class="pagebodydiv">
+<!--  ** END OF twbkwbis.P_OpenDoc **  -->
+
+Total Credit Hours: 15.000
+<BR>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Intro Computer Sci I - CS 113 - 001</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">91399</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">**Web Registered** on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+Narain Gehani, 
+Michael A. Baltrush
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    3.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">1:00 pm - 2:25 pm</TD>
+<TD CLASS="dddefault">M</TD>
+<TD CLASS="dddefault">Guttenberg Info Tech Center 2315C</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">Michael A.  Baltrush </TD>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">4:00 pm - 5:25 pm</TD>
+<TD CLASS="dddefault">R</TD>
+<TD CLASS="dddefault">Kupfrian Hall 118</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">Narain   Gehani (<ABBR title= "Primary">P</ABBR>)</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Intro to Website Development - IS 117 - 001</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">92922</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">**Web Registered** on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+Keith A. Williams
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    3.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">11:30 am - 12:55 pm</TD>
+<TD CLASS="dddefault">MR</TD>
+<TD CLASS="dddefault">Student Mall PC36</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">Keith A.  Williams (<ABBR title= "Primary">P</ABBR>)</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Designing the User Experience - IS 247 - 001</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">92926</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">Waitlist on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Waitlist Position:</TH>
+<TD CLASS="dddefault">0</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Notification Expires:</TH>
+<TD CLASS="dddefault">Apr 24, 2015 10:54 am</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+Douglas A. Zytko<A HREF="mailto:daz2@njit.edu"    target="Douglas A. Zytko" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A>
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    0.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">8:30 am - 11:25 am</TD>
+<TD CLASS="dddefault">W</TD>
+<TD CLASS="dddefault">Kupfrian Hall 202</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">Douglas A  Zytko (<ABBR title= "Primary">P</ABBR>)<A HREF="mailto:daz2@njit.edu"    target="Douglas A. Zytko" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A></TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Intro to Information Systems - IS 265 - 101</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">92927</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">Waitlist on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Waitlist Position:</TH>
+<TD CLASS="dddefault">1</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Notification Expires:</TH>
+<TD CLASS="dddefault">&nbsp;</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+John C. McPartland<A HREF="mailto:mcpartla@njit.edu"    target="John C. McPartland" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A>
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    0.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">6:00 pm - 9:05 pm</TD>
+<TD CLASS="dddefault">T</TD>
+<TD CLASS="dddefault">Central King Building 222</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">John C.  McPartland (<ABBR title= "Primary">P</ABBR>)<A HREF="mailto:mcpartla@njit.edu"    target="John C. McPartland" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A></TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Elem Probability & Statistics - MATH 105 - 005</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">93184</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">**Web Registered** on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+George Mytalas<A HREF="mailto:mytalas@njit.edu"    target="George Mytalas" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A>
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    3.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">2:30 pm - 3:55 pm</TD>
+<TD CLASS="dddefault">MR</TD>
+<TD CLASS="dddefault">Kupfrian Hall 105</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">George   Mytalas (<ABBR title= "Primary">P</ABBR>)<A HREF="mailto:mytalas@njit.edu"    target="George Mytalas" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A></TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Intro To Mngmnt Info Syst - MIS 245 - 101</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">93828</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">Waitlist on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Waitlist Position:</TH>
+<TD CLASS="dddefault">6</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Notification Expires:</TH>
+<TD CLASS="dddefault">&nbsp;</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD COLSPAN="1" CLASS="dddefault">&nbsp;</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    0.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">6:00 pm - 9:05 pm</TD>
+<TD CLASS="dddefault">M</TD>
+<TD CLASS="dddefault">Kupfrian Hall 211</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault"><ABBR title = "To Be Announced">TBA</ABBR></TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Consumer-Buyer Behavior - MRKT 331 - 001</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">93852</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">**Web Registered** on Apr 23, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+Melodi D. Guilbault<A HREF="mailto:guilbaul@njit.edu"    target="Melodi D. Guilbault" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A>
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    3.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">11:30 am - 2:25 pm</TD>
+<TD CLASS="dddefault">T</TD>
+<TD CLASS="dddefault">Faculty Memorial Hall 110</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">Melodi D.  Guilbault (<ABBR title= "Primary">P</ABBR>)<A HREF="mailto:guilbaul@njit.edu"    target="Melodi D. Guilbault" ><IMG SRC="/wtlgifs/web_email.gif" ALIGN="middle" ALT="E-mail" CLASS="headerImg" TITLE="E-mail"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28></A></TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present the schedule course detail"><CAPTION class="captiontext">Introduction to Music - STS 347 - 001</CAPTION>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Associated Term:</TH>
+<TD CLASS="dddefault">2015 Fall</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM>:</TH>
+<TD CLASS="dddefault">94286</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Status:</TH>
+<TD CLASS="dddefault">**Web Registered** on Apr 15, 2015</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Assigned Instructor:</TH>
+<TD CLASS="dddefault">
+David B. Rothenberg
+</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Grade Mode:</TH>
+<TD CLASS="dddefault">Normal Grading</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Credits:</TH>
+<TD CLASS="dddefault">    3.000</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Level:</TH>
+<TD CLASS="dddefault">Undergraduate</TD>
+</TR>
+<TR>
+<TH COLSPAN="2" CLASS="ddlabel" scope="row" >Campus:</TH>
+<TD CLASS="dddefault">Newark</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This table lists the scheduled meeting times and assigned instructors for this class.."><CAPTION class="captiontext">Scheduled Meeting Times</CAPTION>
+<TR>
+<TH CLASS="ddheader" scope="col" >Type</TH>
+<TH CLASS="ddheader" scope="col" >Time</TH>
+<TH CLASS="ddheader" scope="col" >Days</TH>
+<TH CLASS="ddheader" scope="col" >Where</TH>
+<TH CLASS="ddheader" scope="col" >Date Range</TH>
+<TH CLASS="ddheader" scope="col" >Schedule Type</TH>
+<TH CLASS="ddheader" scope="col" >Instructors</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Class</TD>
+<TD CLASS="dddefault">10:00 am - 11:25 am</TD>
+<TD CLASS="dddefault">MR</TD>
+<TD CLASS="dddefault">Kupfrian Hall 206</TD>
+<TD CLASS="dddefault">Sep 01, 2015 - Dec 10, 2015</TD>
+<TD CLASS="dddefault">Lecture</TD>
+<TD CLASS="dddefault">David B.  Rothenberg (<ABBR title= "Primary">P</ABBR>)</TD>
+</TR>
+</TABLE>
+<BR>
+<A HREF="javascript:history.go(-1)" onMouseOver="window.status='Return to Previous';  return true" onFocus="window.status='Return to Previous';  return true" onMouseOut="window.status='';  return true"onBlur="window.status='';  return true">Return to Previous</A>
+
+<!--  ** START OF twbkwbis.P_CloseDoc **  -->
+<TABLE  CLASS="plaintable" SUMMARY="This is table displays line separator at end of the page."
+                                             WIDTH="100%" cellSpacing=0 cellPadding=0 border=0><TR><TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+<A HREF="#top" onMouseover="window.status='Skip to top of page'; return true" onMouseout="window.status=''; return true" OnFocus="window.status='Skip to top of page'; return true" onBlur="window.status=''; return true" class="skiplinks">Skip to top of page</A>
+</DIV>
+<DIV class="footerbeforediv">
+
+</DIV>
+<DIV class="footerlinksdiv">
+<SPAN class="pagefooterlinks">
+<MAP NAME="Student_Detail_Schedule_Links_F" title="Student Detail Schedule Links">
+<p>
+<A HREF="#skip_Student_Detail_Schedule_Links_F" onMouseover="window.status='Skip Student Detail Schedule Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Student Detail Schedule Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Student Detail Schedule Links</A>
+<P>[ <A HREF="/prod/bwsksreg.p_active_regs" onMouseover="window.status='Show Active Registrations'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Show Active Registrations'; return true" onBlur="window.status=''; return true" >Show Active Registrations</A>
+ | <A HREF="/prod/bwskhreg.p_reg_hist" onMouseover="window.status='Show Registration History'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Show Registration History'; return true" onBlur="window.status=''; return true" >Show Registration History</A>
+ | <A HREF="/prod/bwskfreg.P_AltPin" onMouseover="window.status='Add or Drop Classes'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Add or Drop Classes'; return true" onBlur="window.status=''; return true" >Add or Drop Classes</A>
+ | <A HREF="/prod/bwskfcls.p_sel_crse_search" onMouseover="window.status='Look Up Classes'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Look Up Classes'; return true" onBlur="window.status=''; return true" >Look Up Classes</A>
+ ]
+</MAP>
+</SPAN>
+<a name="skip_Student_Detail_Schedule_Links_F"></a>
+</DIV>
+<DIV class="footerafterdiv">
+
+</DIV>
+<DIV class="globalafterdiv">
+
+</DIV>
+<DIV class="globalfooterdiv">
+
+</DIV>
+<DIV class="pagefooterdiv">
+<SPAN class="releasetext">Release: 8.3.0.3</SPAN>
+</DIV>
+<DIV class="poweredbydiv">
+</DIV>
+<DIV class="div1"></DIV>
+<DIV class="div2"></DIV>
+<DIV class="div3"></DIV>
+<DIV class="div4"></DIV>
+<DIV class="div5"></DIV>
+<DIV class="div6"></DIV>
+<div class="banner_copyright"> <br><h5>Â© 2015 Ellucian Company L.P. and its affiliates.<br></h5></div>
+</BODY>
+</HTML>
+buGt<b      U97 U97 ;Š|       C~1429812742,:https://bnssbpr1.njit.edu/prod/bwskfshd.P_CrseSchdDetl necko:classified 1 security-info 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 request-method POST response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:16:33 GMT
+Server: Oracle-Application-Server-11g
+Content-Length: 28904
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ charset UTF-8 uncompressed-len 0   pè

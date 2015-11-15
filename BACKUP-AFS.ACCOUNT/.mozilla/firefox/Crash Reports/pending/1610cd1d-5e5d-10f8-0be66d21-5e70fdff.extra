@@ -1,0 +1,19 @@
+StartupTime=1429813079
+EMCheckCompatibility=true
+ProductName=Firefox
+Vendor=Mozilla
+InstallTime=1429812701
+Theme=classic/1.0
+Notes=GLXtest process failed (exited with status 1): GLX extension missing\n\n
+FramePoisonSize=4096
+Version=35.0
+FramePoisonBase=7ffffffff0dea000
+ReleaseChannel=release
+ServerURL=https://crash-reports.mozilla.com/submit?id={ec8030f7-c20a-464f-9b0e-13a3a9e97384}&version=35.0&buildid=20150108202552
+useragent_locale=en-US
+Add-ons=%7B972ce4c6-7e08-4474-a285-3208198ce6fd%7D:32.0.3
+BuildID=20150108202552
+ProductID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+URL=https://www.google.com/?gws_rd=ssl
+CrashTime=1429813086
+SecondsSinceLastCrash=11

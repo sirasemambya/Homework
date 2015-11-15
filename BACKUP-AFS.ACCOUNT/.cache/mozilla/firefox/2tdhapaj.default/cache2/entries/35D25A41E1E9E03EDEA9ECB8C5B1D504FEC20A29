@@ -1,0 +1,997 @@
+/*
+ * Copyright 1995-2012 Ellucian Company L.P. and its affiliates. 
+ */
+// $Id: //Tuxedo/RELEASE/Product/webroot/DGW_Control.js#4 $ 
+//////////////////////////////////////////////////////////////////
+// DGW_Control.js
+// Before making any changes to the standard Ellucian .js file
+// be sure to save it to DGW_Control.js.sbi so that you have a working
+// copy in case you need to undo your changes.
+// When changes are made be sure to log them here at the top so that
+// you can track your changes.
+//////////////////////////////////////////////////////////////////
+
+var ns4 = (document.layers) ? true : false;
+var ie4 = (document.all) ? true : false;
+
+if (ie4) document.onkeydown = keyDown;
+if (ns4) document.captureEvents(Event.KEYDOWN | Event.KEYUP);
+
+var sDOUBLE_QUOTE = '"';                                              //1.1j
+// When a list of students is loaded, should the first student be loaded?
+var bAutoLoadFirstAdvisee = true;
+
+function keyDown(DnEvents)
+{
+	var iKey = (ns4) ? DnEvents.which : window.event.keyCode;
+	if (iKey == 13)
+	{
+		GetIDSubmit();
+		//document.frmHoldFields.StudentList.focus();
+		return false;
+	}
+}
+
+var wChild = null;
+var strScript;
+var strName;
+var iScreenWidth = screen.availWidth;
+var iScreenHeight = screen.availHeight;
+var iSearchWidth  = 850;
+var iSearchHeight = 690;
+//var iXPlace = 0;
+//var iYPlace = 0;
+var iXPlace = (iScreenWidth / 2) - (iSearchWidth / 2);
+var iYPlace = (iScreenHeight / 2) - (iSearchHeight / 2);
+var sWindowParams = "width=" + iSearchWidth + ",height=" + iSearchHeight + "," + "toolbar=no,location=no,directories=no,status=no," + "menubar=no,scrollbars=yes,resizable=yes";
+
+var studentArray = new Array;
+var iStudentsFound;
+var oStudentID, oStudentList;
+var oDegree, oLevel, oMajor, oLastAudit, oCustom;
+var oCurrentStudent;
+var oCurrentDegree;
+var iCurrentID;
+var iCurrentIndex;
+var iLastIndex;
+var oCallScriptForm;
+var sPleaseWaitMessage = "Please wait<br /> while your request is processed...";
+var bShowPleaseWaitMessage = true;
+
+/*--
+<input type="hidden" name="SERVICE" value="SCRIPTER">
+<input type="hidden" name="SCRIPT" value="">
+<input type="hidden" name="USERID" value="<$ILBOXID>">
+
+<input type="hidden" name="ACTION" value="">
+<input type="hidden" name="AUDITTYPE" value="">
+<input type="hidden" name="DEGREETERM" value="">
+<input type="hidden" name="INTNOTES" value="">
+<input type="hidden" name="REPORT" value="">
+<input type="hidden" name="INPROGRESS" value="">
+<input type="hidden" name="CUTOFFTERM" value="">
+
+<input type="hidden" name="STUID" value="">
+<input type="hidden" name="SCHOOL" value="">
+<input type="hidden" name="STUSCH" value="">
+<input type="hidden" name="DEGREE" value="">
+<input type="hidden" name="STUDEG" value="">
+<input type="hidden" name="STUDEGLIT" value="">
+<input type="hidden" name="STUDI" value="">
+<input type="hidden" name="STULVL" value="">
+<input type="hidden" name="STUMAJLIT" value="">
+<input type="hidden" name="STUCATYEAR" value="">
+*/
+
+function ClearCallFields()
+{
+	with (oCallScriptForm)
+	{
+		SCRIPT.value		= "";
+		ACTION.value		= "";
+		AUDITTYPE.value		= "";
+		DEGREETERM.value	= "";
+		INTNOTES.value		= "";
+		REPORT.value		= "";
+		INPROGRESS.value	= "";
+		CUTOFFTERM.value	= "";
+		NOTENUM.value		= "";
+		NOTETEXT.value		= "";
+		NOTEMODE.value		= "";
+		INTERNAL.value		= ""; //1.0b
+		PENDING.value		= ""; //1.0b
+		CLASSES.value		= ""; //1.0j
+		ContentType.value   = "";
+	}
+}
+
+/*
+function CheckAutoSubmit() {
+	<$ILMASK SERVICE=SHGENATO>
+	CheckSubmit();
+	</$ILMASK>
+	<$ILMASK NOT SERVICE=SHGENATO>
+	return true;
+	</$ILMASK>
+}
+
+function CheckSubmit() {
+	var sScript = document.frmsCallScript.SCRIPT.value;
+	var oForm   = document.frmCallScript;
+	if (oForm.STUID.value != "") {
+		oForm.submit();
+	} else if(oForm.GroupCriteria.value != "xxx" &&
+			  (sScript == "SHPROMGF" ||
+			   sScript == "DTRPTPHN" ||
+			   sScript == "DTRPTIDX" ||
+			   sScript == "DTRPTBOG")) {
+		oForm.submit();
+	} else {
+		alert("Please select a prospect before proceeding.");
+		return false;
+	}
+}
+*/
+
+function CheckSelectedStudent()
+{
+	if ((typeof(oCallScriptForm.STUID) == "undefined") || (Trim(oCallScriptForm.STUID.value) == ""))
+	{
+		alert("Please select a student before proceeding.");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function SetCallFields()
+{
+	with (oCallScriptForm)
+	{
+		STUID.value = iCurrentID;
+		SCHOOL.value = oCurrentDegree.school;
+		STUSCH.value = oCurrentDegree.school;
+		DEGREE.value = oCurrentDegree.degree;
+		STUDEG.value = oCurrentDegree.degree;
+		STUDEGLIT.value = oCurrentDegree.degreelit;
+		STUDI.value = oCurrentDegree.degreeinterest;
+		STULVL.value = oCurrentDegree.level;
+		STUMAJLIT.value = oCurrentDegree.majorlit;
+		//STUCATYEAR.value = oCurrentDegree.catyear;
+	}
+}
+
+function InitializeSettings()
+{                                                                
+	oCallScriptForm = document.frmCallScript;
+	if (is_nav4)
+	{
+		oCallScriptForm.BROWSER.value = "NAV4";
+	}
+	else
+	{
+		oCallScriptForm.BROWSER.value = "NOT-NAV4";
+	}
+	oStudentList = document.frmHoldFields.StudentList;
+	oStudentID = document.frmHoldFields.StudentID;
+	if (bDegreeUsed)
+	{
+		oDegreeList = document.frmHoldFields.DegreeList;
+	}
+	if (bLevelUsed)
+	{
+		oLevel = document.frmHoldFields.Level;
+	}
+	if (bMajorUsed)
+	{
+		oMajor = document.frmHoldFields.Major;
+	}
+	if (bSchoolUsed)
+	{
+		oSchool = document.frmHoldFields.School;
+	}
+	if (bCustomUsed)
+	{
+		oCustom = document.frmHoldFields.Custom;
+	}
+
+	oLastAudit = document.frmHoldFields.LastAudit;
+
+	if (bRefreshUsed)
+	{
+		oLastRefresh = document.frmHoldFields.LastRefresh; //BKH
+	}
+}
+
+function PopulateDegreeList(iCurrentDegreeIndex)
+{
+	if (! bDegreeUsed)
+	{
+	 	return;
+	}
+	//iCurrentID = oStudentList[oStudentList.selectedIndex].value;
+	//oCurrentStudent = studentArray[GetStudentIndex(iCurrentID)];
+	oDegreeList.length = 0;
+	for (var i=0; i < oCurrentStudent.degrees.length; i++)
+	{
+		oDegreeList.options[oDegreeList.length] = new Option(oCurrentStudent.degrees[i].degreelit, oCurrentStudent.degrees[i].degree, 0, 0);
+	}
+    if (typeof(iCurrentDegreeIndex) != "undefined")
+      {
+	  oDegreeList.selectedIndex = iCurrentDegreeIndex;
+      }
+    else // degree is not defined
+	  oDegreeList.selectedIndex = 0;
+	SetDegree();
+	SetCallFields();
+}
+
+function PopulateStudentList(bSetFirst)
+{
+	oStudentList.length = 0;
+	if (typeof(document.frmHoldFields.StudentName) != "undefined")
+	{
+		document.frmHoldFields.StudentName.value = studentArray[0].name;
+	}
+  // Add a "Select" option if the students are not being auto-loaded
+  if (studentArray.length > 1 && !bAutoLoadFirstAdvisee)
+    oStudentList.options[oStudentList.length] = new Option("Select a student", "00000", 0,0);
+  // Add all students to the name picklist    
+  for (var i=0; i < studentArray.length; i++)
+	{
+		oStudentList.options[oStudentList.length] = new Option(studentArray[i].name, studentArray[i].id, 0, 0);
+	}
+  
+  if (bSetFirst)
+	{
+		oStudentList.selectedIndex = 1;
+		iCurrentIndex = 1;
+	}
+	else
+	{
+		oStudentList.selectedIndex = 0;
+		iCurrentIndex = 0;
+	}
+	iLastIndex = (oStudentList.options.length - 1);
+  if (oStudentList.length == 1 || bAutoLoadFirstAdvisee) 
+  	SetStudent(true);
+}
+
+function GetStudentIndex(iStudentID)
+{
+	for (var i=0; i < studentArray.length; i++)
+	{
+		if (studentArray[i].id == iStudentID)
+		{
+			return i;
+		}
+	}
+}
+
+function SetDegree()
+{
+	//iCurrentID = oStudentList[oStudentList.selectedIndex].value;
+	//oCurrentStudent = studentArray[GetStudentIndex(iCurrentID)];
+	if (bDegreeUsed)
+	{
+ 		oCurrentDegree = oCurrentStudent.degrees[oDegreeList.selectedIndex];
+	}
+	if (bLevelUsed)
+	{
+		oLevel.value = oCurrentDegree.level;
+	}
+	if (bMajorUsed)
+	{
+		oMajor.value = oCurrentDegree.majorlit;
+	}
+	if (bSchoolUsed)
+	{
+		oSchool.value = oCurrentDegree.school;
+	}
+	if (bCustomUsed)
+	{
+		if (typeof(oCurrentStudent.customvalue) == "undefined")
+		  oCustom.value = ""
+        else // is defined
+		  oCustom.value = oCurrentStudent.customvalue;
+	}
+	// Now that the student has changed degrees we should change	  //1.0c
+	// the forms's submit fields									  //1.0c
+	SetCallFields ();												 //1.0c
+}
+
+//////////////////////////////////////////////////////////////
+// iCurrentDegreeIndex is only passed in when the student/degree were already
+// selected but a refresh occurred - we want to make sure the same degree
+// still appears after all the student data has been loaded.
+//////////////////////////////////////////////////////////////
+function SetStudent(bReloadBody_Selection, iCurrentDegreeIndex)
+{
+	iCurrentIndex = oStudentList.selectedIndex;
+	iCurrentID = oStudentList[iCurrentIndex].value;
+	oCurrentStudent = studentArray[GetStudentIndex(iCurrentID)];
+	oStudentID.value = oCurrentStudent.id;
+	today = GetCurrentDate();                                      //1.1g Begin
+	if (Trim(today) == Trim(oCurrentStudent.auditdate))
+	{
+		oCurrentStudent.auditdate = "Today";
+	}                                                              //1.1g End
+	if (oCurrentStudent.auditdate.substring(0,1) == "/" || 
+        oCurrentStudent.auditdate.substring(0,1) == " ")
+	  oLastAudit.value = "No audit";
+    else // date not missing
+	  oLastAudit.value = oCurrentStudent.auditdate;
+	
+	if (bRefreshUsed)
+	{
+		if (oCurrentStudent.refreshdate.substring(0,1) == "/" || 
+			  oCurrentStudent.refreshdate.substring(0,1) == " ")
+      {        
+		  oLastRefresh.value = "Not bridged";
+		  oLastRefresh.title = "Not bridged";
+      }
+	  else // refresh date missing
+      {
+		  oLastRefresh.value = oCurrentStudent.refreshdate;
+		  oLastRefresh.title = "The last time the data was refreshed was " + oCurrentStudent.refreshdate;
+      // If there is a real changed-date value then add it
+      if (oCurrentStudent.changeddate == "at")
+        {
+        // do not add more info - the date is blank (happens after 414 update when bridge not run for this student)
+        }
+      // Changed-date and refresh-date are the same
+      else if (oCurrentStudent.changeddate == oCurrentStudent.refreshdate)
+        {
+        oLastRefresh.title = oLastRefresh.title + 
+                           "\n and this is the same date/time data changes were observed";
+        }
+      else // changed date is older
+        {
+        oLastRefresh.title = oLastRefresh.title + 
+                           "\n but the last time the we observed data changes was " + oCurrentStudent.changeddate;
+        }                           
+      //alert ("Changed date = [" + oCurrentStudent.changeddate + "]");        
+      }
+	}
+	// Reset the two main frames since we now have a new student
+	if (bReloadBody_Selection)
+	{
+      // DO NOT LOAD THIS HTML PAGE as it caused an odd problem - this
+      // page is not needed anyway. Problem: bring up a student, go to the planner
+      // tab, type in a new ID and hit return - the new student loads but the 
+      // SD2AUDCON page never loads - I think because the LoadFrameForm.html page
+      // got loaded after the request was sent to the cgi
+      //top.frSelection.location.href = "SD_LoadFrameForm.html";
+
+      // The Worksheets tab will be clicked so we don't to this to prevent flicker
+      //top.frBody.location.href = "SD_GeneralIntroduction.html";
+      // Load the Worksheet tab now
+      top.frControl.LoadWorksheetTab();
+	}
+	PopulateDegreeList(iCurrentDegreeIndex);
+	// 1.1q Begin
+	
+	//alert(sIDMask);
+	//sIDMask is set in the SHP Script SD2STUCON, originating from UCXCFG020 WEB
+	if (sIDMask == " " || sIDMask == "N")
+	{}// do nothing
+	else
+	{
+		myStudentID = document.frmHoldFields.StudentID;
+		sIDLength   = document.frmHoldFields.StudentID.value.length;
+		// if the student ID is less than the number of characters to mask, 
+		// set all the student ID characters to asterisks
+		if (sIDLength <= sIDMask || sIDMask == "A") 
+		{
+			myStudentID.value = "";
+			for (iStringIndex = 0 ; iStringIndex < sIDLength ; iStringIndex++ )
+			{
+				myStudentID.value += "*"; // fill the student ID with "*"
+			}
+		}
+		else // Student ID is greater than the number of characters to mask
+		{
+			sHoldID = myStudentID.value;
+			myStudentID.value = "";
+			for (iStringIndex = 0 ; iStringIndex < sIDMask ; iStringIndex++ )
+			{
+				myStudentID.value += "*"; // fill the student ID with "*"
+			}
+
+			if (sIDMask == "9")
+			{
+				myStudentID.value += sHoldID.substring(9);
+			}
+			else if (sIDMask == "8")
+			{
+				myStudentID.value += sHoldID.substring(8);
+			}
+			else if (sIDMask == "7")
+			{
+				myStudentID.value += sHoldID.substring(7);
+			}
+			else if (sIDMask == "6")
+			{
+				myStudentID.value += sHoldID.substring(6);
+			}
+			else if (sIDMask == "5")
+			{
+				myStudentID.value += sHoldID.substring(5);
+			}
+			else if (sIDMask == "4")
+			{
+				myStudentID.value += sHoldID.substring(4);
+			}
+			else if (sIDMask == "3")
+			{
+				myStudentID.value += sHoldID.substring(3);
+			}
+			else if (sIDMask == "2")
+			{
+				myStudentID.value += sHoldID.substring(2);
+			}
+			else if (sIDMask == "1")
+			{
+				myStudentID.value += sHoldID.substring(1);
+			}
+			else
+			{
+				document.frmHoldFields.StudentID.value = oStudentID.value;
+			}
+		}
+	}
+
+	// 1.1q End
+}
+///////////////////////////////////////////////////////
+function OpenSearchDraw()
+{
+	//alert(studentArray.length);
+	if (studentArray.length > 0)
+	{
+		sa.length = 0;
+		//alert(studentArray.length);
+		for (var i=0; i < studentArray.length; i++)
+		{
+			//alert(i);
+			sa[i] = studentArray[i];
+		}
+		DrawList("Currently Selected Students:");
+	}
+}
+
+///////////////////////////////////////////////////////
+function OpenSearch(strScript, strName, strType)
+{
+	document.OpenSearchForm.SCRIPT.value = strScript;
+	document.OpenSearchForm.target = strName;
+	if (strType != null)
+	{
+		document.OpenSearchForm.SEARCHTYPE.value = strType;
+	}
+	if (!wChild || wChild.closed) 
+	{
+		wChild = window.open("",strName, sWindowParams);
+		wChild.resizeTo(iSearchWidth, iSearchHeight);
+		wChild.moveTo(iXPlace, iYPlace);
+		//if (wChild.history.length > 1)								//1.0e
+		if (false)													  //1.0e
+		{
+			wChild.focus();
+			//wChild.opener=self;
+		} 
+		else // length is undefined or 0
+		{
+			wChild = window.open("", strName, sWindowParams);
+	 		top.frControl.opener = wChild;
+			document.OpenSearchForm.submit();
+			//wChild.opener=self;
+			wChild.focus();
+		}
+	 } 
+	 else //not child
+	 {
+	 	wChild.opener=self;
+	 	wChild.focus();
+	 }
+} // opensearch
+
+function GoFirst()
+{
+	if (iCurrentIndex > 0)
+	{
+		oStudentList.selectedIndex = 0;
+		iCurrentIndex = 0;
+		SetStudent(true);
+	}
+}
+
+function GoPrevious()
+{
+	if (iCurrentIndex > 0)
+	{
+		oStudentList.selectedIndex = --iCurrentIndex;
+		SetStudent(true);
+	}
+}
+
+function GoNext()
+{
+	if (iCurrentIndex < iLastIndex)
+	{
+		oStudentList.selectedIndex = ++iCurrentIndex;
+		SetStudent(true);
+	}
+}
+
+function GoLast()
+{
+	if (iCurrentIndex < iLastIndex)
+	{
+		oStudentList.selectedIndex = iLastIndex;
+		iCurrentIndex = iLastIndex;
+		SetStudent(true);
+	}
+}
+
+/////////////////////////////////////////////////////////////
+function GetAudit (sAction, sScript, sTarget, sReport, sAuditType) 
+{
+var oAuditForm;
+
+	if (CheckSelectedStudent()) 
+	  {
+		ClearCallFields();
+		// NOTE: need to include "document" here for Netscape
+		oAuditForm = top.frSelection.document.frmAuditForm;
+		//if (oAuditForm.REPORT.value == "SDAUDNEW")
+		//  oCallScriptForm.SCRIPT.value = "SDAUDNEW";
+		//else 
+		//  oCallScriptForm.SCRIPT.value = "SDAUDREV";
+		//alert ('In GetAudit: sAction = ' + sAction + '; sScript = ' + sScript);
+		with (oCallScriptForm)
+		{
+			SCRIPT.value = sScript;
+			ACTION.value = sAction;
+			AUDITTYPE.value = "";
+			DEGREETERM.value = "ACTV";
+			//REPORT.value = oAuditForm.REPORT.value; // Net 4.7 change
+		    if (typeof (sReport) == "undefined")                   //1.1n
+			  REPORT.value = oAuditForm.REPORT.options[oAuditForm.REPORT.selectedIndex].value;
+			else // report was passed as a param
+			  REPORT.value = sReport;
+            if (typeof (sAuditType) == "undefined")
+              {
+              // Get the audit type from the form - if it is defined
+              if (typeof (oAuditForm.AUDITTYPE) != "undefined")
+                AUDITTYPE.value = oAuditForm.AUDITTYPE.value;
+              }
+            else // report was passed as a param
+              AUDITTYPE.value = sAuditType;
+
+//1.1p Begin
+			if (typeof(ContentType) != "undefined")  // 1.1s: always set content type to XML when getting audits.
+			  { 
+                      // See if "pdf" is in the script name
+                      if (sScript.indexOf("pdf") > 0)  //1.1t
+			      { 
+                        ContentType.value = "pdf"; 
+                        }
+                      else // default is xml
+                        {
+                        ContentType.value = "xml"; 
+                        }
+                    }
+/* 1.1g Begin */
+			if (typeof(oAuditForm.InProgress) != "undefined" && // if the In-Progress element is defined AND
+			   (oAuditForm.InProgress.checked || // if In-Progress is either checked OR
+				oAuditForm.InProgress.value == "Y")) // if In-Progress has a value of "Y"
+			{
+				INPROGRESS.value = "Y";
+			}
+			else
+			{
+				INPROGRESS.value = "N";
+			}
+			if (typeof(oAuditForm.CutOffTerm) != "undefined" && // if the CutOffTerm element is defined AND
+			   (oAuditForm.CutOffTerm.checked || // if CutOffTerm is either checked OR
+				oAuditForm.CutOffTerm.value == "Y")) // if CutOffTerm has a value of "Y"
+			{
+				CUTOFFTERM.value = "9999";
+			}
+			else
+			{
+				CUTOFFTERM.value = "ACTV";
+			}
+/* 1.1g End */
+			if (typeof(oAuditForm.Refresh) == "undefined" || ! oAuditForm.Refresh.checked) 
+			{
+				REFRESHBRDG.value = "N";
+			}
+			else //  Checkbox exists and is checked
+			{
+				REFRESHBRDG.value = "Y";
+			}
+			if (typeof(oAuditForm.AuditID) == "undefined" || oAuditForm.AuditID.length == 0)
+			{
+				AUDITID.value = "";
+			}
+			else //  Must be history page
+			{
+				AUDITID.value = oAuditForm.AuditID.options[oAuditForm.AuditID.selectedIndex].value;
+			}
+		} // with
+		if (typeof (bDebugOn) != "undefined")         //1.1l begin
+		{
+		  if (bDebugOn)
+			oCallScriptForm.DEBUG.value = "ON"; 
+		  else // debug must be off
+			oCallScriptForm.DEBUG.value = "OFF"; 
+		}											  //1.1l end
+		if (typeof (sTarget) == "undefined")
+  		{
+			oCallScriptForm.target = "frBody"; // frBody
+		}
+		else
+		{
+			oCallScriptForm.target = sTarget;
+		}
+
+		DebugSubmit();
+	} // student selected
+} // getaudit
+
+function GetScript(sScript, sAction, sReport, sTarget)
+{
+	if (CheckSelectedStudent())
+	{
+		ClearCallFields();
+		with (oCallScriptForm)
+		{
+			SCRIPT.value = sScript;
+			ACTION.value = sAction;
+   			REPORT.value = sReport;
+		}
+		if (typeof (bDebugOn) != "undefined")         //1.1l begin
+		{
+		  if (bDebugOn)
+			oCallScriptForm.DEBUG.value = "ON"; 
+		  else // debug must be off
+			oCallScriptForm.DEBUG.value = "OFF"; 
+		}											  //1.1l end
+		if (typeof(sTarget) == "undefined") 
+		  oCallScriptForm.target = "frBody";
+        else // target is defined
+		  oCallScriptForm.target = sTarget;
+		DebugSubmit();
+	}
+}
+
+function GetNotes(sScript, sReport, sAction)
+{
+	if (CheckSelectedStudent())
+	{
+		ClearCallFields();
+		//var oAuditForm = top.frSelection.frmAuditForm;
+		with (oCallScriptForm)
+		{
+			SCRIPT.value = sScript;
+			REPORT.value = sReport;
+			ACTION.value = sAction;
+			ContentType.value = "xml";
+		}
+		if (typeof (bDebugOn) != "undefined")         //1.1l begin
+		{
+		  if (bDebugOn)
+			oCallScriptForm.DEBUG.value = "ON"; 
+		  else // debug must be off
+			oCallScriptForm.DEBUG.value = "OFF"; 
+		}											  //1.1l end
+		oCallScriptForm.target = "frBody";
+		DebugSubmit();
+	}
+}
+
+/* 1.1k Start
+function AddNote(sScript)
+{
+	if (CheckSelectedStudent())
+	{
+		ClearCallFields();
+		//var oAuditForm = top.frSelection.frmAuditForm;
+		with (oCallScriptForm)
+		{
+			SCRIPT.value = sScript;
+			ACTION.value = "ADDNOTE";
+			//REPORT.value = sReport;
+		}
+		oCallScriptForm.target = "frBody";
+		DebugSubmit();
+	}
+}
+1.1k End
+*/ 
+
+function SaveNote(sNoteNumber, sNoteText, oInternal, frmAddNote, theTarget)
+{
+	if (CheckSelectedStudent())
+	{
+		ClearCallFields();
+		var oNotesForm;
+		if (typeof (frmAddNote) != "undefined")    
+		  oNotesForm = frmAddNote;
+        else // use the default form
+		  oNotesForm = top.frBody.document.frmNotesForm;
+
+		if (typeof(sNoteText) == "undefined")  // Undefined if deleting //1.1e
+		{
+			sNoteText = ""; // Set note text before quotes are checked //1.1e
+		}
+		if (sNoteText.length > 2016) 
+		{
+		  alert ("Sorry, you are only allowed to enter 2,016 characters - you have entered " +
+		         sNoteText.length + 
+		         " characters. Please shorten your text and try saving again.");
+		  return;
+		}
+        // check for double quotes in the note text
+        if (sNoteText.indexOf('"') != -1)
+    	{
+			/*1.06 Begin */
+    	    //alert ("You cannot have double quotes in the note text");
+            //return false; // do not submit form since text was invalid 
+			var myNote = "";
+			myNote = sNoteText.replace(/\"/g, "'"); // replace ["] with [']
+			sNoteText = myNote;
+			/*1.06 End */
+        }
+
+		with (oCallScriptForm)
+		{
+			NOTENUM.value  = sNoteNumber;
+			NOTETEXT.value = sDOUBLE_QUOTE + sNoteText + sDOUBLE_QUOTE;  //1.1j
+			NOTEMODE.value = oNotesForm.NOTEMODE.value;
+			SCRIPT.value   = oNotesForm.SCRIPT.value;
+			ACTION.value   = oNotesForm.ACTION.value;
+			ContentType.value = "";
+            // If the internal form object was passed (necessary on a Modify)
+			if (typeof(oInternal) != "undefined")
+              {
+			  if (oInternal.checked)
+				INTERNAL.value = "Y";
+              else // not checked
+				INTERNAL.value = "N";
+              }
+			else if (typeof(oNotesForm.INTERNAL) == "undefined" || !oNotesForm.INTERNAL.checked)
+			{
+				INTERNAL.value = "N";
+			}
+			else // checkbox is checked
+			{
+				INTERNAL.value = "Y";
+			}
+            // For petitions only - not for normal notes
+			if (typeof(oNotesForm.PENDING) == "undefined" || !oNotesForm.PENDING.checked)
+			{
+				PENDING.value  = "N";
+			}
+			else // checkbox is checked
+   			{
+				PENDING.value  = "Y";							//1.0b end
+			}                                
+		}
+		if (typeof (bDebugOn) != "undefined")         //1.1l begin
+		{
+		  if (bDebugOn)
+			oCallScriptForm.DEBUG.value = "ON"; 
+		  else // debug must be off
+			oCallScriptForm.DEBUG.value = "OFF"; 
+		}											  //1.1l end
+		if (typeof(theTarget) != "undefined")  
+		  oCallScriptForm.target = theTarget; 
+        else
+		  oCallScriptForm.target = "frBody";
+		DebugSubmit();
+	}
+}
+function SavePetition(sNoteNumber, sNoteText)        //1.1c added
+{
+	if (CheckSelectedStudent())
+	{
+		ClearCallFields();
+
+		var oPetitionsForm = top.frBody.document.frmPetitionsForm;
+		if (typeof(sNoteText) == "undefined")  // Undefined if deleting
+		  {
+		  sNoteText = "";
+		  }
+        // check for double quotes in the note text
+        if (sNoteText.indexOf('"') != -1)
+    	  {
+    	  //alert ("You cannot have double quotes in the petition text");
+          //return; // do not submit form since text was invalid
+		  var myNote = "";
+		  myNote = sNoteText.replace(/\"/g, "'"); // replace ["] with [']
+		  sNoteText = myNote;
+          }
+
+		with (oCallScriptForm)
+		  {
+  		  NOTENUM.value  = sNoteNumber;
+		  NOTETEXT.value = sDOUBLE_QUOTE + sNoteText + sDOUBLE_QUOTE;  
+		  NOTEMODE.value = oPetitionsForm.NOTEMODE.value;
+		  SCRIPT.value   = oPetitionsForm.SCRIPT.value;
+		  ACTION.value   = oPetitionsForm.ACTION.value;
+	      ContentType.value = "";
+		  if (typeof(oPetitionsForm.INTERNAL) == "undefined")
+			{
+		  	INTERNAL.value = "Y";
+			}
+		  else // Value exists
+			{
+		  	INTERNAL.value = oPetitionsForm.INTERNAL.value;
+			}
+		  if (typeof(oPetitionsForm.PENDING) == "undefined")
+			{
+		  	PENDING.value  = "Y";
+			}
+		  else // Value exists
+   			{
+		  	PENDING.value  = oPetitionsForm.PENDING.value;
+  			}                                
+  		  }
+		if (typeof (bDebugOn) != "undefined")         //1.1l begin
+		{
+		  if (bDebugOn)
+			oCallScriptForm.DEBUG.value = "ON"; 
+		  else // debug must be off
+			oCallScriptForm.DEBUG.value = "OFF"; 
+		}											  //1.1l end
+		oCallScriptForm.target = "frBody";
+		DebugSubmit();
+	}
+} // savepetition
+function DebugSubmit()
+{
+	var sOutput = "";
+	//for (var i=0; i < oCallScriptForm.length; i++) {
+	//	sOutput += "<" + oCallScriptForm[i].name + ">";
+	//	sOutput += "<" + oCallScriptForm[i].value + ">\n";
+	//}
+	//if (confirm(sOutput)) 
+		//top.frBody.location.href = "SD_PleaseWait.html";
+		if (bShowPleaseWaitMessage)
+		{
+			WriteWaitingMessage ();
+		}
+		oCallScriptForm.submit();
+}
+function WriteWaitingMessage()
+{
+ if (oCallScriptForm.target == "frBody")
+	with (top.frBody.document)
+	{
+		open();
+		write('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en"><head><link rel="StyleSheet" href="DGW_Style.css" type="text/css"></head>');
+		write('<body class="WaitingMessage" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">'); // 1.1r
+		write('<table width="100%" height="100%"><tr><td align="center" valign="middle">');
+		write('<span class="BodyText">' + sPleaseWaitMessage + '</span>');
+		//Please wait<br /> while your request is processed...
+		write('</body></html>');
+		close();
+	}
+}
+
+function GetMyStudentsSubmit(sFieldMode)
+{
+	//document.frmGetID.E7306.value = document.frmCallScript.USERID.value;
+	document.frmGetID.submit();
+}
+
+function GetIDSubmit(sFieldMode)
+{
+	// Upshift the stu-id in case the user entered a lowercase value
+    document.frmHoldFields.StudentID.value = document.frmHoldFields.StudentID.value.toUpperCase();                               
+
+	var sID = document.frmHoldFields.StudentID.value;
+	if (sID.length > 0 && bStudentIDSelected == true) //1.0d //1.1b added second if criteria
+	{
+    // If the new planner or finder (any ZK app) is currently being shown we don't have frBody available to us
+		if (top.frBody == null || top.frControl.sTabContext.indexOf("ZK") == 0) // ZKPLANNER, ZKFINDER, etc
+		{
+			top.frBodyContainer.location.href = "SD_SearchWait.html";
+		}
+		else
+		{
+			top.frBody.location.href = "SD_SearchWait.html";
+		}
+
+		// load the specific-context frame with blank.  this prevents what appears to be "flickering"
+		// if the search is successful it'll load the appropriate service here
+		// if the search is not successful it'll load this blank page anyway.
+        // This was causing a problem when the new planner was loaded and the user tried to switch to a new student ID.
+//	    top.frSelection.location.href = "SD_LoadFrameForm.html"; 
+		document.frmGetID.STUID.value = document.frmHoldFields.StudentID.value;
+		document.frmGetID.STUIDSEARCH.value = "YES"
+		//document.frmGetID.E7306.value = "";
+		if (typeof (bDebugOn) != "undefined")         //1.1l begin
+		{
+		  if (bDebugOn)
+			document.frmGetID.DEBUG.value = "ON"; 
+		  else // debug must be off
+			document.frmGetID.DEBUG.value = "OFF"; 
+		}											  //1.1l end
+		document.frmGetID.submit();
+		// Remove focus from the Student ID box  // 1.1f
+		document.frmHoldFields.StudentID.blur(); // 1.1f
+	}
+
+}
+
+function SelectIDStudents()
+{
+	//studentArray.length = 0;
+	//alert(studentArray.length);
+	sa.sort(NameSort);
+	for (var i=0; i < sa.length; i++) {
+		studentArray[studentArray.length] = sa[i];
+	}
+}
+
+//1.1g Begin
+//////////////////////////////////////////////////////////
+// GetCurrentDate
+// usage:            today = GetCurrentDate();
+// Returns: format MM/DD/YYYY
+//////////////////////////////////////////////////////////
+function GetCurrentDate() 
+{
+   today = new Date()
+
+   month = today.getMonth() + 1
+   day   = today.getDate()
+   year  = today.getFullYear()
+
+   if (month < 10)
+       month = "0" + month;
+   if (day < 10)
+       day = "0" + day;
+
+   //return month + "/" + day + "/" + year
+   // make sure we return a date - not an int (sum of parts)
+   // On 2009-10-10 we were getting 2029 because this was the first day
+   // that did not have a leading zero on the month or day - so on this day
+   // JavaScript added these three numbers together; by inserting quotes we are
+   // making sure we get a string back.
+   return FormatDate (year + "" + month + "" + day); 
+}             
+//1.1g End
+
+// 1.1h Begin
+//////////////////////////////////////////////////////////
+// WriteWaitingMessageProcessingNew
+// writes the message "No audit exists. <br> Please wait while a new audit
+//                     is processed."
+// Called from SHP Script SD2GETAUD.
+//////////////////////////////////////////////////////////
+function WriteWaitingMessageProcessingNew()
+{
+	document.write('<br><center>');
+	document.write('<span class="BodyText">');
+	document.write('No audit exists.');
+	document.write('<br>');
+	document.write('Please wait while a new audit is processed...');
+	document.write('</span></center>');
+}
+// 1.1h end
+ö€òöÁ      U96U96;‰ÜUQ   ):https://dwapppr1.njit.edu/DGW_Control.js necko:classified 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:12:42 GMT
+Server: Apache/2.2.3 (Red Hat)
+Last-Modified: Fri, 24 Oct 2014 10:38:19 GMT
+Etag: "60590-6f8e-50628c77efcc0"
+Accept-Ranges: bytes
+Content-Length: 28558
+Content-Type: application/x-javascript
+ uncompressed-len 0   oŽ

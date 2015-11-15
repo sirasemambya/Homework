@@ -1,0 +1,19 @@
+imsettings information
+==========================
+Is DBus enabled: yes
+Is imsettings enabled: yes
+Is GTK+ supported: no
+Is Qt supported: no
+DESKTOP_SESSION: default
+DISABLE_IMSETTINGS: 
+IMSETTINGS_DISABLE_DESKTOP_CHECK: 
+DBUS_SESSION_BUS_ADDRESS: unix:abstract=/tmp/dbus-t70spDGb0x,guid=4237707b5a4593ed7aecaf1d00000031
+GTK_IM_MODULE: gtk-im-context-simple
+QT_IM_MODULE: xim
+XMODIFIERS: @im=none
+IMSETTINGS_MODULE: none
+IMSETTINGS_INTEGRATE_DESKTOP: yes
+
+
+IM-Settings-Daemon[3604]: WARNING **: Unable to monitor /afs/cad/u/s/b/sbs43/.xinputrc: Error stating file '/afs/cad/u/s/b/sbs43/.xinputrc': No such file or directory
+IM-Settings-Daemon[3604]: INFO: Current IM is: none

@@ -1,0 +1,522 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Pragma" NAME="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" NAME="Cache-Control" CONTENT="no-cache">
+<LINK REL="stylesheet" HREF="/css/web_defaultapp.css" TYPE="text/css"><LINK REL="stylesheet" HREF="https://cp4.njit.edu/cp/content/style.css" TYPE="text/css">
+<LINK REL="stylesheet" HREF="/css/web_defaultprint.css" TYPE="text/css" media="print">
+<TITLE>Add or Drop Classes</TITLE>
+<META HTTP-EQUIV="Content-Script-Type" NAME="Default_Script_Language" CONTENT="text/javascript">
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+window.onunload = function() {submitcount=0;}
+var submitcount=0;
+function checkSubmit() {
+if (submitcount == 0)
+   {
+   submitcount++;
+   return true;
+   }
+else
+   {
+alert("Your changes have already been submitted.");
+   return false;
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+//  Function to open a window
+function windowOpen(window_url) {
+   helpWin = window.open(window_url,'','toolbar=yes,status=no,scrollbars=yes,menubar=yes,resizable=yes,directories=no,location=no,width=350,height=400');
+   if (document.images) { 
+       if (helpWin) helpWin.focus()
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+</HEAD>
+<BODY  class="campuspipeline" >
+<DIV class="headerwrapperdiv">
+<DIV class="headerlinksdiv">
+<SPAN class="pageheaderlinks2">
+<MAP NAME="Module_Navigation_Links_H" title="Module Navigation Links">
+<p>
+<A HREF="#skip_Module_Navigation_Links_H" onMouseover="window.status='Skip Module Navigation Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Module Navigation Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Module Navigation Links</A>
+<TABLE  CLASS="plaintable" SUMMARY="This is main table for displaying Tab Items."
+                          WIDTH="100%" cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<TD CLASS="pldefault">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Tab Items."
+                 cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_GenMnu" onMouseover="window.status='Personal Information'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Personal Information'; return true" onBlur="window.status=''; return true" >Personal Information</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="tabon"  height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu" onMouseover="window.status='Student'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Student'; return true" onBlur="window.status=''; return true" >Student</A>
+</TD>
+<TD class="bgtabon"  height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_FinAidMainMnu" onMouseover="window.status='Financial Aid'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Financial Aid'; return true" onBlur="window.status=''; return true" >Financial Aid</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+<TR>
+<TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+</MAP>
+</SPAN>
+<a name="skip_Module_Navigation_Links_H"></a>
+</DIV>
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Menu Items and Banner Search textbox."
+         WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<DIV class="headerlinksdiv2">
+<FORM ACTION="/prod/twbksrch.P_ShowResults" METHOD="POST">
+Search
+<SPAN class="fieldlabeltextinvisible"><LABEL for=keyword_in_id><SPAN class="fieldlabeltext">Search</SPAN></LABEL></SPAN>
+<INPUT TYPE="text" NAME="KEYWRD_IN" SIZE="20" MAXLENGTH="65" ID="keyword_in_id">
+<INPUT TYPE="submit" VALUE="Go">
+</FORM>
+</div>
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<SPAN class="pageheaderlinks">
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"  class="submenulinktext2" id="ssbbackurl">RETURN TO MENU</A>
+|
+<A HREF="/prod/twbksite.P_DispSiteMap?menu_name_in=bmenu.P_MainMnu&amp;depth_in=2&amp;columns_in=3" accesskey="2" class="submenulinktext2">SITE MAP</A>
+|
+<A HREF="/prod/twbkfrmt.P_DispHelp?pagename_in=bwskfreg.P_AddDropCrse" accesskey="H" onClick="popup = window.open('/prod/twbkfrmt.P_DispHelp?pagename_in=bwskfreg.P_AddDropCrse', 'PopupPage','height=500,width=450,scrollbars=yes,resizable=yes'); return false" target="_blank" onMouseOver="window.status='';  return true" onMouseOut="window.status=''; return true"onFocus="window.status='';  return true" onBlur="window.status=''; return true"  class="submenulinktext2">HELP</A>
+</span>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV class="pagetitlediv">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays title and static header displays."
+   WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<H2>Add or Drop Classes</H2>
+</TD>
+<TD CLASS="pldefault">
+&nbsp;
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<DIV class="staticheaders">
+31118493 Sira B. Semambya<br>
+2015 Fall<br>
+Apr 23, 2015 02:15 pm<br>
+</div>
+</TD>
+</TR>
+<TR>
+<TD class="bg3" width="100%" colSpan=3><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD>
+</TR>
+</TABLE>
+<a name="main_content"></a>
+</DIV>
+<DIV class="pagebodydiv">
+<!--  ** END OF twbkwbis.P_OpenDoc **  -->
+<BR>
+<FORM ACTION="/prod/bwckcoms.P_Regs" METHOD="POST" onSubmit="return checkSubmit()">
+<DIV class="infotextdiv"><TABLE  CLASS="infotexttable" SUMMARY="This layout table contains information that may be helpful in understanding the content and functionality of this page.  It could be a brief set of instructions, a description of error messages, or other special information."><TR><TD CLASS="indefault"><IMG SRC="/wtlgifs/web_info_cascade.png" ALT="Information" CLASS="headerImg" TITLE="Information"  NAME="web_info" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=12 WIDTH=14></TD><TD CLASS="indefault"><SPAN class="infotext"> To add a class, enter the Course Reference Number in the Add Classes section. To drop a class, use the options available in the Action pull-down list. 
+
+
+</SPAN></TD></TR></TABLE><P></DIV>
+<INPUT TYPE="hidden" NAME="term_in" VALUE="201590">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="CRN_IN" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="SUBJ" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="CRSE" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="SEC" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="LEVL" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="CRED" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="GMOD" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="TITLE" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">
+<INPUT TYPE="hidden" NAME="REG_BTN" VALUE="DUMMY">
+<H3>Current Schedule</H3>
+<TABLE  CLASS="datadisplaytable" SUMMARY="Current Schedule">
+<TR>
+<TH CLASS="ddheader" scope="col" >Status</TH>
+<TH CLASS="ddheader" scope="col" >Action</TH>
+<TH CLASS="ddheader" scope="col" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Subject>Subj</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Course>Crse</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Section>Sec</ABBR></TH>
+<TH CLASS="ddheader" scope="col" >Level</TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Credit Hours">Cred</ABBR></TH>
+<TH CLASS="ddheader" scope="col" >Grade Mode</TH>
+<TH CLASS="ddheader" scope="col" >Title</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">**Web Registered** on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id1><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id1">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="91399">91399<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="CS">CS</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="113">113</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="001">001</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    3.000">    3.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Intro Computer Sci I">Intro Computer Sci I</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">**Web Registered** on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id2><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id2">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="92922">92922<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="IS">IS</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="117">117</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="001">001</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    3.000">    3.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Intro to Website Development">Intro to Website Development</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">Waitlist on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id3><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id3">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+<OPTION VALUE="RW">**Web Registered**
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="92926">92926<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="IS">IS</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="247">247</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="001">001</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    0.000">    0.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Designing the User Experience">Designing the User Experience</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">Waitlist on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id4><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id4">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="93828">93828<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="MIS">MIS</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="245">245</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="101">101</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    0.000">    0.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Intro To Mngmnt Info Syst">Intro To Mngmnt Info Syst</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">**Web Registered** on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id5><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id5">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="93184">93184<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="MATH">MATH</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="105">105</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="005">005</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    3.000">    3.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Elem Probability & Statistics">Elem Probability & Statistics</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">Waitlist on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id6><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id6">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="92927">92927<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="IS">IS</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="265">265</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="101">101</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    0.000">    0.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Intro to Information Systems">Intro to Information Systems</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">**Web Registered** on Apr 15, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id7><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id7">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="94286">94286<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="STS">STS</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="347">347</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="001">001</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    3.000">    3.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Introduction to Music">Introduction to Music</TD>
+</TR>
+<TR>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="MESG" VALUE="DUMMY">**Web Registered** on Apr 23, 2015</TD>
+<TD CLASS="dddefault">
+<LABEL for=action_id8><SPAN class="fieldlabeltextinvisible">Action</SPAN></LABEL>
+<SELECT NAME="RSTS_IN" SIZE="1" ID="action_id8">
+<OPTION VALUE="" SELECTED>None
+<OPTION VALUE="DW">Drop/Delete (Web)
+</SELECT>
+</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="201590"><INPUT TYPE="hidden" NAME="CRN_IN" VALUE="93852">93852<INPUT TYPE="hidden" NAME="start_date_in" VALUE="09/01/2015"><INPUT TYPE="hidden" NAME="end_date_in" VALUE="12/10/2015"></TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SUBJ" VALUE="MRKT">MRKT</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRSE" VALUE="331">331</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="SEC" VALUE="001">001</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="LEVL" VALUE="Undergraduate">Undergraduate</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="CRED" VALUE="    3.000">    3.000</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="GMOD" VALUE="Normal Grading">Normal Grading</TD>
+<TD CLASS="dddefault"><INPUT TYPE="hidden" NAME="TITLE" VALUE="Consumer-Buyer Behavior">Consumer-Buyer Behavior</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="plaintable" SUMMARY="Schedule Summary">
+<TR>
+<TD CLASS="pldefault">Total Credit Hours: </TD>
+<TD CLASS="pldefault">   15.000</TD>
+</TR>
+<TR>
+<TD CLASS="pldefault">Billing Hours:</TD>
+<TD CLASS="pldefault">   15.000</TD>
+</TR>
+<TR>
+<TD CLASS="pldefault">Minimum Hours:</TD>
+<TD CLASS="pldefault">      0.000</TD>
+</TR>
+<TR>
+<TD CLASS="pldefault">Maximum Hours:</TD>
+<TD CLASS="pldefault">     19.000</TD>
+</TR>
+<TR>
+<TD CLASS="pldefault">Date:</TD>
+<TD CLASS="pldefault">Apr 23, 2015 02:15 pm</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE  CLASS="plaintable" summary="This layout table holds message information">
+<TR>
+<TD CLASS="pldefault">
+<IMG SRC="/wtlgifs/web_stop_cascade.png" ALT="Stop" CLASS="headerImg" TITLE="Stop"  NAME="web_stop" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=13 WIDTH=13>
+</TD>
+<TD CLASS="pldefault">
+<SPAN class="errortext">Registration Add Errors</SPAN>
+<BR>
+</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="datadisplaytable" SUMMARY="This layout table is used to present Registration Errors.">
+<TR>
+<TH CLASS="ddheader" scope="col" >Status</TH>
+<TH CLASS="ddheader" scope="col" ><ACRONYM title = "Course Reference Number">CRN</ACRONYM></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Subject>Subj</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Course>Crse</ABBR></TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = Section>Sec</ABBR></TH>
+<TH CLASS="ddheader" scope="col" >Level</TH>
+<TH CLASS="ddheader" scope="col" ><ABBR title = "Credit Hours">Cred</ABBR></TH>
+<TH CLASS="ddheader" scope="col" >Grade Mode</TH>
+<TH CLASS="ddheader" scope="col" >Title</TH>
+</TR>
+<TR>
+<TD CLASS="dddefault">Time conflict with CRN 92927</TD>
+<TD CLASS="dddefault">90007</TD>
+<TD CLASS="dddefault">ACCT</TD>
+<TD CLASS="dddefault">117</TD>
+<TD CLASS="dddefault">101</TD>
+<TD CLASS="dddefault">Undergraduate</TD>
+<TD CLASS="dddefault">    3.000</TD>
+<TD CLASS="dddefault">Normal Grading</TD>
+<TD CLASS="dddefault">Principles Of Fin Accountng</TD>
+</TR>
+</TABLE>
+<BR>
+<H3>Add Classes Worksheet</H3>
+<TABLE  CLASS="dataentrytable" SUMMARY="Add Classes Data Entry" WIDTH="100%">
+<TR>
+<TD COLSPAN="10" CLASS="detitle" scope="colgroup" ><ACRONYM title = "Course Reference Numbers">CRNs</ACRONYM></TD>
+</TR>
+<TR>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id1><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id1">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id2><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id2">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id3><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id3">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id4><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id4">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id5><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id5">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id6><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id6">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id7><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id7">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id8><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id8">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id9><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id9">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+<TD CLASS="dedefault">
+<INPUT TYPE="hidden" NAME="RSTS_IN" VALUE="RW">
+<LABEL for=crn_id10><SPAN class="fieldlabeltextinvisible">CRN</SPAN></LABEL>
+<INPUT TYPE="text" NAME="CRN_IN" SIZE="6" MAXLENGTH="5" ID="crn_id10">
+<INPUT TYPE="hidden" NAME="assoc_term_in" VALUE="">
+<INPUT TYPE="hidden" NAME="start_date_in" VALUE="">
+<INPUT TYPE="hidden" NAME="end_date_in" VALUE="">
+</TD>
+</TABLE>
+<INPUT TYPE="hidden" NAME="regs_row" VALUE="8">
+<INPUT TYPE="hidden" NAME="wait_row" VALUE="0">
+<INPUT TYPE="hidden" NAME="add_row" VALUE="10">
+
+<BR>
+<INPUT TYPE="submit" NAME="REG_BTN" VALUE="Submit Changes">
+<INPUT TYPE="submit" NAME="REG_BTN" VALUE="Class Search">
+<INPUT TYPE="reset" VALUE="Reset">
+</FORM>
+
+<!--  ** START OF twbkwbis.P_CloseDoc **  -->
+<TABLE  CLASS="plaintable" SUMMARY="This is table displays line separator at end of the page."
+                                             WIDTH="100%" cellSpacing=0 cellPadding=0 border=0><TR><TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+<A HREF="#top" onMouseover="window.status='Skip to top of page'; return true" onMouseout="window.status=''; return true" OnFocus="window.status='Skip to top of page'; return true" onBlur="window.status=''; return true" class="skiplinks">Skip to top of page</A>
+</DIV>
+<DIV class="footerbeforediv">
+
+</DIV>
+<DIV class="footerlinksdiv">
+<SPAN class="pagefooterlinks">
+<MAP NAME="Add_or_Drop_Classes_Links_F" title="Add or Drop Classes Links">
+<p>
+<A HREF="#skip_Add_or_Drop_Classes_Links_F" onMouseover="window.status='Skip Add or Drop Classes Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Add or Drop Classes Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Add or Drop Classes Links</A>
+<P>[ <A HREF="/prod/bwskoacc.P_ViewHold" onMouseover="window.status='View Holds'; return true" onMouseout="window.status=''; return true" onFocus="window.status='View Holds'; return true" onBlur="window.status=''; return true" >View Holds</A>
+ | <A HREF="/prod/bwskfreg.P_ChangeCrseOpt" onMouseover="window.status='Change Class Options'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Change Class Options'; return true" onBlur="window.status=''; return true" >Change Class Options</A>
+ | <A HREF="/prod/bwskffee.P_FeeAsses" onMouseover="window.status='Registration Fee Assessment'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Registration Fee Assessment'; return true" onBlur="window.status=''; return true" >Registration Fee Assessment</A>
+ ]
+</MAP>
+</SPAN>
+<a name="skip_Add_or_Drop_Classes_Links_F"></a>
+</DIV>
+<DIV class="footerafterdiv">
+
+</DIV>
+<DIV class="globalafterdiv">
+
+</DIV>
+<DIV class="globalfooterdiv">
+
+</DIV>
+<DIV class="pagefooterdiv">
+<SPAN class="releasetext">Release: 8.6.0.2</SPAN>
+</DIV>
+<DIV class="poweredbydiv">
+</DIV>
+<DIV class="div1"></DIV>
+<DIV class="div2"></DIV>
+<DIV class="div3"></DIV>
+<DIV class="div4"></DIV>
+<DIV class="div5"></DIV>
+<DIV class="div6"></DIV>
+<div class="banner_copyright"> <br><h5>Â© 2015 Ellucian Company L.P. and its affiliates.<br></h5></div>
+</BODY>
+</HTML>
+Ž;°'Zâ      U96ÅU96Ç;ŠS       >~1429812739,:https://bnssbpr1.njit.edu/prod/bwskfreg.P_AltPin1 necko:classified 1 security-info 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 request-method POST response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:15:33 GMT
+Server: Oracle-Application-Server-11g
+Content-Length: 27710
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ charset UTF-8 uncompressed-len 0   l>

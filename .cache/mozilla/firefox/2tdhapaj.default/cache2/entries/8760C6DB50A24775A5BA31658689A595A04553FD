@@ -1,0 +1,947 @@
+<!-- 
+ Copyright 1995-2012 Ellucian Company L.P. and its affiliates. 
+ $Id: //Tuxedo/RELEASE/Product/webroot/CourseInfo.xsl#8 $ -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+
+<xsl:variable name="v24_hour">Y</xsl:variable><!-- set to Y for 24-hour time, N for AM-PM time -->
+<xsl:variable name="vCreditDecimals">0.###</xsl:variable>
+<xsl:variable name="vSpace"> space</xsl:variable>
+<xsl:variable name="vPlus">+</xsl:variable>
+
+<xsl:template match="CourseInformation">
+<html>
+<head>
+<title>Course Information</title>
+	<link rel="stylesheet" href="DGW_Style.css" type="text/css" />
+</head>
+<body style="margin: 5px;">
+
+<xsl:if test="Error">
+  <xsl:call-template name="tError"/>
+</xsl:if>
+
+<table border="0" cellspacing="5" cellpadding="0" width="100%">
+
+<xsl:for-each select="Course">
+   
+  <xsl:choose>
+   <!-- If this is a not-equals attribute operator then hide any course
+        that has this attribute listed -->
+   <xsl:when test="/CourseInformation/@AttributeOperator='&lt;&gt;' and
+                   Attributes/Attribute/@Code=/CourseInformation/@AttributeValue">
+     <!-- skip this course with this attribute -->
+   </xsl:when>
+   <xsl:otherwise>
+	<xsl:call-template name="tPrintCourseDetails">
+	<xsl:with-param name="pCourseId"><xsl:value-of select="generate-id()"/></xsl:with-param>
+	</xsl:call-template>
+   </xsl:otherwise>
+  </xsl:choose>
+
+</xsl:for-each>
+</table>
+
+
+</body>
+</html>
+</xsl:template> <!-- courseinformation -->
+
+<!-- COURSE, CREDITS and TITLE -->
+<xsl:template name="tCourseCreditsTitle">
+<tr>
+<td>
+  <table border="0" cellspacing="5" cellpadding="0" width="100%">
+  <tr>
+  <!-- COURSE -->
+  <td width="20%">
+    <span style="font-weight:bold;font-size:12pt;color:#559999">
+    <xsl:value-of select="@SubjCode"/>&#160;<xsl:value-of select="@CrseNumb"/>  
+    </span>
+  </td>
+  <!-- CREDITS -->
+  <xsl:if test="/CourseInformation/DisplayOptions/TitleCredits/@Source != 'N'">  <!-- not None -->
+  <xsl:if test="/CourseInformation/DisplayOptions/TitleCredits/@Version != 'B'"> <!-- in Brief mode we hide the credits -->
+  <td width="15%">
+    <span style="font-weight:normal;font-size:12pt;color:#559999">
+    <xsl:choose>
+     <xsl:when test="@CreditHrInd='TO'"> <!-- low to high -->
+      <xsl:value-of select="@CreditHrLow"/>-<xsl:value-of select="@CreditHrHigh"/>&#160;<xsl:value-of 
+       select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+     </xsl:when>
+     <xsl:when test="@CreditHrInd='OR'"> <!-- low or high -->
+      <xsl:value-of select="@CreditHrLow"/> or <xsl:value-of select="@CreditHrHigh"/>&#160;<xsl:value-of 
+       select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+     </xsl:when>
+     <xsl:otherwise> <!-- only credits-low is defined -->
+      <xsl:choose>
+       <xsl:when test="@CreditHrLow = 1">
+        <xsl:value-of select="@CreditHrLow"/>&#160;<xsl:value-of select="normalize-space(/CourseInformation/@inputCreditSingular)" />
+       </xsl:when>
+       <xsl:otherwise> <!-- credits-low not 1 -->
+        <xsl:value-of select="@CreditHrLow"/>&#160;<xsl:value-of select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+       </xsl:otherwise>
+      </xsl:choose>
+     </xsl:otherwise>
+    </xsl:choose>
+    </span>
+  </td>
+  </xsl:if>  <!-- TitleCredits/Version != 'B'"> not brief -->
+  </xsl:if>  <!-- TitleCredits/Source  != 'N'"> not none -->
+
+  <!-- TITLE -->
+  <xsl:if test="/CourseInformation/DisplayOptions/TitleCredits/@Source != 'N'"> <!-- not None -->
+  <td>
+    <span style="font-weight:bold;font-size:12pt;color:#559999">
+    <xsl:value-of select="@Title"/>     
+  </span>
+  </td>
+  </xsl:if>  <!-- TitleCredits/Source  != 'N'"> not none -->
+
+  <xsl:if test="position()=1"> <!-- if first course - add Print button -->
+  <td align="right">
+    <span style="font-weight:bold;font-size:9pt">
+    <a href="javascript:window.print()">Print</a>
+    </span>
+  </td>
+  </xsl:if>  
+
+  </tr>
+  </table>
+</td>
+</tr>
+</xsl:template> <!-- tcoursecreditstitle -->
+
+<!-- DESCRIPTION -->
+<xsl:template name="tDescription">
+<tr>
+<td colspan="1" align="left">
+  <table border="0" cellspacing="5" cellpadding="0" width="100%">
+  <tr>
+  <td colspan="1" align="left">
+  <span style="font-weight:normal;font-size:10pt;color:#000000">
+ <!-- Use disable-output-escaping to allow HTML commands (like bolding)
+      to be processed by the browser correctly. We are assuming the Description
+      contains a CDATA section to output the value. -->
+   <xsl:for-each select="Description/Text">
+    <xsl:value-of select="."  disable-output-escaping="yes"/> 
+   </xsl:for-each>
+  </span>
+  </td>
+  </tr>
+ 
+ <!-- A second set of text may also be sent -->
+ <!-- For Banner schools, this additional text is from the 2nd of the two
+      sets of entries in bannerextract.config: 
+        if SCBDESC is 1st and SCRTEXT is 2nd then the SCRTEXT will be here 
+        if SCRTEXT is 1st and SCBDESC is 2nd then the SCBDESC will be here 
+  -->
+  <tr>
+  <td colspan="1" align="left">
+  <span style="font-weight:normal;font-size:10pt;color:#000000">
+   <xsl:for-each select="DescriptionAdditional/Text">
+    <xsl:value-of select="."  disable-output-escaping="yes"/> 
+   </xsl:for-each>
+  </span>
+  </td>
+  </tr>
+
+  </table>
+</td>
+</tr>
+</xsl:template> <!-- tdescription -->
+
+<!-- PREREQS -->
+<xsl:template name="tPrereqs">
+<tr>
+<td colspan="3">
+  <table border="0" cellspacing="5" cellpadding="0" width="100%">
+   <tr>
+   <td width="100" rowspan="2" valign="top">
+    <span style="font-weight:normal;font-size:12pt;color:#559999">
+     Prerequisites:
+    </span>
+   </td>
+   <td>
+    <span style="font-weight:normal;font-size:10pt;color:#000000">
+    <xsl:for-each select="Prereqs/Prereq">
+      <!-- COURSES -->
+      <xsl:if test="@SubjCodePreq != ''">
+       <xsl:if test="@Connector='O'"><i><u>or</u></i> </xsl:if>
+       <xsl:if test="@Connector='A'"><i><u>and</u></i></xsl:if>
+       <xsl:if test="@Lparen != ' '">
+        <xsl:text>&#160;</xsl:text><xsl:value-of select="@Lparen"/>   
+        </xsl:if>
+       <b><xsl:value-of select="@SubjCodePreq"/>
+          <xsl:text>&#160;</xsl:text>   
+          <xsl:value-of select="@CrseNumbPreq"/></b>
+          <xsl:if test="@ConcurrencyInd = 'Y'"><sup>CC</sup></xsl:if>
+          <xsl:text>&#160;</xsl:text>   <!-- space --> 
+       <xsl:if test="@MinGrde != ''">
+        <span style="font-size:9pt">
+        minimum grade of <xsl:value-of select="@MinGrde"/>&#160;
+        </span>
+       </xsl:if>
+       <xsl:if test="@Rparen != ' '">
+        <xsl:value-of select="@Rparen"/><xsl:text>&#160;</xsl:text>   
+       </xsl:if>
+      </xsl:if> <!-- end tests -->
+
+      <!-- TESTS -->
+      <xsl:if test="@TescCode != ''">
+       <xsl:if test="@Connector='O'"><i><u>or</u></i> </xsl:if>
+       <xsl:if test="@Connector='A'"><i><u>and</u></i> </xsl:if>
+       <xsl:value-of select="@Lparen"/>
+       Test <b><xsl:value-of select="@TescCode"/></b>
+       with a minimum score of <b><xsl:value-of select="@TestScore"/></b>
+       <xsl:if test="@Rparen!=' '">
+        <xsl:value-of select="@Rparen"/><xsl:text>&#160;</xsl:text>   
+        </xsl:if>
+      </xsl:if> <!-- end tests -->
+
+    </xsl:for-each>
+    </span>
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>
+    <xsl:if test="Prereqs//Prereq/@ConcurrencyInd='Y'">
+    <span style="font-weight:normal;font-size:9pt;color:#000000">
+       <b><sup>CC</sup></b> indicates the class may be taken concurrently with
+    <xsl:value-of select="@SubjCode"/>&#160;<xsl:value-of select="@CrseNumb"/>  
+    </span>
+    </xsl:if>
+   </td>
+   </tr>
+
+  </table>
+</td>
+</tr>
+</xsl:template> <!-- tprereqs -->
+
+<!-- ATTRIBUTES -->
+<xsl:template name="tAttributes">
+<tr>
+<td colspan="3">
+  <table border="0" cellspacing="5" cellpadding="0" width="100%">
+  <tr>
+  <td width="100" valign="top">
+  <span style="font-weight:normal;font-size:12pt;color:#559999">
+  Attributes: 
+  </span>
+  </td>
+  <td>
+  <xsl:choose>
+   <xsl:when test="/CourseInformation/DisplayOptions/Attributes/@Version = 'V'"> <!-- verbose mode -->
+    <!-- list the attribute codes and descriptions -->
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <xsl:for-each select="Attributes/Attribute">
+     <tr>
+     <td width="14%"><xsl:value-of select="@Code"/></td>
+     <td width="5%">-</td>
+     <td>            <xsl:value-of select="@Description"/> </td>
+     </tr>
+    </xsl:for-each>
+    </table>
+   </xsl:when> <!-- verbose mode -->
+   <xsl:otherwise> <!-- just list the attribute codes -->
+    <span style="font-weight:normal;font-size:10pt;color:#000000">
+    <xsl:for-each select="Attributes/Attribute">
+     <a>
+     <xsl:attribute name="title"><xsl:value-of select="@Description"/></xsl:attribute>
+     <xsl:value-of select="@Code"/>
+     </a>
+     <xsl:if test="position()!=last()">, </xsl:if>  <!-- comma (if not last one in the series) -->
+    </xsl:for-each>
+    </span>
+   </xsl:otherwise>
+  </xsl:choose>
+
+  </td>
+  </tr>
+  </table>
+</td>
+</tr>
+</xsl:template> <!-- tattributes -->
+
+
+<!-- SECTIONS -->
+<xsl:template name="tSections">
+<tr>
+<td colspan="3">
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+  <td width="100">
+  <span style="font-weight:normal;font-size:12pt;color:#559999">
+  Sections: 
+  </span>
+  </td>
+  <!-- #afeeee"   #99ffff"   #e0ffff"
+  -->
+  <td class="CourseInfoHeaders" bgcolor="#e0ffff"><b>Term         </b></td>
+  <td class="CourseInfoHeaders" bgcolor="#e0ffff"><b>Crn          </b></td>
+  <td class="CourseInfoHeaders" bgcolor="#e0ffff"><b>Section      </b></td>
+  <td class="CourseInfoHeaders" bgcolor="#e0ffff"><b>Seats Open   </b></td>
+  <xsl:if test="/CourseInformation/DisplayOptions/Sections/@Version = 'V'"> <!-- verbose mode -->
+   <td class="CourseInfoHeaders" bgcolor="#e0ffff"><b>Course Title </b></td>
+  </xsl:if>
+  <td class="CourseInfoHeaders" bgcolor="#e0ffff" colspan="2"><b>Meeting Times</b></td>
+  </tr>
+
+  <xsl:for-each select="Sections/Section">
+  <tr valign="top">
+  <td> <!-- empty column -->
+  </td>
+  <td class="CourseInfoHeaders">
+    <xsl:choose>
+     <xsl:when test="preceding-sibling::Section[1]/@TermLit = @TermLit">
+      <!-- do not display the same term lit as our previous sibling -->
+     </xsl:when>
+     <xsl:otherwise> <!-- new term - display the lit -->
+      <xsl:value-of select="@TermLit"/>
+     </xsl:otherwise>
+    </xsl:choose>
+  </td>
+  <td class="CourseInfoHeaders"> <!-- CRN -->
+   <xsl:value-of select="@Crn"/>     
+  </td>
+  <td class="CourseInfoHeaders"><xsl:value-of select="@SeqNumb"/> </td>
+  <td class="CourseInfoHeaders"><xsl:value-of select="@SeatsAvail"/> 
+      <span style="font-size:8pt">
+      (out of <xsl:value-of select="@MaxEnrl"/>)
+      </span>
+  </td>
+
+     <!-- if section title is empty use parent's title -->
+  <xsl:if test="/CourseInformation/DisplayOptions/Sections/@Version = 'V'"> <!-- verbose mode -->
+  <td class="CourseInfoHeaders">
+     <xsl:value-of select="@CrseTitle"/> 
+     <xsl:if test="@CrseTitle = ''">  
+       <xsl:value-of select="ancestor::Course[*]/@Title"/> 
+     </xsl:if> 
+  </td>
+  </xsl:if> <!-- version = Verbose -->
+	  <xsl:if test="Meetings">
+		  <td class="CourseInfoHeaders">
+		  <xsl:for-each select="Meetings/Meeting">
+			<xsl:call-template name="tDaysOfWeek"/>
+		  </xsl:for-each>
+		  </td>
+		  <td class="CourseInfoHeaders">
+		  <xsl:for-each select="Meetings/Meeting">
+			<xsl:call-template name="tMeetingsTime"/>
+		  </xsl:for-each>
+		  </td>
+	  </xsl:if>
+  </tr>
+  </xsl:for-each>
+  </table>
+</td>
+</tr>
+</xsl:template> <!-- tsections -->
+
+<!-- MEETINGS -->
+<xsl:template name="tMeetingsTime">
+    <xsl:choose>
+     <xsl:when test="preceding-sibling::Meeting">
+	    <br />
+		<xsl:call-template name="tFormatTime" />
+     </xsl:when>
+	 <xsl:otherwise>
+		<xsl:call-template name="tFormatTime" />
+	 </xsl:otherwise>
+	</xsl:choose>
+</xsl:template> <!-- tmeetings -->
+
+<xsl:template name="tFormatTime">
+	<xsl:choose>
+		  <xsl:when test="normalize-space(@BeginTime)=''">
+        <!-- no meeting time - show TBA with a hint --> 
+        <a>
+        <xsl:attribute name="title">To be announced</xsl:attribute>
+        TBA
+        </a>
+      </xsl:when>
+      <xsl:when test="$v24_hour='N'">
+			<xsl:choose>
+				<xsl:when test="substring(@BeginTime,1,2)=00">
+					12:<xsl:value-of select="substring(@BeginTime,3,2)" /> a.m. -
+				</xsl:when>
+				<xsl:when test="substring(@BeginTime,1,2)=12">
+					12:<xsl:value-of select="substring(@BeginTime,3,2)" /> p.m. -
+				</xsl:when>
+				<xsl:when test="substring(@BeginTime,1,2)=24">
+					12:<xsl:value-of select="substring(@BeginTime,3,2)" /> a.m. -
+				</xsl:when>
+				<xsl:when test="substring(@BeginTime,1,2) &lt; 12">
+					<xsl:value-of select="format-number(substring(@BeginTime,1,2), '#')"/>:<xsl:value-of select="substring(@BeginTime,3,2)"/> a.m. -
+				</xsl:when>
+				<xsl:otherwise> <!-- hour is 13 or greater -->
+					<xsl:value-of select="substring(@BeginTime,1,2)-12"/>:<xsl:value-of select="substring(@BeginTime,3,2)"/>p.m. -
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:choose>
+				<xsl:when test="substring(@EndTime,1,2)=00">
+					12:<xsl:value-of select="substring(@EndTime,3,2)" /> a.m.
+				</xsl:when>
+				<xsl:when test="substring(@EndTime,1,2)=12">
+					12:<xsl:value-of select="substring(@EndTime,3,2)" /> p.m.
+				</xsl:when>
+				<xsl:when test="substring(@EndTime,1,2)=24">
+					12:<xsl:value-of select="substring(@EndTime,3,2)" /> a.m.
+				</xsl:when>
+				<xsl:when test="substring(@EndTime,1,2) &lt; 12">
+					<xsl:value-of select="format-number(substring(@EndTime,1,2), '#')"/>:<xsl:value-of select="substring(@EndTime,3,2)"/> a.m.
+				</xsl:when>
+				<xsl:otherwise> <!-- hour is 13 or greater -->
+					<xsl:value-of select="substring(@EndTime,1,2)-12"/>:<xsl:value-of select="substring(@EndTime,3,2)"/>p.m.
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="substring(@BeginTime,1,2)" />:<xsl:value-of select="substring(@BeginTime,3,2)" /> - <xsl:value-of select="substring(@EndTime,1,2)" />:<xsl:value-of select="substring(@EndTime,3,2)" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template name="tDaysOfWeek">
+	<table cellpadding="0" cellspacing="0" border="0">
+	<tr>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@SunDay!=''">
+			Su&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@MonDay!=''">
+			M&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@TueDay!=''">
+			Tu&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@WedDay!=''">
+			W&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@ThuDay!=''">
+			Th&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@FriDay!=''">
+			F&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	<td>
+		<xsl:choose>
+		<xsl:when test="@SatDay!=''">
+			Sa&#160;
+		</xsl:when>
+		<xsl:otherwise />
+		</xsl:choose>
+	</td>
+	</tr>
+	</table>
+</xsl:template>
+
+<!-- DRAW A LINE to end the course -->
+<xsl:template name="tEndCourse">
+<tr> <!-- draw a line below each course - normally there is only one though -->
+<td colspan="30">
+  <hr style="font-weight:normal;font-size:12pt;color:#559999"/>
+</td>
+</tr>
+</xsl:template> <!-- tendcourse -->
+
+<!-- ====================================================== -->
+<!-- MAPPINGS -->
+<!-- ====================================================== -->
+<xsl:template name="tMappings">
+<xsl:if test="Mappings/Mapping and /CourseInformation/DisplayOptions/Mappings/@Source = 'D'">
+
+<xsl:for-each select="Mappings">
+
+<table border="0" cellspacing="2" cellpadding="0" width="100%">
+  <tr>
+  <td width="100%" colspan="10">
+  <span style="font-weight:bold;font-size:14pt;color:#559999">
+  Transfer equivalences for
+  <xsl:value-of select="@Discipline"/>&#160;
+  <xsl:value-of select="@Number"/>
+  </span>
+  </td>
+  </tr>
+
+  <xsl:choose>
+    <!-- if we found a mapping for a favorite school or we are showing mappings for all schools -->
+    <xsl:when test="Mappings/Mapping/@FavoriteSchool='Y' or /CourseInformation/DisplayOptions/Mappings/@FavoritesOnly = 'N'">
+    </xsl:when>
+    <xsl:otherwise> <!-- no favorite school mappings found -->  
+<!--    <tr>
+    <td width="100%" colspan="10">
+    <span style="font-weight:normal;font-size:12pt;color:#559999">
+    No transfer equivalences exist for the local feeder schools
+    </span>
+    </td>
+    </tr>
+-->
+    </xsl:otherwise>
+  </xsl:choose>
+
+  <!-- PREVIOUSLY ATTENDED SCHOOLS 
+  <xsl:for-each select="Mappings/Mapping">
+  <xsl:sort select="@SchoolName" order="ascending"/>
+   <xsl:if test="@SchoolId=/CourseInformation/PrevSchools/School">
+     <xsl:call-template name="tShowMapping" />
+   </xsl:if>
+  </xsl:for-each>
+  -->
+
+  <xsl:for-each select="Mapping">
+  <xsl:sort select="@SchoolName" order="ascending"/>
+
+   <!-- FAVORITE/FEEDER SCHOOLS - or all -->
+   <xsl:if test="@FavoriteSchool='Y' or /CourseInformation/DisplayOptions/Mappings/@FavoritesOnly = 'N'">
+     <xsl:choose>
+      <xsl:when test="/CourseInformation/DisplayOptions/Mappings/@Version = 'B'"> <!-- Brief -->
+       <xsl:call-template name="tShowMappingBrief" />
+      </xsl:when> 
+      <xsl:when test="/CourseInformation/DisplayOptions/Mappings/@Version = 'S'"> <!-- Standard -->
+       <xsl:call-template name="tShowMappingStandard" />
+      </xsl:when> 
+      <xsl:otherwise>  <!-- must be verbose -->
+       <xsl:call-template name="tShowMappingVerbose" />
+      </xsl:otherwise>
+    </xsl:choose>
+
+   </xsl:if> <!-- test="@FavoriteSchool='Y'" -->
+
+  </xsl:for-each> <!-- mapping -->
+
+</table>
+</xsl:for-each> <!-- mappings -->
+</xsl:if>
+
+</xsl:template> <!--  name="tMappings" -->
+
+<!-- ====================================================== -->
+<!-- tShowMappingBrief -->
+<!-- ====================================================== -->
+<xsl:template name="tShowMappingBrief">
+    <xsl:if test="position() = 1">
+    <tr style="font-weight:bold;font-size:10pt;color:#FFFFFF;background-color:#559999">
+    <td width="33%">&#160;Taking this class(es)</td>
+    <td width="33%">&#160;at this transfer school</td>
+    <td width="33%">&#160;may equate to this class(es) here</td>
+    </tr>
+    </xsl:if>  <!-- comma (if not last one in the series) -->
+    <tr style="font-weight:normal;font-size:10pt;color:#000000">
+
+    <td> 
+          <xsl:for-each select="FromClass">
+            <b><xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/></b>
+            <xsl:if test="position()!=last()"> and </xsl:if>
+          </xsl:for-each> 
+    </td>
+    <td> 
+          <span style="font-weight:bold;color:#000066">
+            <xsl:call-template name="tSchoolLink" />
+          </span>
+    </td>
+    <td> 
+          <xsl:for-each select="ToClass">
+            <b><xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/></b>
+            <xsl:if test="position()!=last()"> and </xsl:if>
+          </xsl:for-each> 
+          here 
+    </td>
+   </tr>
+</xsl:template> <!--  name="tShowMappingBrief" -->
+
+<!-- ====================================================== -->
+<!-- tShowMappingStandard -->
+<!-- ====================================================== -->
+<xsl:template name="tShowMappingStandard">
+    <tr style="font-weight:normal;font-size:10pt;color:#000000">
+    <td> 
+          <xsl:for-each select="FromClass">
+            <b><xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/></b>
+            <xsl:if test="position()!=last()"> and </xsl:if>
+          </xsl:for-each> 
+    </td>
+    <td> 
+          taken at
+          <span style="font-weight:bold;color:#000066">
+            <xsl:call-template name="tSchoolLink" />
+          </span>
+    </td>
+    <td> 
+          may equate to
+          <xsl:for-each select="ToClass">
+            <b><xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/></b>
+            <xsl:if test="position()!=last()"> and </xsl:if>
+          </xsl:for-each> 
+          here 
+    </td>
+   </tr>
+</xsl:template> <!--  name="tShowMappingStandard" -->
+
+<!-- ====================================================== -->
+<!-- tShowMappingVerbose -->
+<!-- ====================================================== -->
+<xsl:template name="tShowMappingVerbose">
+  <xsl:call-template name="tEndCourse" />
+    <tr>
+    <td colspan="10">
+      <span style="font-weight:bold;font-size:12pt;color:#000000">
+       <xsl:call-template name="tSchoolLink" />
+      </span>
+      <span style="font-weight:normal;font-size:10pt;color:#000000">
+      - <xsl:value-of select="@SchoolCity"/>, <xsl:value-of select="@SchoolState"/>
+      </span>
+    </td>
+    </tr>
+    
+    <tr style="font-weight:normal;font-size:10pt;color:#000000">
+
+    <td width="50%"> <!-- LEFT = TRANSFER CLASSES -->
+      <table border="0" cellspacing="0" cellpadding="3" width="100%" class="xBlocks">
+        <xsl:for-each select="FromClass">
+          <tr>
+          <td  nowrap="true" width="30" >
+            <span class="TreqerCourseKey">
+            <xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/>
+            </span>
+          </td>
+          <td nowrap="true" >
+            <span class="TreqerCourseTitle">
+            <xsl:value-of select="@Title" />
+            </span>
+          </td>
+          </tr>
+
+          <!-- Display the min/max credits/grades info - if it exists -->
+          <xsl:call-template name="tCreditsGrade" />
+
+        </xsl:for-each> <!-- fromclass -->
+      </table>
+    </td> <!-- left = transfer classes -->
+
+    <td width="5%"> <!-- MIDDLE = ARROW -->
+      <img src="Images_DG2/treqarrowgreen.gif" alt="" border="0" height="15" width="15">                                                        
+        <xsl:attribute name="title">
+          <xsl:for-each select="FromClass">
+            <xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/>
+            <xsl:if test="position()!=last()"> and </xsl:if>
+          </xsl:for-each> taken at <xsl:value-of 
+          select="@SchoolName"/> may equate to <xsl:for-each select="ToClass">
+            <xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/>
+            <xsl:if test="position()!=last()"> and </xsl:if>
+          </xsl:for-each> here</xsl:attribute>
+      </img>                                                        
+    </td> <!-- middle = arrow -->
+
+    <td width="45%"> <!-- RIGHT = RESIDENT CLASSES -->
+      <table border="0" cellspacing="0" cellpadding="3" width="100%" class="xBlocks">
+        <xsl:for-each select="ToClass">
+          <tr>
+          <td nowrap="true"  width="25" >
+            <span class="TreqerCourseKey">
+            <xsl:value-of select="@Discipline"/>
+            <xsl:text>&#160;</xsl:text> <!-- space --> 
+            <xsl:value-of select="@Number"/>
+            </span>
+          </td>
+          <td nowrap="true" >
+            <span class="TreqerCourseTitle">
+            <xsl:value-of select="@Title" />
+            </span>
+          </td>
+          <!-- <td nowrap="true" width="20" >
+            <span class="TreqerCourseGradeCredits">
+               <xsl:call-template name="tFormatNumber" >
+                 <xsl:with-param name="iNumber" select="@Credits" />
+                 <xsl:with-param name="sRoundingMethod" select="$vCreditDecimals" />
+               </xsl:call-template>
+            </span>
+          </td> -->
+          </tr>
+        </xsl:for-each> <!-- toclass -->
+      </table>
+    </td> <!-- right = resident classes -->
+   </tr>
+
+</xsl:template> <!-- tshowmapping -->
+
+<!-- ====================================================== -->
+<!-- tSchoolLink -->
+<!--
+http://www.google.com/search?hl=en&q=university+of+phoenix&aq=1&oq=un&aqi=g10
+-->
+<!-- ====================================================== -->
+<xsl:template name="tSchoolLink">
+      <xsl:choose>
+        <xsl:when test="/CourseInformation/DisplayOptions/Mappings/@LinkToSchool = 'Y'">
+         <a target="anewwindow">
+          <xsl:choose>
+           <xsl:when test="@SchoolURL = ''">
+            <xsl:attribute name="href">http://google.com/search?hl=en&amp;q=<xsl:call-template name="tReplace">
+      <xsl:with-param name="string"      select="@SchoolName"/>
+      <xsl:with-param name="pattern"     select="substring($vSpace,1,1)"/>
+      <xsl:with-param name="replacement" select="$vPlus"/>
+      </xsl:call-template>&amp;aq=1&amp;oq=un&amp;aqi=g10</xsl:attribute>
+            <xsl:attribute name="title">Search on <xsl:value-of select="@SchoolName"/></xsl:attribute>
+           </xsl:when>
+           <xsl:otherwise> <!-- school URL exists - use it -->
+            <xsl:attribute name="href"><xsl:value-of select="@SchoolURL"/></xsl:attribute>
+            <xsl:attribute name="title">Visit <xsl:value-of select="@SchoolName"/></xsl:attribute>
+           </xsl:otherwise>
+          </xsl:choose>
+          <xsl:value-of select="@SchoolName"/>
+         </a>
+        </xsl:when>
+        <xsl:otherwise> <!-- don't add link -->
+         <xsl:value-of select="@SchoolName"/>
+        </xsl:otherwise>
+      </xsl:choose>
+</xsl:template> <!--  name="tSchoolLink" -->
+
+<!-- ====================================================== -->
+<!-- Replace this char with another char -->
+<!-- ====================================================== -->
+<xsl:template name="tReplace">
+<xsl:param name="string"      />
+<xsl:param name="pattern"     />
+<xsl:param name="replacement" />
+
+<xsl:choose>
+  <xsl:when test="$pattern != '' and $string != '' and contains($string, $pattern)">
+    <xsl:value-of select="substring-before($string, $pattern)"/>
+    <xsl:copy-of select="$replacement"/>
+    <xsl:call-template name="tReplace">
+      <xsl:with-param name="string"      select="substring-after($string, $pattern)"/>
+      <xsl:with-param name="pattern"     select="$pattern"/>
+      <xsl:with-param name="replacement" select="$replacement"/>
+    </xsl:call-template>
+  </xsl:when>
+  <xsl:otherwise>
+    <xsl:value-of select="$string"/>
+  </xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+
+<!-- ====================================================== -->
+<xsl:template name="tCreditsGrade">
+          <xsl:if test="@MinGrade!='' or @MaxGrade!='' or @MinCredits!='' or @MaxCredits!=''">
+          <tr style="font-weight:normal;font-size:8px;color:#000000">
+          <td nowrap="true" > <!-- Please note -->
+          Please note:
+          </td>
+          <td> 
+            <!-- MIN/MAX GRADE -->
+            <span class="TreqerCourseGradeCreditsX">
+            <xsl:if test="@MinGrade!=''">
+            Minimum grade of <xsl:value-of select="@MinGrade" /> required <br/>
+            </xsl:if>
+            <xsl:if test="@MaxGrade!=''">
+            Maximum grade of <xsl:value-of select="@MaxGrade" /> allowed  <br/>
+            </xsl:if>
+            </span>
+            <!-- MIN/MAX CREDITS -->
+            <span class="TreqerCourseGradeCreditsX">
+            <xsl:if test="@MinCredits!='' or @MaxCredits!=''">
+            <xsl:choose>
+              <xsl:when test="@MinCredits=@MaxCredits">  <!-- must take exactly this number of credits -->
+                Must take for 
+                 <xsl:call-template name="tFormatNumber" >
+                   <xsl:with-param name="iNumber" select="@MinCredits" />
+                   <xsl:with-param name="sRoundingMethod" select="$vCreditDecimals" />
+                 </xsl:call-template>
+                 <xsl:text>&#160;</xsl:text> <!-- space --> 
+                 <xsl:value-of select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+              </xsl:when>
+
+              <xsl:when test="@MinCredits!='' and @MaxCredits!='' ">  <!-- both credits specified -->
+                Must take for between
+                 <xsl:call-template name="tFormatNumber" >
+                   <xsl:with-param name="iNumber" select="@MinCredits" />
+                   <xsl:with-param name="sRoundingMethod" select="$vCreditDecimals" />
+                 </xsl:call-template>
+                 and
+                 <xsl:call-template name="tFormatNumber" >
+                   <xsl:with-param name="iNumber" select="@MaxCredits" />
+                   <xsl:with-param name="sRoundingMethod" select="$vCreditDecimals" />
+                 </xsl:call-template>
+                 <xsl:text>&#160;</xsl:text> <!-- space --> 
+                 <xsl:value-of select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+              </xsl:when>
+
+              <xsl:otherwise>
+                <xsl:if test="@MinCredits!='' ">
+                  Must take for at least
+                   <xsl:call-template name="tFormatNumber" >
+                     <xsl:with-param name="iNumber" select="@MinCredits" />
+                     <xsl:with-param name="sRoundingMethod" select="$vCreditDecimals" />
+                   </xsl:call-template>
+                   <xsl:text>&#160;</xsl:text> <!-- space --> 
+                   <xsl:value-of select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+                   <br/>
+                </xsl:if>
+                <xsl:if test="@MaxCredits!='' ">
+                  Cannot take for more than 
+                   <xsl:call-template name="tFormatNumber" >
+                     <xsl:with-param name="iNumber" select="@MaxCredits" />
+                     <xsl:with-param name="sRoundingMethod" select="$vCreditDecimals" />
+                   </xsl:call-template>
+                   <xsl:text>&#160;</xsl:text> <!-- space --> 
+                   <xsl:value-of select="normalize-space(/CourseInformation/@inputCreditsLiteral)" />
+                   <br/>
+                </xsl:if>
+              </xsl:otherwise>
+
+            </xsl:choose>
+            </xsl:if> <!-- min or max not blank -->
+
+            </span>
+          </td>
+          </tr>
+          </xsl:if> <!-- test="@MinGrade!='' or @MaxGrade!='' or @MinCredits!='' or @MaxCredits!=''" -->
+</xsl:template> <!-- tcreditsgrade -->
+
+<xsl:template name="tFormatNumber">
+<xsl:param name="iNumber" />
+<xsl:param name="sRoundingMethod" />
+	<xsl:value-of select="format-number($iNumber, $sRoundingMethod)" />
+</xsl:template>
+
+<xsl:template name="tError">
+  <span style="font-weight:normal;font-size:12pt;color:#FF0000">
+  Error processing <b><xsl:value-of select="/CourseInformation/@inputCourseDiscipline"/>&#160;<xsl:value-of select="/CourseInformation/@inputCourseNumber"/></b>  
+  <br/>
+  Error encountered: <b><xsl:value-of select="Error/@Message"/></b>; Status = <b><xsl:value-of select="Error/@Status"/></b>  
+  <br/>
+  <xsl:choose>
+    <xsl:when test="Error/@Status = '5802'">
+      You are attempting to use the AdviceLink feature that reads course catalog
+      information from the Banner student system but it appears you are not a Banner site. 
+      You should set the <b>vGetCourseInfoFromServer</b> flag to N in DGW_Report.xsl to use 
+      a static file instead of attempting to read directly from Banner.
+    </xsl:when>
+    <xsl:otherwise> 
+    </xsl:otherwise>
+  </xsl:choose>
+  </span>
+</xsl:template> <!-- terror -->
+
+<xsl:template name="tPrintCourseDetails">
+<xsl:param name="pCourseId" />
+	<xsl:for-each select="/CourseInformation/DisplayOptions/child::*">
+		<xsl:sort select="@Order" order="ascending" />
+		<xsl:choose>
+		<xsl:when test="@Order='00'">
+		<!-- Do Nothing -->
+		</xsl:when>
+		<xsl:when test="name(.) = 'TitleCredits'">
+			<xsl:for-each select="/CourseInformation/Course">
+				<xsl:if test="$pCourseId = generate-id()">
+				  <xsl:call-template name="tCourseCreditsTitle"/>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:when test="name(.) = 'Description'">
+			<xsl:for-each select="/CourseInformation/Course">
+				<xsl:if test="$pCourseId = generate-id()">
+				  <xsl:call-template name="tDescription"/>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:when test="name(.) = 'Prerequisites'">
+			<xsl:for-each select="/CourseInformation/Course">
+				<xsl:if test="$pCourseId = generate-id()">
+					<xsl:if test="Prereqs/Prereq">
+						<xsl:call-template name="tPrereqs"/>
+					</xsl:if>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:when test="name(.) = 'Attributes'">
+			<xsl:for-each select="/CourseInformation/Course">
+				<xsl:if test="$pCourseId = generate-id()">
+				<xsl:if test="Attributes/Attribute">
+					<xsl:call-template name="tAttributes"/>
+				</xsl:if>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:when test="name(.) = 'Sections'">
+			<xsl:for-each select="/CourseInformation/Course">
+				<xsl:if test="$pCourseId = generate-id()">
+				<xsl:if test="Sections/Section">
+					<xsl:call-template name="tSections"/>
+				</xsl:if>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:when test="name(.) = 'Mappings'">
+			<xsl:for-each select="/CourseInformation">
+					<xsl:call-template name="tMappings"/>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:otherwise>
+		<!-- Do Nothing -->
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:for-each>
+
+	<xsl:call-template name="tEndCourse"/>
+</xsl:template>
+
+</xsl:stylesheet>
+}ò‚Ü´^      U96¦U96¦;|¡RUQ¦   ):https://dwapppr1.njit.edu/CourseInfo.xsl security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:13:18 GMT
+Server: Apache/2.2.3 (Red Hat)
+Last-Modified: Fri, 24 Oct 2014 10:38:19 GMT
+Etag: "6066b-827d-50628c77efcc0"
+Accept-Ranges: bytes
+Content-Length: 33405
+Content-Type: text/xml
+ uncompressed-len 0   ‚}

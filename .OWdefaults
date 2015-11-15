@@ -1,0 +1,20 @@
+
+OpenWindows.WorkspaceColor:	bisque3
+OpenWindows.IconLocation:       top
+OpenWindows.SetInput:           followmouse
+OpenWindows.ScreenSaver.OnOff:	off
+OpenWindows.ScreenSaver.IdleTime:	10
+OpenWindows.WorkspaceStyle:	paintcolor
+OpenWindows.Scale:		medium
+OpenWindows.BeepDuration:	75
+OpenWindows.DataBackground:	#e5d8b7
+OpenWindows.RegularFont:	-linotype-helvetica-medium-r-narrow-sans-*-120-*-*-p-*-iso8859-1
+OpenWindows.PaintWorkspace:	True
+OpenWindows.ButtonFont:	-linotype-helvetica-medium-r-narrow-sans-*-120-*-*-p-*-iso8859-1
+OpenWindows.BoldFont:	-linotype-helvetica-bold-r-narrow-sans-*-120-*-*-p-*-iso8859-1
+OpenWindows.WorkspaceBitmapBg:	#ffe4c4
+OpenWindows.TextFont:	-linotype-helvetica-medium-r-narrow-sans-*-120-*-*-p-*-iso8859-1
+OpenWindows.TitleFont:	-linotype-helvetica-bold-r-narrow-sans-*-120-*-*-p-*-iso8859-1
+OpenWindows.WindowColor:	BlanchedAlmond
+OpenWindows.MonospaceFont:	-b&h-lucida sans typewriter-medium-r-normal-sans-*-120-*-*-m-*-iso8859-1
+OpenWindows.WorkspaceBitmapFg:	#000000

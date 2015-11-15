@@ -1,0 +1,351 @@
+/*
+ * Copyright 1995-2012 Ellucian Company L.P. and its affiliates. 
+ */
+// $Id: //Tuxedo/RELEASE/Product/webroot/DGW_SearchDataIsland.js#7 $
+//////////////////////////////////////////////////////////////////////
+
+//<StudentData StudentCount="2">
+// <Student Id="1464743170" Name="Smithen, Carla" LastAuditMonth="07" LastAuditDay="12" LastAuditYear"2007">
+//  <DegreeRecord School="U" Degree="BA" Major="ANTH" Level="SR"
+//                DegreeLit="BA" MajorLit="Anthropology" LevelLit="Senior" />
+// </Student>
+// <Student Id="1611107493" Name="Martino, Cameron" LastAuditMonth="07" LastAuditDay="05" LastAuditYear"2007" >
+//  <DegreeRecord School="U" Degree="BA" Major="ANTH" Level="SR"
+//                DegreeLit="BA" MajorLit="Anthropology" LevelLit="Senior" />
+// </Student>
+//</StudentData>
+
+var winowner; // set by SD2STUGID and SD2STUGET
+var bCompleteStudentData;
+function ParseXMLDataIsland()
+{
+
+	/*
+	http://developer.mozilla.org/en/docs/Using_XML_Data_Islands_in_Mozilla
+	http://developer.mozilla.org/en/docs/DOM:element
+	http://developer.mozilla.org/en/docs/DOM:element.nodeName
+	http://developer.mozilla.org/en/docs/DOM:element.nextSibling
+	*/
+	
+	var moz = false;
+	var ie  = false;
+	var SearchResultsDataNode; // do not inizialize; leave as undefined.
+	//var iStudentCount = 0;
+
+//alert ("ParseXMLDataIsland enter");
+	moz = (typeof document.implementation != 'undefined') && 
+		  (typeof document.implementation.createDocument != 'undefined');
+	ie  = (typeof window.ActiveXObject != 'undefined');
+	agt=navigator.userAgent.toLowerCase();
+
+	if (moz) //  Mozilla
+	{
+		var xmlNode = window.document.getElementsByTagName('xml');	
+		///////////////////////////////////////////////////////////////////
+		// Process the "StudentData" node
+		//ReportNode = window.document.getElementsByTagName('Report'); // this does not work
+		SearchResultsNode = xmlNode[0].childNodes[1]; 
+
+		// The "StudentDataNode" node is always there - or better be
+		if (SearchResultsNode == undefined)
+              {
+              // Subsequent error message will tell user that no students were found
+		  //alert ("StudentDataNode does not exist - no students found");
+              }
+            else
+		  ProcessSearchResultsNode(SearchResultsNode, "moz");
+	} // moz
+
+	else // if (ie) // IE (Microsoft Internet Explorer)
+	{
+	    // Get the node based on its id
+		myDataIsland = StudentsXML; // Not "StudentsXML" in quotes because you define
+								    // the XMLDocument as "StudentsXML.XMLDocument"
+		if (myDataIsland == undefined)
+		  alert ("myDataIsland does not exist");
+		var myXMLDocument = myDataIsland.XMLDocument;
+
+		///////////////////////////////////////////////////////////////////
+		// Process the "Report" node
+		SearchResultsNode = myXMLDocument.selectSingleNode("SearchResults");
+		if (SearchResultsNode == undefined)
+                  {
+		  //alert("StudentDataNode does not exist - no students found");
+                  }
+        else
+		  ProcessSearchResultsNode(SearchResultsNode, "ie");
+	}
+//alert ("ParseXMLDataIsland exit");
+
+} // ParseXMLDataIsland()
+
+function ProcessSearchResultsNode (SearchResultsNode, sBrowser)
+{
+	// Process each "StudentData" node returned.
+	if (sBrowser == "ie")
+	{
+		// In IE you can just go from one node to the next using a for loop
+		StudentDataNodeLength = SearchResultsNode.childNodes.length;
+
+		// The only types of nodes under "Term" nodes are "Course" nodes.
+		for ( iStudentDataNodeIndex = 0; iStudentDataNodeIndex < StudentDataNodeLength; iStudentDataNodeIndex++)
+		{
+			ProcessStudentDataNode (SearchResultsNode.childNodes(iStudentDataNodeIndex), "ie");
+		}
+	}
+
+	else if (sBrowser == "moz")
+	{
+		// in Mozilla you must start at the beginning, using a while loop and increment
+		// the node by 2 because it counts the end node ("</Course>") as a node.
+		if (is_safari20down)
+		  StudentDataNode = SearchResultsNode.childNodes[0];
+		else
+		  StudentDataNode = SearchResultsNode.childNodes[1];
+		while (StudentDataNode)
+		{
+			// these are the Course nodes
+			ProcessStudentDataNode (StudentDataNode, "moz");
+			StudentDataNode = StudentDataNode.nextSibling; // this puts you at the "</StudentDataNode>" node
+			StudentDataNode = StudentDataNode.nextSibling; // this puts you at the next "<StudentDataNode>" node (if it exists)
+		}
+	}
+//alert ("ProcessDegreeNodes - exit");
+}
+
+function ProcessStudentDataNode(StudentDataNode, sBrowser)
+{
+//alert ("ProcessStudentDataNode - enter");
+  var iStudentsReturned = 1*StudentDataNode.getAttribute("StudentsReturned"); // aka Max Allowed
+  var iStudentsFound    = 1*StudentDataNode.getAttribute("StudentsFound");
+	if (iStudentsFound > iStudentsReturned)
+	  {
+      alert ("There are serious performance ramifications inherent in searching " +
+             "and loading more records into this page than the University has allowed. " +
+             "We have only allowed that a maximum of " + iStudentsReturned + " be loaded and your search " +
+             "has resulted in finding over that number (" + iStudentsFound + ").  We will, of course, " +
+             "load these " + iStudentsReturned + " records but recommend narrowing your search and trying again.");
+	  }
+
+	if (sBrowser == "ie")
+	{
+	    //iStudentCount	=		StudentDataNode.getAttribute('StudentCount');
+		// In IE you can just go from one node to the next using a for loop
+		StudentLength = StudentDataNode.childNodes.length;
+
+		// The <Plan> node can contain: <Term> nodes and/or <Notes> nodes
+		for ( iStudentIndex = 0; iStudentIndex < StudentLength; iStudentIndex++)
+		{
+			if (StudentDataNode.childNodes(iStudentIndex).nodeName == 'Student')
+			{
+				bContinue=true;
+				DegreeNodeLength = StudentDataNode.childNodes(iStudentIndex).childNodes.length;
+				//alert("DegreeNodeLength = " + DegreeNodeLength);
+				if (DegreeNodeLength == 0)
+				{
+					//alert("A blank degree record was found for \"" + 
+					//	StudentDataNode.childNodes(iStudentIndex).getAttribute("Name") + 
+					//	"\".  Partial/Incomplete student data loaded.");
+
+					bContinue = false;
+					bCompleteStudentData = false;
+				}
+				if (bContinue)
+				{
+					// This is a valid student node
+					winowner.AddStudent (StudentDataNode.childNodes(iStudentIndex).getAttribute("Id"),
+										 StudentDataNode.childNodes(iStudentIndex).getAttribute("Name"));
+					winowner.AddAuditDate (StudentDataNode.childNodes(iStudentIndex).getAttribute("Id"),
+										   StudentDataNode.childNodes(iStudentIndex).getAttribute("LastAuditYear")  + //ccyymmdd
+										   StudentDataNode.childNodes(iStudentIndex).getAttribute("LastAuditMonth") +
+										   StudentDataNode.childNodes(iStudentIndex).getAttribute("LastAuditDay"));
+					winowner.AddRefreshDateTime (StudentDataNode.childNodes(iStudentIndex).getAttribute("Id"),
+										         StudentDataNode.childNodes(iStudentIndex).getAttribute("LastRefreshYear")  +  //ccyymmdd
+										          StudentDataNode.childNodes(iStudentIndex).getAttribute("LastRefreshMonth") +
+										          StudentDataNode.childNodes(iStudentIndex).getAttribute("LastRefreshDay"),
+										         StudentDataNode.childNodes(iStudentIndex).getAttribute("LastRefreshTime"),
+                             StudentDataNode.childNodes(iStudentIndex).getAttribute("LastChangedYear")  +  //ccyymmdd
+										          StudentDataNode.childNodes(iStudentIndex).getAttribute("LastChangedMonth") +
+										          StudentDataNode.childNodes(iStudentIndex).getAttribute("LastChangedDay"),
+										         StudentDataNode.childNodes(iStudentIndex).getAttribute("LastChangedTime"));
+					ProcessDegreeNodes (StudentDataNode.childNodes(iStudentIndex), "ie");
+					ProcessCustomNodes (StudentDataNode.childNodes(iStudentIndex), "ie");
+				}
+			}
+		} // for
+	} // ie
+
+	else if (sBrowser == "moz")
+	{
+		// in Mozilla you must start at the beginning, using a while loop and increment
+		// the node by 2 because it counts the end node ("</Student>") as a node.
+		if (is_safari20down)
+			{StudentNode = StudentDataNode.childNodes[0];}// for some reason Safari wants to start at 0
+		else
+			{StudentNode = StudentDataNode.childNodes[1];}// while non-Safari Mozilla wants to start at 1.
+		if (StudentNode == undefined)
+		  {
+          alert ("No students found - no Student nodes found");
+		  }
+		while (StudentNode)
+		{
+			if (StudentNode.nodeName == 'STUDENT') // Mozilla upshifts this value (for some dang reason)
+			{
+				bContinue=true;
+				if (is_safari20down)
+				  DegreeNode = StudentNode.childNodes[0];
+				else
+				  DegreeNode = StudentNode.childNodes[1];
+				//alert("DegreeNodeLength = " + DegreeNodeLength);
+				if (!DegreeNode)
+				{
+					//alert("A blank degree record was found for \"" + 
+					//	 StudentNode.getAttribute('Name') + 
+					//	"\".  Partial/Incomplete student data loaded.");
+
+					bContinue = false;
+					bCompleteStudentData = false;
+				}
+				if (bContinue)
+				{
+					// This is a valid student node
+					winowner.AddStudent (StudentNode.getAttribute("Id"),
+										 StudentNode.getAttribute("Name"));
+					winowner.AddAuditDate (StudentNode.getAttribute("Id"),
+										   StudentNode.getAttribute("LastAuditYear")  + // ccyymmdd
+										   StudentNode.getAttribute("LastAuditMonth") +
+										   StudentNode.getAttribute("LastAuditDay"));
+					winowner.AddRefreshDateTime (StudentNode.getAttribute("Id"),
+										         StudentNode.getAttribute("LastRefreshYear")  + // ccyymmdd
+										          StudentNode.getAttribute("LastRefreshMonth") +
+										          StudentNode.getAttribute("LastRefreshDay"),
+										         StudentNode.getAttribute("LastRefreshTime"),
+                             StudentNode.getAttribute("LastChangedYear")  +  //ccyymmdd
+										          StudentNode.getAttribute("LastChangedMonth") +
+										          StudentNode.getAttribute("LastChangedDay"),
+										         StudentNode.getAttribute("LastChangedTime"));                             
+					ProcessDegreeNodes (StudentNode, "moz");
+					ProcessCustomNodes (StudentNode, "moz");
+				}
+
+			}
+			StudentNode = StudentNode.nextSibling; // this puts you at the "</Student>" node
+			StudentNode = StudentNode.nextSibling; // this puts you at the next "<Student>" node (if it exists)
+		}
+	}
+//alert ("ProcessStudentDataNode - exit");
+} // ProcessStudentDataNode 
+
+function ProcessDegreeNodes (StudentNode, sBrowser)
+{
+//alert ("ProcessDegreeNodes - enter");
+	if (sBrowser == "ie")
+	{
+		// In IE you can just go from one node to the next using a for loop
+		DegreeNodeLength = StudentNode.childNodes.length;
+
+		// The only types of nodes under "Term" nodes are "Course" nodes.
+		for ( iDegreeNodeIndex = 0; iDegreeNodeIndex < DegreeNodeLength; iDegreeNodeIndex++)
+		{
+	     if (StudentNode.childNodes(iDegreeNodeIndex).nodeName == 'DegreeRecord')
+			{
+			if (StudentNode.childNodes(iDegreeNodeIndex).getAttribute("Source") != "A")
+			{
+				sDegreeLit = StudentNode.childNodes(iDegreeNodeIndex).getAttribute("DegreeLit");
+			}
+			else
+			{
+				sDegreeLit = StudentNode.childNodes(iDegreeNodeIndex).getAttribute("DegreeLit") + "*";
+			}
+			winowner.AddDegree(StudentNode.getAttribute("Id"),
+						       StudentNode.childNodes(iDegreeNodeIndex).getAttribute("Degree"),
+						       sDegreeLit,
+						       StudentNode.childNodes(iDegreeNodeIndex).getAttribute("School"),
+						       StudentNode.childNodes(iDegreeNodeIndex).getAttribute("MajorLit"),
+						       StudentNode.childNodes(iDegreeNodeIndex).getAttribute("LevelLit"),
+						       ""); // blank degree-interest
+			}
+		}
+	}
+
+	else if (sBrowser == "moz")
+	{
+		// in Mozilla you must start at the beginning, using a while loop and increment
+		// the node by 2 because it counts the end node ("</Course>") as a node.
+		if (is_safari20down)
+		  DegreeNode = StudentNode.childNodes[0];
+		else
+		  DegreeNode = StudentNode.childNodes[1];
+		while (DegreeNode)
+		{
+		  if (DegreeNode.nodeName == 'DEGREERECORD') // Mozilla upshifts this value (for some dang reason)
+			{
+			if (DegreeNode.getAttribute("Source") != "A")
+			{
+				sDegreeLit = DegreeNode.getAttribute("DegreeLit");
+			}
+			else
+			{
+				sDegreeLit = DegreeNode.getAttribute("DegreeLit") + "*";
+			}
+			winowner.AddDegree(StudentNode.getAttribute("Id"),
+						       DegreeNode.getAttribute("Degree"),
+						       sDegreeLit,
+						       DegreeNode.getAttribute("School"),
+						       DegreeNode.getAttribute("MajorLit"),
+						       DegreeNode.getAttribute("LevelLit"),
+						       ""); // blank degree-interest
+			}
+		  DegreeNode = DegreeNode.nextSibling; // this puts you at the "</DegreeRecord>" node
+		  DegreeNode = DegreeNode.nextSibling; // this puts you at the next "<DegreeRecord>" node (if it exists)
+		}
+	}
+//alert ("ProcessDegreeNodes - exit");
+}
+function ProcessCustomNodes (StudentNode, sBrowser)
+{
+	if (sBrowser == "ie")
+	{
+		// In IE you can just go from one node to the next using a for loop
+		CustomNodeLength = StudentNode.childNodes.length;
+
+		// The only types of nodes under "Term" nodes are "Course" nodes.
+		for ( iCustomNodeIndex = 0; iCustomNodeIndex < CustomNodeLength; iCustomNodeIndex++)
+		{
+	     if (StudentNode.childNodes(iCustomNodeIndex).nodeName == 'CustomRecord')
+			winowner.AddCustom(StudentNode.getAttribute("Id"),
+						       StudentNode.childNodes(iCustomNodeIndex).getAttribute("CustomCode"),
+						       StudentNode.childNodes(iCustomNodeIndex).getAttribute("CustomValue"));
+		}
+	}
+
+	else if (sBrowser == "moz")
+	{
+		// in Mozilla you must start at the beginning, using a while loop and increment
+		// the node by 2 because it counts the end node ("</CustomRecord>") as a node.
+		if (is_safari20down)
+		  CustomNode = StudentNode.childNodes[0];
+		else
+		  CustomNode = StudentNode.childNodes[1];
+		while (CustomNode)
+		{
+		  if (CustomNode.nodeName == 'CUSTOMRECORD') // Mozilla upshifts this value (for some dang reason)
+			winowner.AddCustom(StudentNode.getAttribute("Id"),
+						       CustomNode.getAttribute("CustomCode"),
+						       CustomNode.getAttribute("CustomValue"));
+		  CustomNode = CustomNode.nextSibling; // this puts you at the "</CustomRecord>" node
+		  CustomNode = CustomNode.nextSibling; // this puts you at the next "<CustomRecord>" node (if it exists)
+		}
+	}
+}
+
+
+"Z®»D      U96U96;‰ÝUQ€   2:https://dwapppr1.njit.edu/DGW_SearchDataIsland.js necko:classified 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:12:42 GMT
+Server: Apache/2.2.3 (Red Hat)
+Last-Modified: Fri, 24 Oct 2014 10:38:19 GMT
+Etag: "6066e-373b-50628c77efcc0"
+Accept-Ranges: bytes
+Content-Length: 14139
+Content-Type: application/x-javascript
+ uncompressed-len 0   7;

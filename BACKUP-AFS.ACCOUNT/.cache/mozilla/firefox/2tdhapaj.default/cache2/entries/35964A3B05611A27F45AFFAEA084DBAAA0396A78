@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Pragma" NAME="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" NAME="Cache-Control" CONTENT="no-cache">
+<LINK REL="stylesheet" HREF="/css/web_defaultapp.css" TYPE="text/css"><LINK REL="stylesheet" HREF="https://cp4.njit.edu/cp/content/style.css" TYPE="text/css">
+<LINK REL="stylesheet" HREF="/css/web_defaultprint.css" TYPE="text/css" media="print">
+<TITLE>Look Up Classes</TITLE>
+<META HTTP-EQUIV="Content-Script-Type" NAME="Default_Script_Language" CONTENT="text/javascript">
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+window.onunload = function() {submitcount=0;}
+var submitcount=0;
+function checkSubmit() {
+if (submitcount == 0)
+   {
+   submitcount++;
+   return true;
+   }
+else
+   {
+alert("Your changes have already been submitted.");
+   return false;
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!-- Hide JavaScript from older browsers 
+//  Function to open a window
+function windowOpen(window_url) {
+   helpWin = window.open(window_url,'','toolbar=yes,status=no,scrollbars=yes,menubar=yes,resizable=yes,directories=no,location=no,width=350,height=400');
+   if (document.images) { 
+       if (helpWin) helpWin.focus()
+   }
+}
+//  End script hiding -->
+</SCRIPT>
+</HEAD>
+<BODY  class="campuspipeline" >
+<DIV class="headerwrapperdiv">
+<DIV class="headerlinksdiv">
+<SPAN class="pageheaderlinks2">
+<MAP NAME="Module_Navigation_Links_H" title="Module Navigation Links">
+<p>
+<A HREF="#skip_Module_Navigation_Links_H" onMouseover="window.status='Skip Module Navigation Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Module Navigation Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Module Navigation Links</A>
+<TABLE  CLASS="plaintable" SUMMARY="This is main table for displaying Tab Items."
+                          WIDTH="100%" cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<TD CLASS="pldefault">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Tab Items."
+                 cellSpacing=0 cellPadding=0 border=0>
+<TR>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_GenMnu" onMouseover="window.status='Personal Information'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Personal Information'; return true" onBlur="window.status=''; return true" >Personal Information</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="tabon"  height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu" onMouseover="window.status='Student'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Student'; return true" onBlur="window.status=''; return true" >Student</A>
+</TD>
+<TD class="bgtabon"  height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+<td class="taboff" height=22>
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_FinAidMainMnu" onMouseover="window.status='Financial Aid'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Financial Aid'; return true" onBlur="window.status=''; return true" >Financial Aid</A>
+</TD>
+<TD class="bgtaboff" height=22 vAlign="top" align="right">
+<IMG SRC="/wtlgifs/web_tab_corner_right.gif" ALT="Tab Corner Right" CLASS="headerImg" TITLE="Tab Corner Right"  NAME="web_tab_corner_right" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=20 WIDTH=8>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+<TR>
+<TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+</MAP>
+</SPAN>
+<a name="skip_Module_Navigation_Links_H"></a>
+</DIV>
+<TABLE  CLASS="plaintable" SUMMARY="This table displays Menu Items and Banner Search textbox."
+         WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<DIV class="headerlinksdiv2">
+<FORM ACTION="/prod/twbksrch.P_ShowResults" METHOD="POST">
+Search
+<SPAN class="fieldlabeltextinvisible"><LABEL for=keyword_in_id><SPAN class="fieldlabeltext">Search</SPAN></LABEL></SPAN>
+<INPUT TYPE="text" NAME="KEYWRD_IN" SIZE="20" MAXLENGTH="65" ID="keyword_in_id">
+<INPUT TYPE="submit" VALUE="Go">
+</FORM>
+</div>
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<SPAN class="pageheaderlinks">
+<A HREF="/prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"  class="submenulinktext2" id="ssbbackurl">RETURN TO MENU</A>
+|
+<A HREF="/prod/twbksite.P_DispSiteMap?menu_name_in=bmenu.P_MainMnu&amp;depth_in=2&amp;columns_in=3" accesskey="2" class="submenulinktext2">SITE MAP</A>
+|
+<A HREF="/wtlhelp/twbhhelp.htm" accesskey="H" onClick="popup = window.open('/wtlhelp/twbhhelp.htm', 'PopupPage','height=500,width=450,scrollbars=yes,resizable=yes'); return false" target="_blank" onMouseOver="window.status='';  return true" onMouseOut="window.status=''; return true"onFocus="window.status='';  return true" onBlur="window.status=''; return true"  class="submenulinktext2">HELP</A>
+</span>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV class="pagetitlediv">
+<TABLE  CLASS="plaintable" SUMMARY="This table displays title and static header displays."
+   WIDTH="100%">
+<TR>
+<TD CLASS="pldefault">
+<H2>Look Up Classes</H2>
+</TD>
+<TD CLASS="pldefault">
+&nbsp;
+</TD>
+<TD CLASS="pldefault"><p class="rightaligntext"></p>
+<DIV class="staticheaders">
+31118493 Sira B. Semambya<br>
+2015 Fall<br>
+Apr 23, 2015 02:14 pm<br>
+</div>
+</TD>
+</TR>
+<TR>
+<TD class="bg3" width="100%" colSpan=3><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD>
+</TR>
+</TABLE>
+<a name="main_content"></a>
+</DIV>
+<DIV class="pagebodydiv">
+<!--  ** END OF twbkwbis.P_OpenDoc **  -->
+<DIV class="infotextdiv"><TABLE  CLASS="infotexttable" SUMMARY="This layout table contains information that may be helpful in understanding the content and functionality of this page.  It could be a brief set of instructions, a description of error messages, or other special information."><TR><TD CLASS="indefault"><IMG SRC="/wtlgifs/web_info_cascade.png" ALT="Information" CLASS="headerImg" TITLE="Information"  NAME="web_info" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=12 WIDTH=14></TD><TD CLASS="indefault"><SPAN class="infotext"> Use the selection options to search the class schedule.  You may choose any combination of fields to narrow your search, but you must select at least one Subject.  Select Class Search when your selection is complete.</SPAN></TD></TR></TABLE><P></DIV>
+<FORM ACTION="/prod/bwskfcls.P_GetCrse" METHOD="POST" onSubmit="return checkSubmit()">
+<INPUT TYPE="hidden" NAME="rsts" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="crn" VALUE="dummy">
+<BR>
+<INPUT TYPE="hidden" NAME="term_in" VALUE="201590">
+<INPUT TYPE="hidden" NAME="sel_subj" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_day" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_schd" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_insm" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_camp" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_levl" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_sess" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_instr" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_ptrm" VALUE="dummy">
+<INPUT TYPE="hidden" NAME="sel_attr" VALUE="dummy">
+<TABLE  CLASS="dataentrytable" SUMMARY="Table is used to present the course search criteria">
+<TR>
+<TD CLASS="delabel" scope="row" ><LABEL for=subj_id><SPAN class="fieldlabeltext">Subject: </SPAN></LABEL></TD>
+<TD COLSPAN="37" CLASS="dedefault">
+<SELECT NAME="sel_subj" SIZE="10" MULTIPLE ID="subj_id">
+<OPTION VALUE="ACCT">Accounting
+<OPTION VALUE="AS">Aerospace
+<OPTION VALUE="R512">American History Rutgers
+<OPTION VALUE="ARCH">Architecture
+<OPTION VALUE="AD">Art & Design
+<OPTION VALUE="BNFO">Bioinformatics
+<OPTION VALUE="BIOL">Biology
+<OPTION VALUE="R120">Biology-Rutgers
+<OPTION VALUE="BME">Biomedical Engineering
+<OPTION VALUE="CHE">Chemical Engineering
+<OPTION VALUE="CHEM">Chemistry
+<OPTION VALUE="CE">Civil Engineering
+<OPTION VALUE="COM">Communication
+<OPTION VALUE="CS">Computer Science
+<OPTION VALUE="CPT">Computer Technology
+<OPTION VALUE="CIMT">Concrete Industry Management
+<OPTION VALUE="CET">Construction Engineering Tech
+<OPTION VALUE="CMT">ConstructionManagementTech
+<OPTION VALUE="DD">DigitalDesign
+<OPTION VALUE="ECON">Economics
+<OPTION VALUE="ECET">Elect & Comp Engr Tech
+<OPTION VALUE="ECE">Electrical & Computer Engr
+<OPTION VALUE="EM">Engineering Management
+<OPTION VALUE="ESC">Engineering Science
+<OPTION VALUE="ET">Engineering Technology
+<OPTION VALUE="ENG">English
+<OPTION VALUE="ENTR">Entrepreneurship
+<OPTION VALUE="ENE">Environmental Engineering
+<OPTION VALUE="EPS">Environmental Policy Studies
+<OPTION VALUE="EVSC">Environmental Science
+<OPTION VALUE="FIN">Finance
+<OPTION VALUE="FRSH">Freshman Seminar
+<OPTION VALUE="FED">Fundamentals of Engr Design
+<OPTION VALUE="HIST">History
+<OPTION VALUE="R510">History Rutgers
+<OPTION VALUE="HRM">Human Resource Management
+<OPTION VALUE="HUM">Humanities
+<OPTION VALUE="HSS">Humanities & Social Sciences
+<OPTION VALUE="ID">Industrial Design
+<OPTION VALUE="IE">Industrial Engineering
+<OPTION VALUE="IS">Information Systems
+<OPTION VALUE="IT">Information Technology
+<OPTION VALUE="MIP">Infrastructure Planning
+<OPTION VALUE="INT">Interior Design
+<OPTION VALUE="LIT">Literature
+<OPTION VALUE="MR">Maintaining Registration
+<OPTION VALUE="MGMT">Management
+<OPTION VALUE="MIS">Management Info Systems
+<OPTION VALUE="MNE">Manufacturing Engineering
+<OPTION VALUE="MNET">Manufacturing Engr Tech
+<OPTION VALUE="MRKT">Marketing
+<OPTION VALUE="MARC">Masters ofArchitecture
+<OPTION VALUE="MTSE">Material Science & Engineering
+<OPTION VALUE="MATH">Mathematics
+<OPTION VALUE="ME">Mechanical Engineering
+<OPTION VALUE="MET">Mechanical Engineering Tech
+<OPTION VALUE="MECH">Mechanics
+<OPTION VALUE="MIT">Medical Informatics Technology
+<OPTION VALUE="NANO">Nanotechnology
+<OPTION VALUE="OM">Operations Management
+<OPTION VALUE="OPSE">Optical Science & Engineering
+<OPTION VALUE="PHB">Pharmaceutical Bioprocessing
+<OPTION VALUE="PHEN">Pharmaceutical Engineering
+<OPTION VALUE="PHIL">Philosophy
+<OPTION VALUE="PE">Physical Education
+<OPTION VALUE="PHYS">Physics
+<OPTION VALUE="R750">Physics Rutgers
+<OPTION VALUE="PTC">Professional & Tech Comm
+<OPTION VALUE="PBL">Project Based Learning
+<OPTION VALUE="STS">Science, Technolgy & Society
+<OPTION VALUE="SET">Surveying Engineering Tech
+<OPTION VALUE="THTR">Theater
+<OPTION VALUE="R088">Theater Rutgers
+<OPTION VALUE="TRAN">TransportationEngr
+<OPTION VALUE="TUTR">Tutoring
+<OPTION VALUE="USYS">Urban Systems
+<OPTION VALUE="R089">Video Prodouction
+</SELECT>
+</TD>
+</TR>
+</TABLE>
+<TABLE  CLASS="plaintable" style="margin-top:20px;">
+<tr style="display:none">
+<TD CLASS="pllabel"><LABEL for=crse_id><SPAN class="fieldlabeltext">Course Number: </SPAN></LABEL></TD>
+<TD COLSPAN="7" CLASS="pldefault"><INPUT TYPE="text" NAME="sel_crse" SIZE="6" MAXLENGTH="5" ID="crse_id"></TD>
+</TR>
+<tr style="display:none">
+<TD CLASS="pllabel"><LABEL for=title_id><SPAN class="fieldlabeltext">Title: </SPAN></LABEL></TD>
+<TD COLSPAN="7" CLASS="pldefault"><INPUT TYPE="text" NAME="sel_title" SIZE="33" MAXLENGTH="30" ID="title_id"></TD>
+</TR>
+<tr style="display:none">
+<TD CLASS="pllabel"><LABEL for=credit_id_from><SPAN class="fieldlabeltext">Credit Range: </SPAN></LABEL></TD>
+<TD COLSPAN="7" CLASS="pldefault">
+<INPUT TYPE="text" NAME="sel_from_cred" SIZE="11" MAXLENGTH="10" ID="credit_id_from">
+ hours to  
+<LABEL for=credit_id_to><SPAN class="fieldlabeltextinvisible">Credit Range To:</SPAN></LABEL>
+<INPUT TYPE="text" NAME="sel_to_cred" SIZE="11" MAXLENGTH="10" ID="credit_id_to">
+ hours
+</TD>
+</TR>
+<tr style="display:none">
+<TD CLASS="pllabel"><LABEL for=ptrm_id><SPAN class="fieldlabeltext">Part of Term: </SPAN></LABEL><BR>     <SPAN class="fieldsmalltext">Non-date based courses only</SPAN></TD>
+<TD COLSPAN="7" CLASS="pldefault">
+<SELECT NAME="sel_ptrm" SIZE="3" MULTIPLE ID="ptrm_id">
+<OPTION VALUE="%" SELECTED>All
+</SELECT>
+</TD>
+</TR>
+<tr style="display:none">
+<TD CLASS="pllabel">Start Time: </TD>
+<TD COLSPAN="2" CLASS="pldefault">
+<LABEL for=begin_hh_id><SPAN class="fieldlabeltextinvisible">Hour</SPAN></LABEL>
+Hour <SELECT NAME="begin_hh" SIZE="1" ID="begin_hh_id">
+<OPTION VALUE="0"> 00
+<OPTION VALUE="1"> 01
+<OPTION VALUE="2"> 02
+<OPTION VALUE="3"> 03
+<OPTION VALUE="4"> 04
+<OPTION VALUE="5"> 05
+<OPTION VALUE="6"> 06
+<OPTION VALUE="7"> 07
+<OPTION VALUE="8"> 08
+<OPTION VALUE="9"> 09
+<OPTION VALUE="10"> 10
+<OPTION VALUE="11"> 11
+<OPTION VALUE="12"> 12
+</SELECT>
+</TD>
+<TD COLSPAN="2" CLASS="pldefault">
+<LABEL for=begin_mi_id><SPAN class="fieldlabeltextinvisible">Minute</SPAN></LABEL>
+Minute <SELECT NAME="begin_mi" SIZE="1" ID="begin_mi_id">
+<OPTION VALUE="0"> 00
+<OPTION VALUE="5"> 05
+<OPTION VALUE="10"> 10
+<OPTION VALUE="15"> 15
+<OPTION VALUE="20"> 20
+<OPTION VALUE="25"> 25
+<OPTION VALUE="30"> 30
+<OPTION VALUE="35"> 35
+<OPTION VALUE="40"> 40
+<OPTION VALUE="45"> 45
+<OPTION VALUE="50"> 50
+<OPTION VALUE="55"> 55
+</SELECT>
+</TD>
+</TR>
+<tr style="display:none">
+<TD CLASS="pllabel">End Time: </TD>
+<TD COLSPAN="2" CLASS="pldefault">
+<LABEL for=end_hh_id><SPAN class="fieldlabeltextinvisible">Hour</SPAN></LABEL>
+Hour <SELECT NAME="end_hh" SIZE="1" ID="end_hh_id">
+<OPTION VALUE="0"> 00
+<OPTION VALUE="1"> 01
+<OPTION VALUE="2"> 02
+<OPTION VALUE="3"> 03
+<OPTION VALUE="4"> 04
+<OPTION VALUE="5"> 05
+<OPTION VALUE="6"> 06
+<OPTION VALUE="7"> 07
+<OPTION VALUE="8"> 08
+<OPTION VALUE="9"> 09
+<OPTION VALUE="10"> 10
+<OPTION VALUE="11"> 11
+<OPTION VALUE="12"> 12
+</SELECT>
+</TD>
+<TD COLSPAN="2" CLASS="pldefault">
+<LABEL for=end_mi_id><SPAN class="fieldlabeltextinvisible">Minute</SPAN></LABEL>
+Minute <SELECT NAME="end_mi" SIZE="1" ID="end_mi_id">
+<OPTION VALUE="0"> 00
+<OPTION VALUE="5"> 05
+<OPTION VALUE="10"> 10
+<OPTION VALUE="15"> 15
+<OPTION VALUE="20"> 20
+<OPTION VALUE="25"> 25
+<OPTION VALUE="30"> 30
+<OPTION VALUE="35"> 35
+<OPTION VALUE="40"> 40
+<OPTION VALUE="45"> 45
+<OPTION VALUE="50"> 50
+<OPTION VALUE="55"> 55
+</SELECT>
+</TD>
+</TABLE>
+<INPUT TYPE="hidden" NAME="begin_ap" VALUE="x">
+<INPUT TYPE="hidden" NAME="end_ap" VALUE="y">
+<span id="courseBtnDiv" style="display:block;margin-left:60px;margin-bottom:50px;"></span>
+<INPUT TYPE="hidden" NAME="path" VALUE="1">
+<INPUT TYPE="submit" NAME="SUB_BTN" VALUE="Course Search">
+<INPUT TYPE="submit" NAME="SUB_BTN" VALUE="Advanced Search">
+</FORM>
+
+<!--  ** START OF twbkwbis.P_CloseDoc **  -->
+<TABLE  CLASS="plaintable" SUMMARY="This is table displays line separator at end of the page."
+                                             WIDTH="100%" cellSpacing=0 cellPadding=0 border=0><TR><TD class="bgtabon" width="100%" colSpan=2><IMG SRC="/wtlgifs/web_transparent.gif" ALT="Transparent Image" CLASS="headerImg" TITLE="Transparent Image"  NAME="web_transparent" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=3 WIDTH=10></TD></TR></TABLE>
+<A HREF="#top" onMouseover="window.status='Skip to top of page'; return true" onMouseout="window.status=''; return true" OnFocus="window.status='Skip to top of page'; return true" onBlur="window.status=''; return true" class="skiplinks">Skip to top of page</A>
+</DIV>
+<DIV class="footerbeforediv">
+
+</DIV>
+<DIV class="footerlinksdiv">
+<SPAN class="pagefooterlinks">
+<MAP NAME="Look_Up_Classes_Links_F" title="Look Up Classes Links">
+<p>
+<A HREF="#skip_Look_Up_Classes_Links_F" onMouseover="window.status='Skip Look Up Classes Links'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Skip Look Up Classes Links'; return true" onBlur="window.status=''; return true"  class="skiplinks">Skip Look Up Classes Links</A>
+<P>[ <A HREF="/prod/bwskfshd.P_CrseSchd" onMouseover="window.status='Week at a Glance'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Week at a Glance'; return true" onBlur="window.status=''; return true" >Week at a Glance</A>
+ | <A HREF="/prod/bwskfshd.P_CrseSchdDetl" onMouseover="window.status='Student Detail Schedule'; return true" onMouseout="window.status=''; return true" onFocus="window.status='Student Detail Schedule'; return true" onBlur="window.status=''; return true" >Student Detail Schedule</A>
+ | <A HREF="/prod/bwskoacc.P_ViewHold" onMouseover="window.status='View Holds'; return true" onMouseout="window.status=''; return true" onFocus="window.status='View Holds'; return true" onBlur="window.status=''; return true" >View Holds</A>
+ ]
+</MAP>
+</SPAN>
+<a name="skip_Look_Up_Classes_Links_F"></a>
+</DIV>
+<DIV class="footerafterdiv">
+
+</DIV>
+<DIV class="globalafterdiv">
+
+</DIV>
+<DIV class="globalfooterdiv">
+
+</DIV>
+<DIV class="pagefooterdiv">
+<SPAN class="releasetext">Release: 8.5.2.1</SPAN>
+</DIV>
+<DIV class="poweredbydiv">
+</DIV>
+<DIV class="div1"></DIV>
+<DIV class="div2"></DIV>
+<DIV class="div3"></DIV>
+<DIV class="div4"></DIV>
+<DIV class="div5"></DIV>
+<DIV class="div6"></DIV>
+<div class="banner_copyright"> <br><h5>Â© 2015 Ellucian Company L.P. and its affiliates.<br></h5></div>
+</BODY>
+</HTML>
+Åýz¢=g      U96¹U96¹;@;       E~1429812732,:https://bnssbpr1.njit.edu/prod/bwckgens.p_proc_term_date necko:classified 1 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjoj9ApAYLLhYqsrhSapAAQAAgAAAAAAAAAAAAAAACw4N6+LhUposNgK7YiYWzI/H82DxalM0aJQdnbKfH40ZgoyJpFcT/u7IImFpjLfBfjtg2TO2UxuhrpIr1PDk+YAAAAAAAAFgDCCBXwwggRkoAMCAQICEAXGMT+LMke+mbVle55RVvIwDQYJKoZIhvcNAQELBQAwcDELMAkGA1UEBhMCVVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTEvMC0GA1UEAxMmRGlnaUNlcnQgU0hBMiBIaWdoIEFzc3VyYW5jZSBTZXJ2ZXIgQ0EwHhcNMTQwNDE2MDAwMDAwWhcNMTcwODE4MTIwMDAwWjB1MQswCQYDVQQGEwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEPMA0GA1UEBxMGTmV3YXJrMSswKQYDVQQKEyJOZXcgSmVyc2V5IEluc3RpdHV0ZSBvZiBUZWNobm9sb2d5MRMwEQYDVQQDDAoqLm5qaXQuZWR1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkXkFGWHnAuF+PFeS5L/lBe1fIHrSlfSoZuvGv0npyinfIJemY4hZEZ1l+cbDLt0tjR5XgrxlXRbh6la7qyYbf2gELJ3mLjEG20rnkIRd/6V64d68uTj5+RLZCKNJEe5D1XGNQAPcAI6endi3l3EtjTQxMKG1YFvpDx0Q0tvPJYaltIU/9jHQxA6a0w+wCySuQebyLhC87Ctu56Clp+75UMoS33KqCifn0khtmb4IyCeWE/ubPyTxQORK7+jJU3pHnX3B1NDenyU+2g+LgO2/TZeUSF+WIgjTMLOnEr34NyqlvIKwyK1EQCf96Aetpl4+Vk/jeV6BcCHOfZRAQLVAxQIDAQABo4ICCzCCAgcwHwYDVR0jBBgwFoAUUWj/kK8CB3U8zNllZGKiErhZcjswHQYDVR0OBBYEFLWEnI+8dX9LpGOn3hM0Q2YA44O3MEcGA1UdEQRAMD6CCioubmppdC5lZHWCCG5qaXQuZWR1ghFibnNzYnByMS5uaml0LmVkdYITc3NiLmJhbm5lci5uaml0LmVkdTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMHUGA1UdHwRuMGwwNKAyoDCGLmh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9zaGEyLWhhLXNlcnZlci1nMi5jcmwwNKAyoDCGLmh0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNvbS9zaGEyLWhhLXNlcnZlci1nMi5jcmwwQgYDVR0gBDswOTA3BglghkgBhv1sAQEwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCBgwYIKwYBBQUHAQEEdzB1MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTQYIKwYBBQUHMAKGQWh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFNIQTJIaWdoQXNzdXJhbmNlU2VydmVyQ0EuY3J0MAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcNAQELBQADggEBAEjb0CVDTdcWAGpOA8B0Enpo9Q6kordFNqxr7qcYQP7HlGUCECem/fstensIw199N1of0ORLdS0/Zhr1XV+e8GsL3HgtFgj1n72nhg96JrVrxH/Jzt6LxyDgDlvLabWtkW0HUB9Mq7sSMdQXnI/+Kyrz25WMvkSQGZUr7Dk5bs0+vOk6pMPRywnwQyjtsAkKk7SuEw0/X/+bW1L4UoKLibQ5HTQMbkDdik7EQgfvUwPPu49H4FbJBj9vFypaJV9Au76R7V6phWb0miuhdNlO+SJYFDFTfMd9EZM1uPC1HQNEOXW8ssatL3u5Je3SVP6pc6q2uyS6gAm48EpL6k5eGm0AAADAAAAAcAAAAB1UTFNfUlNBX1dJVEhfM0RFU19FREVfQ0JDX1NIQQAAAAEAAA== request-method POST response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:14:10 GMT
+Server: Oracle-Application-Server-11g
+Content-Length: 17615
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ charset UTF-8 uncompressed-len 0   DÏ

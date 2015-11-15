@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>New Jersey Institute of Technology Login - powered by SunGard Higher Education</title>
+<script language="JavaScript" src="https://cp4.njit.edu/js/clientsniffer.js"></script>
+<script language="JavaScript" src="https://cp4.njit.edu/js/util.js"></script>
+<script language="javascript1.1">
+<!-- (hide from old browsers)
+var userpwdFocus = false;
+var hasRecovery = false
+var recoveryUri = ""
+function hadFocus(set)
+{
+    if (set) userpwdFocus = true;
+    return userpwdFocus;
+}
+
+function getCookie(name) 
+{
+    var search = name + "="
+    if (document.cookie.length > 0) 
+    {
+        // if there are any cookies
+        offset = document.cookie.indexOf(search)
+        if (offset != -1) 
+        { // if cookie exists
+            offset += search.length // set index of beginning of value
+            end = document.cookie.indexOf(";", offset) // set index of end of cookie value
+            if (end == -1)
+                end = document.cookie.length
+            return unescape(document.cookie.substring(offset, end))
+        }
+    }
+}
+
+function clearCache()
+{
+    var name="usid"
+    var value="chocolate-chip-cookies"
+    cookie= name + "=" + value + "; path=/; domain=.njit.edu; expires=" + (new Date(0)).toGMTString();
+    if (getCookie (name) != value) document.cookie = cookie;
+    doCancel();
+}
+
+function doCancel()
+{
+    document.userid.user.value='';
+    document.cplogin.user.value='';
+    document.cplogin.pass.value='';
+}
+
+function OpenWin(w)
+{
+    var unDefined;
+
+    if (w == "help")
+    {
+        stats='resizable=yes,toolbar=no,location=no,directories=no,status=yes,menubar=no,'
+        stats += 'scrollbars=yes,width=650,height=475';
+        helpWindow = window.open ("http://cp4.njit.edu/site/loginhelp.html","helpWindow",stats)
+        setTimeout ("helpWindow.focus ()", 500);
+    }
+}
+
+function xferFocus()
+{
+    document.getElementById("pass").focus();
+}
+
+function login()
+{
+    setQueryAsCookie();
+    document.cplogin.user.value=document.userid.user.value;
+    document.cplogin.uuid.value="0xACA021";
+    document.cplogin.submit();
+}
+function setQueryAsCookie()
+{
+    var query = document.location.search;
+    if (query.length > 1) {
+        document.cookie = "query=" + encodeURIComponent(query) + "; path=/; domain=.njit.edu;"
+    } else {
+        // kill any previous query cookie setup
+        document.cookie = "query=; path=/; domain=.njit.edu; expires=" + (new Date(0)).toGMTString();
+    }
+}
+
+function pageLoad()
+{
+    if (!hadFocus(false))
+    {
+        document.getElementById("user").focus();
+    }
+    checkRecovery();
+}
+
+function checkRecovery()
+{
+	if (hasRecovery == false) 
+	{
+		document.getElementById("forgetPass").style.display="none";
+	}
+	else
+	{
+		document.getElementById("recover").setAttribute('href', recoveryUri);
+	}
+}
+
+var size = "15";
+if ( ( is_nav4up || is_ie4up ) && is_mac ) { size = "12"; }
+else if ( is_nav4_7up) { size = "10"; }
+
+//-->
+</script>
+ 
+ 
+
+
+
+
+<link rel="stylesheet" href="https://cp4.njit.edu/misc/style.css" type="text/css">
+<link rel="stylesheet" href="https://cp4.njit.edu/custom/classic/custom.css" type="text/css">
+<link rel="stylesheet" href="https://cp4.njit.edu/cp/content/style.css" type="text/css">
+
+<style type="text/css">
+
+body {margin: 0px}
+
+#header {padding:10px;
+background-color: transparent;
+background-image: url(https://cp4.njit.edu/custom/classic/images/misc/njit/pipelinelogoback.jpg);
+background-repeat: no-repeat;
+background-position: 0 0;
+background-attachment: scroll;}
+
+</style>
+
+
+</head>
+<body onLoad="pageLoad()">
+<a name="TOP"></a>
+<div id="wrapper">
+  <div class="minwidth">
+    <div class="container">
+      <div id="header">
+	    <IMG SRC="https://cp4.njit.edu/site/content/2623143384884499.gif" ALT="School Logo" title="School Logo" NAME="topnav_logo_1"/>
+      </div>
+	  <div>
+      
+      <img src="https://cp4.njit.edu/cmd.msc?sid=&mbox=&cmd=logout&laurel=on" width="1" height="1">
+      
+      </div>
+      <!-- *** *** -->
+      
+      
+      
+      <style type="text/css">
+body {background-repeat: repeat-x; background-image: url(https://cp4.njit.edu/custom/classic/images/misc/njit/pipelinelogoback.jpg);}
+</style>
+
+<div id="mainBody">  
+  <div id="leftPan">  
+	<div id="loginPan">
+	  <ul>
+		  <li class="text12">Secure Access Login</li>
+		  <li id="userField" class="text10"><form name="userid" onSubmit="xferFocus(this); return false;">
+			  <label class="blocklabel" for="user" accesskey="u"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UCID:&nbsp;</b>
+			  <input class="textform" id="user" name="user" tabindex="1" onFocus="hadFocus(true)" type="text" size="15"/></label>
+		  </form></li>
+		  <li id="passField" class="text10"><form name="cplogin" action="https://cp4.njit.edu/cp/home/login" onSubmit="login(); return false;" method="post">
+			  <label class="blocklabel" for="pass" accesskey="p"><b>Password:&nbsp;</b>
+			  <input class="textform" id="pass" name="pass" tabindex="2" onFocus="hadFocus(true)" type="password" size="15"/></label>
+			  <input type="hidden" name="user" value="" /> <input type="hidden" name="uuid" value="0xACA021"/>
+		  </form></li>
+		  <li class="text10"><input class="btn" accesskey="l" id="login_btn" value="&nbsp;&nbsp;Login&nbsp;&nbsp;" type="button" onClick="login();" tabindex="3"/>
+		  <input class="btn" accesskey="c" id="cancel_btn" value="Cancel" type="button" onClick="doCancel();" tabindex="4"/></li>
+		  <li class="text10"><a href="http://ist.njit.edu/support/ucid/">Forgot your UCID or password?</a></li><li class="text10" id="forgetPass"><a id="recover" href="">Forget Password?</a></li>
+		  
+	  </ul>
+	</div>
+	<div id="registerPan">
+	  <ul>
+		<li class="text12"><p class="text10" align="center"><a href="http://ist.njit.edu/pipeline/index.php">What is Highlander Pipeline?</a> <br /> <a href="http://ist.njit.edu/support/pipeline/index.php">&quot;How do I logon&quot; and other FAQ's</a></p>
+
+</li>
+	  </ul>
+	</div>
+  </div>
+  <div id="rightPan">
+	<!-- Social Sites-->
+
+    <div
+    style="border:2px solid #c00; background-color:#D5D7B7; font-size:13px; font-weight:normal;">
+
+      <div
+      style="font-weight:normal; font-size:150%; border-bottom:1px solid #c00; padding-bottom:3px; padding:5px; background-color:#C0C1A4;">
+        
+<!-- lastRSS errors:
+--><!--
+Are you graduating?</div><div style="padding:10px; color:#333; font-size:14px; font-weight:400"> 
+<p style="font-weight:bold;">Only a few days left!</p>
+<p>During the 2015 commencement ceremony we will be displaying a personalized graphic for you as you cross the stage. If you are not sure if you successfully submitted, check your <a href="http://commencement.njit.edu/upload/status.php">status here</a>.</p>
+
+<p> If you have not yet submitted your information, head over to <a href="https://commencement.njit.edu/upload">https://commencement.njit.edu/upload</a> before time runs out!</p>
+<img src="https://commencement.njit.edu/upload/images/sample.jpg" style="margin:auto;">
+</div>
+-->
+ Did you know?
+      </div>
+
+      <ul style="line-height:60px; list-style:none;">
+        <li><a
+        href="http://www.facebook.com/pages/Newark-NJ/NJIT/7185471825">
+        <img alt="facebook"
+        src="https://www.njit.edu/corporate/uicomponents/mstoner/images/social/facebook_tile.png"
+         style="width:50px; vertical-align:middle; border:0px;" /></a>
+        <a
+        href="http://www.facebook.com/pages/Newark-NJ/NJIT/7185471825"
+         style="color:#800;">NJIT has an official Facebook
+        page</a></li>
+
+        <li><a href="http://youtube.com/njit"><img alt=""
+        src="https://www.njit.edu/corporate/uicomponents/mstoner/images/social/youtube_tile.png"
+         style="vertical-align:middle; border:0px; width:50px;" /></a>
+
+        <a href="http://youtube.com/njit" style="color:#800;">NJIT
+        has an official YouTube Channel</a></li>
+
+        <li><a href="http://www.flickr.com/photos/njit"><img alt=""
+        src="https://www.njit.edu/corporate/uicomponents/mstoner/images/social/flickr_tile.png"
+         style="vertical-align:middle; width:50px; border:0px;" /></a>
+        <a href="https://www.flickr.com/photos/njit"
+        style="color:#800;">NJIT has an official Flickr photo
+        site</a></li>
+
+        <li><a href="http://twitter.com/njit"><img alt=""
+        src="https://www.njit.edu/corporate/uicomponents/mstoner/images/social/twitter_tile.png"
+         style="vertical-align:middle; width:50px; border:0px;" /></a>
+        <a href="http://twitter.com/njit" style="color:#800;">NJIT
+        has an official Twitter feed</a></li>
+      </ul>
+
+ 	</div>
+	<!-- begin outages -->
+	<div style="font-size: 12px; margin-top: 10px">
+	
+				
+			
+	        
+							
+				</div>
+				
+				<!-- end outages -->
+
+  </div>
+</div> 
+
+      
+      
+      <!-- *** *** -->
+      
+
+
+ 
+
+
+
+
+
+<div id="footer">
+	<ul>
+		<li id="copyright">Copyright&nbsp;&copy; SunGard Higher Education 1998 - 2010.</li>
+		<li class="notice"><a href="javascript:OpenNotice();" onMouseOver="window.status=''; return true;"><img src="https://cp4.njit.edu/cps/images/misc/foot_logo.gif" alt="Powered by SunGard Higher Education" title="Powered by SunGard Higher Education"</a></li>
+		
+	</ul>
+</div>
+
+  <script language="JavaScript">
+  function OpenNotice()
+  {
+      stats='resizable=no,scrollbars=no,toolbar=no,location=no,directories=no,status=no,menubar=no,';
+      stats += 'width=600,height=400';
+      noticeWindow = window.open ( /*URL*/ "https://cp4.njit.edu/jsp/misc/tmNotice.jsp","tmNotice",stats)
+      setTimeout ("noticeWindow.focus ()", 500);
+  }
+  </script>
+
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
+¤,ÈCð           U96Þ;Še       ":https://www.njit.edu/cp/login.php security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Thu, 23 Apr 2015 18:15:59 GMT
+Server: Apache
+Content-Type: text/html
+ charset windows-1252 uncompressed-len 0   '
